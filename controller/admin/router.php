@@ -20,6 +20,9 @@
     elseif($module == "statisticals"){
         include('components/statistical.php');
     }
+    elseif($module == "blog"){
+        include('components/blog.php');
+    }
     else {
         include('components/dashboard.php');
     }
