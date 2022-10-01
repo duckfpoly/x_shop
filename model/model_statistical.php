@@ -1,8 +1,8 @@
 <?php
-    class cate {
-        private $process;
-        public function __construct($process){
-            $this->process = $process;
+    $handle_statistical = new statistical();
+    class statistical {
+        public function __construct(){
+            $this->process = new process();
         }
         public function list(){
             $sql = "SELECT 
@@ -20,6 +20,5 @@
             return $read;
         }
     }
-    include_once 'config/process.php';
-    $handle_statistical = new cate($process);
+    
 ?>

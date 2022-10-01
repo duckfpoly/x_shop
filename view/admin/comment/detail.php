@@ -23,7 +23,7 @@
         <tr>
             <td><input type="checkbox" class="checkbox" name="" id=""></td>
             <td><?= $value['content'] ?></td>
-            <td><?= $value['comment_time'] ?></td>
+            <td><?= $value['time'] ?></td>
             <td><?= $value['username'] ?></td>
             <td><a href="?module=comment&act=delete&id=<?= $value['id_cmt'] ?>" class="btn btn-danger">Del</a></td>
         </tr>

@@ -1,8 +1,8 @@
 <?php
+    $handle_comment = new comment();
     class comment {
-        private $process;
-        public function __construct($process){
-            $this->process = $process;
+        public function __construct(){
+            $this->process = new process();
         }
         public function read(){
             $sql = "SELECT * FROM `tbl_comments`";
@@ -53,7 +53,7 @@
         }
         public function detail($id){
             if(empty($id)){
-                $alert = "Please enter ID Comments !";
+                $alert = "Please enter ID Products !";
                 return $alert;
             }
             else {
@@ -67,7 +67,9 @@
                 FROM `tbl_comments`
                 INNER JOIN `tbl_products` ON `tbl_products`.id_prd = `tbl_comments`.ID_Product
                 INNER JOIN `tbl_user` ON `tbl_user`.ID = `tbl_comments`.ID_User 
-                WHERE tbl_comments.ID_Product = ?";
+                WHERE tbl_comments.ID_Product = ?
+                ORDER BY `tbl_comments`.id_cmt DESC
+                ";
                 $detail = $this->process->query($sql,$id);
                 return $detail;
             }
@@ -83,8 +85,6 @@
                 return $getCmt;
             }
         }
-        
     }
-    include_once 'config/process.php';
-    $handle_comment = new comment($process);
+    
 ?>

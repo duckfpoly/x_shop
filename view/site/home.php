@@ -7,9 +7,8 @@
                         <div class="col-md-5">
                             <div class="banner_text">
                                 <div class="banner_text_iner animate__animated animate__fadeInLeft animate__slow">
-                                    <h1>Best quality</h1>
-                                    <p>Seamlessly empower fully researched
-                                        growth strategies and interoperable internal</p>
+                                    <h1>WELCOME TO XSHOP</h1>
+                                    <p>Vietnam flagship store</p>
                                     <a href="shop" class="btn_1 ">shop now</a>
                                 </div>
                             </div>

@@ -1,19 +1,18 @@
 <?php
-    // include_once 'config/session.php';
-    include 'model/validate.php';
-    include 'model/model_account.php';
-    include 'model/model_cate.php';
-    include 'model/model_product.php';
-    include 'model/model_comment.php';
+    // include 'model/validate.php';
+    require_once 'model/model_process.php';
+
+    require_once 'model/model_cate.php';
+    require_once 'model/model_product.php';
+    require_once 'model/model_comment.php';
+    require_once 'model/model_user.php';
+    require_once 'model/model_statistical.php';
+    require_once 'model/model_blog.php';
+
     include 'global.php';
 
-
-    if(isset($_GET['v'])){
-        $v = $_GET['v'];
-    }
-    else {
-        $v = '';
-    }
+    if(isset($_GET['v'])){ $v = $_GET['v']; }
+    else { $v = ''; }
     if($v == "shop") {
         $read_cate = $handle_cate->read();
         $read_prd = $handle_product->read_all();
@@ -36,7 +35,7 @@
     }
     elseif($v == "product_detail"){
         $id = (int)$_GET['id'];
-        $up_view = $handle_product->tang_view($id);
+        // $up_view = $handle_product->tang_view($id);
         if(isset($_POST['cmt'])){
             $id_product = $id;
             $id_user = Session::get('ID');

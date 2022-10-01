@@ -1,7 +1,4 @@
-<?php 
-    include('model/model_comment.php');
-    include('model/model_product.php');
-?>
+
 <?php 
     if(isset($_GET['act'])){
         $text = $_GET['act'];

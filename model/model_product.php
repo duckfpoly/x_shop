@@ -1,8 +1,9 @@
 <?php
+    $handle_product = new product();
     class product {
         private $process;
-        public function __construct($process){
-            $this->process = $process;
+        public function __construct(){
+            $this->process = new process();
         }
         public function read(){
             $sql = "SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate ORDER BY RAND() LIMIT 6" ;
@@ -88,6 +89,5 @@
             }
         }
     }
-    include_once 'config/process.php';
-    $handle_product = new product($process);
+    
 ?>

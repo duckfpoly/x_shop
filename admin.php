@@ -2,7 +2,9 @@
     $url = $_SERVER['REQUEST_URI']; 
     include 'global.php';
     include 'config/session.php';
+    // kiểm tra đăng nhập
     Session::checkSession();
+    // kiểm tran vai trò (phân quyền)
     Session::get('vaitro') !== 1 ? header('Location: ./') : '';
 ?>
 <!DOCTYPE html>

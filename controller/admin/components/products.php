@@ -1,7 +1,4 @@
-<?php 
-    include 'model/model_product.php';
-    include 'model/model_cate.php';
-?>
+
 
 <?php 
     if(isset($_GET['act'])){

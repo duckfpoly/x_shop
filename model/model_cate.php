@@ -1,8 +1,8 @@
 <?php
-    class cate {
-        private $process;
-        public function __construct($process){
-            $this->process = $process;
+    $handle_cate = new categories();
+    class categories {
+        public function __construct(){
+            $this->process = new process();
         }
         public function read(){
             $sql = "SELECT * FROM `tbl_categories`";
@@ -80,6 +80,5 @@
             }
         }
     }
-    include_once 'config/process.php';
-    $handle_cate = new cate($process);
+    
 ?>

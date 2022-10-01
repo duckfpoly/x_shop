@@ -12,7 +12,6 @@
 </div>
 <div>
 <?php 
-    include('model/model_statistical.php');
     if(isset($_GET['act'])){
         $act = $_GET['act'];
     }

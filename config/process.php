@@ -1,6 +1,12 @@
 <?php 
+    include_once 'database.php';
+    // $db = new db();
+    // $connect = $db->connect();
+    // $process = new process($connect);
     class process {
-        public function __construct($db){
+        public function __construct(){
+            $this->db = new db();
+            $db = $this->db->connect();
             $this->conn = $db;
         }
         public function query_sql($sql){
@@ -16,8 +22,7 @@
             //     unset($this->conn);
             // }
         }
-        public function query($sql)
-        {
+        public function query($sql){
             $sql_args = array_slice(func_get_args(), 1);
             try {
                 $stmt = $this->conn->prepare($sql);
@@ -31,8 +36,7 @@
             //     unset($this->conn);
             // }
         }
-        public function query_one($sql)
-        {
+        public function query_one($sql){
             $sql_args = array_slice(func_get_args(), 1);
             try {
                 $stmt = $this->conn->prepare($sql);
@@ -46,8 +50,7 @@
             //     unset($this->conn);
             // }
         }
-        public function query_value($sql)
-        {
+        public function query_value($sql){
             $sql_args = array_slice(func_get_args(), 1);
             try {
                 $stmt = $this->conn->prepare($sql);
@@ -62,8 +65,5 @@
             // }
         }
     }
-    include_once 'database.php';
-    $db = new db();
-    $connect = $db->connect();
-    $process = new process($connect);
+   
 ?>

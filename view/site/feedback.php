@@ -34,7 +34,7 @@
                 <div id="sent-message" class="sent-message ">✔✔✔ Your message has been sent. Thank you!</div>
             </div>
             <div class="col-md-12 text-center mb-5">
-                <button type="submit" id="submit-form" class="btn btn-outline-success p-2 w-25">Send Message</button>
+                <button type="submit" id="submit-form" class="btn btn-outline-secondary p-2 w-25">Send Message</button>
             </div>
         </div>
     </form>

@@ -1,8 +1,8 @@
 <?php
+    $handle_user = new user();
     class user {
-        private $process;
-        public function __construct($process){
-            $this->process = $process;
+        public function __construct(){
+            $this->process = new process();
         }
         public function read(){
             $sql = "SELECT * FROM `tbl_user`";
@@ -67,6 +67,5 @@
             }
         }
     }
-    include_once 'config/process.php';
-    $handle_user = new user($process);
+    
 ?>

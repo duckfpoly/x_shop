@@ -1,6 +1,4 @@
-<?php 
-    include('model/model_blog.php');
-?>
+
 <?php 
     if(isset($_GET['act'])){
         $text = $_GET['act'];

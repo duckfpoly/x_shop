@@ -1,4 +1,12 @@
 <?php
+    require_once 'model/model_process.php';
+    require_once 'model/model_cate.php';
+    require_once 'model/model_product.php';
+    require_once 'model/model_comment.php';
+    require_once 'model/model_user.php';
+    require_once 'model/model_statistical.php';
+    require_once 'model/model_blog.php';
+    
     if(isset($_GET['module'])){
         $module = $_GET['module'];
     }

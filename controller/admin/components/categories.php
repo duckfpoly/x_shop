@@ -1,7 +1,4 @@
 <?php 
-    include('model/model_cate.php');
-?>
-<?php 
     if(isset($_GET['act'])){
         $text = $_GET['act'];
         $req = $str = strtoupper("- ".$text);
@@ -22,10 +19,13 @@
             $act = '';
         }
         if($act == 'create'){
+            // view
             include('view/admin/categories/add.php');
+            // controller
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $name = $_POST['name'];
                 alert(
+                    // model
                     $create = $handle_cate->create($name),
                     'Add category successfully !',
                     'Has error in too processor !',

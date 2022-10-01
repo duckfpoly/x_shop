@@ -143,97 +143,10 @@
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>
+<script src="src/JS/loadContent.js"></script>
+<script src="src/JS/shop.js"></script>
 <script>
-    // loadMore
-    $(document).ready(function() {
-        $(".product-item").hide();
-        $(".product-item").slice(0, 8).show();
-        if ($(".product-item").length <= 8) {
-            $("#loadMore").addClass("d-none");
-        } else {
-            $("#loadMore").on("click", function(e) {
-                e.preventDefault();
-                $(".product-item:hidden").slice(0, 8).slideDown();
-                if ($(".product-item:hidden").length == 0) {
-                    $("#loadMore").addClass("d-none");
-                    $("#loadLess").removeClass("d-none");
-                    $("#loadLess").addClass("d-block");
-                }
-            });
-        }
-    });
-    // LoadLess
-    $(document).ready(function() {
-        $('#loadLess').click(function(e) {
-            e.preventDefault();
-            $('html, body').animate({
-                scrollTop: 440
-            }, 0);
-            // $(".item-list .product-item").slideUp();
-            $('.item-list .product-item').addClass('animate__fadeInDown');
-            $(".item-list .product-item").hide();
-            $(".item-list .product-item").slice(0, 8).show();
-            $("#loadMore").removeClass("d-none");
-            $("#loadLess").addClass("d-none");
-        });
-    });
-    // Filter category
-    $(document).ready(function() {
-        // Lấy tất cả item-child
-        var items = [];
-        $('.item-list .product-item').each(function() {
-            items.push('<div class=" animate__zoomOutDown ' + $(this).attr('class') + '" data-group="' + $(this).data('group') + '">' + $(this).html() + '</div>');
-        });
-        // Sự kiện khi bấm vào bộ lọc
-        $('.filter-link p .filter_button').click(function(e) {
-            e.preventDefault();
-            var group = $(this).data('filter');
-            if (group == 0) {
-                $('.item-list .product-item').addClass('animate__faster animate__zoomOutDown');
-                $('.item-list .product-item').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-                    // Lấy kết quả
-                    var result = '';
-                    for (var i = 0; i < items.length; i++) {
-                        result += items[i];
-                    };
-                    $('.item-list').html(result);
-                    $('.item-list .product-item').removeClass('animate__zoomOutDown').addClass('animate__fadeInUp');
-                    $(".item-list .product-item").hide();
-                    $(".item-list .product-item").slice(0, 6).show();
-                });
-            } else {
-                $('.item-list .product-item').addClass('animate__faster animate__zoomOutDown');
-                $('.item-list .product-item').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-                    $('.item-list').html(''); // Làm trống nội dung
-                    // Lấy kết quả
-                    var result = '';
-                    for (var i = 0; i < items.length; i++) {
-                        if (items[i].includes('data-group="' + group + '"')) {
-                            result += items[i];
-                        }
-                    };
-                    $('.item-list').html(result);
-                    $('.item-list .product-item').removeClass('animate__zoomOutDown').addClass('animate__fadeInUp');
-                    $(".item-list .product-item").hide();
-                    $(".item-list .product-item").slice(0, 6).show();
-                });
-            }
-        });
-    });
-    // filter
-    document.querySelector('#searchInput').addEventListener('keyup', function(e) {
-        // UI Element
-        let namesLI = document.getElementsByClassName('product-item');
-        // Get Search Query
-        let searchQuery = searchInput.value.toLowerCase();
-        // Search Compare & Display
-        for (let index = 0; index < namesLI.length; index++) {
-            const name = namesLI[index].textContent.toLowerCase();
-            if (name.includes(searchQuery)) {
-                namesLI[index].style.display = 'block';
-            } else {
-                namesLI[index].style.display = 'none';
-            }
-        }
-    });
+    const lenght = 8;
+    load_more(".product-item","#loadMore","#loadLess",lenght);
+    load_less_scroll(".product-item","#loadLess","#loadMore",lenght,440);
 </script>

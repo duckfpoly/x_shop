@@ -1,5 +1,5 @@
 <?php 
-    class db {
+    class process {
         private $servername = "localhost";
         private $username = "root";
         private $password = "";
