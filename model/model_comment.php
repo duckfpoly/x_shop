@@ -1,5 +1,5 @@
 <?php
-    $handle_comment = new comment();
+    $comment = new comment();
     class comment {
         public function __construct(){
             $this->process = new process();

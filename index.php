@@ -26,7 +26,10 @@
     <a class="p-3 d-none animate__animated animate__fadeInUp" id="btn-back-to-top"><i class="fa-solid fa-circle-arrow-up"></i></a>
     <?php include 'view/site/layout/header.php' ?>
     <main>
-        <?php include 'controller/site/router.php' ?>
+        <?php 
+            // include 'controller/site/router_2.php' 
+            include 'controller/site/router.php' 
+        ?>
     </main>
     <?php include 'view/site/layout/footer.php' ?>
     </div>

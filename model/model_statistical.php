@@ -1,5 +1,5 @@
 <?php
-    $handle_statistical = new statistical();
+    $statistical = new statistical();
     class statistical {
         public function __construct(){
             $this->process = new process();

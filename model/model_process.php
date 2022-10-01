@@ -4,7 +4,7 @@
         private $username = "root";
         private $password = "";
         private $db = "xshop";
-        public function connect(){
+        private function connect(){
             $this->conn = null;
             try {
                 $this->conn = new PDO("mysql:host=".$this->servername.";dbname=".$this->db."", $this->username, $this->password);

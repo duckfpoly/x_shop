@@ -7,31 +7,31 @@
 <div class="container">
     <div class="d-flex justify-content-around">
         <div class="col-3 animate__animated animate__fadeInDown">
-            <img width="100%" height="300px" src="assets/uploads/admin/user/<?= Session::get('image') ?>" class="card-img-top" alt="...">
+            <img width="100%" height="300px" src="assets/uploads/admin/user/<?= $detail['image'] ?>" class="card-img-top" alt="...">
         </div>
         <div class="col-8 animate__animated animate__fadeInUp">
             <div class="form-group mb-3">
                 <label for="" class="form-label">Họ tên</label>
                 <div class="form-control">
-                    <?= Session::get('name') ?>
+                    <?= $detail['name'] ?>
                 </div>
             </div>
             <div class="form-group mb-3">
                 <label for="" class="form-label">Username</label>
                 <div class="form-control">
-                    <?= Session::get('username') ?>
+                    <?= $detail['username'] ?>
                 </div>
             </div>
             <div div class="form-group mb-3">
                 <label for="" class="form-label">Email</label>
                 <div class="form-control">
-                    <?= Session::get('email') ?>
+                    <?= $detail['email'] ?>
                 </div>
             </div>
             <div class="form-group mb-3">
                 <label for="" class="form-label">Trạng thái tài khoản</label>
                 <div class="form-control">
-                    <?= Session::get('active') == 0 
+                    <?= $detail['active'] == 0 
                     ? '<span class="text-success">Hoạt động <i class="fa-solid fa-check"></i></span>' 
                     : '<span class="text-secondary">Chờ kích hoạt <i class="fa-solid fa-exclamation"></i></span>' ?>
                 </div>
@@ -43,29 +43,29 @@
     </div>
     <div id="update_profile" class="d-flex justify-content-around animate__animated animate__fadeInDown animate__fast d-none ">
         <div class="col-3">
-            <img width="100%" height="300px" src="assets/uploads/admin/user/<?= Session::get('image') ?>" class="card-img-top" alt="...">
+            <img width="100%" height="300px" src="assets/uploads/admin/user/<?= $detail['image'] ?>" class="card-img-top" alt="...">
         </div>
         <div class="col-8">
             <form action="" method="post">
                 <div class="form-group mb-3">
                     <label for="" class="form-label">Họ tên</label>
-                    <input class="form-control" value="<?= Session::get('name') ?>" name="name">
+                    <input class="form-control" value="<?=$detail['name'] ?>" name="name">
                 </div>
                 <div class="form-group mb-3">
                     <label for="" class="form-label">Ảnh</label>
                     <input type="file" class="form-control" name="image_update">
-                    <input type="text" class="form-control" hidden value="<?= Session::get('image') ?>">
+                    <input type="text" class="form-control" hidden name="image" value="<?= $detail['image'] ?>">
                 </div>
                 <div class="form-group mb-3">
                     <label for="" class="form-label">Username</label>
-                    <input class="form-control" value="<?= Session::get('username') ?>" name="username">
+                    <input class="form-control" value="<?= $detail['username'] ?>" name="username">
                 </div>
                 <div class="form-group mb-3">
                     <label for="" class="form-label">Email</label>
-                    <input class="form-control" value="<?= Session::get('email') ?>" name="email">
+                    <input class="form-control" value="<?= $detail['email'] ?>" name="email">
                 </div>
                 <div class="form-group mb-3">
-                    <button class="btn btn-outline-success" type="submit">Update</button>
+                    <button class="btn btn-outline-success" name="update_info_user" type="submit">Update</button>
                     <button class="btn btn-outline-danger" type="button" id="cancel">Cancel</button>
                 </div>
             </form>

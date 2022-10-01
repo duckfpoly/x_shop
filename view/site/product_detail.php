@@ -177,7 +177,7 @@
                 <div class="col-lg-3 col-sm-6 prd_same" data-aos="zoom-in">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
-                            <a href="product_detail/<?= $values['id_prd'] ?>">
+                            <a href="?v=product_detail&id=<?= $values['id_prd'] ?>">
                                 <img style="width: 100% !important; height: 300px !important; " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid rounded">
                             </a>
                         </div>

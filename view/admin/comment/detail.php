@@ -1,11 +1,6 @@
 <div class="mb-3 mt-3">
     <h1>Sản phẩm: <?= $name ?></h1>
 </div>
-<!-- <div class="mb-3 mt-3">
-    <button class="btn btn-outline-primary" onclick='selects()' >Checked All</button>
-    <button class="btn btn-outline-info"  onclick='deSelect()' >Unchecked All</button>
-    <button onclick="" type="submit" class="btn btn-outline-danger">Delete Checked</button>
-</div> -->
 <table class="table" id="example">
     <thead>
         <tr>

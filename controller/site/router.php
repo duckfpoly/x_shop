@@ -1,5 +1,6 @@
 <?php
-    // include 'model/validate.php';
+    isset($_GET['v']) ? $v = $_GET['v'] : $v = '';
+
     require_once 'model/model_process.php';
 
     require_once 'model/model_cate.php';
@@ -11,11 +12,9 @@
 
     include 'global.php';
 
-    if(isset($_GET['v'])){ $v = $_GET['v']; }
-    else { $v = ''; }
     if($v == "shop") {
-        $read_cate = $handle_cate->read();
-        $read_prd = $handle_product->read_all();
+        $read_cate = $cate->read();
+        $read_prd = $product->read_all();
         include('view/site/shop.php');
     }
     elseif($v == "about") {
@@ -31,24 +30,48 @@
         include('view/site/feedback.php');
     }
     elseif($v == "profiles") {
-        include('view/site/profiles.php');
+        if(isset($_POST['update_info_user'])){
+            $id_user = Session::get('ID');
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $active = Session::get('active');
+            $name = $_POST['name'];
+            $image_goc = $_POST['image'];
+            $image_up = $_FILES['image_update']['name'];
+            if ($image_up == '') {
+                $image = $image_goc;
+            } else {
+                $image = $image_up;
+                $image_uploads = save_file("image_update", "assets/uploads/admin/user/");
+            }
+            $vaitro = Session::get('active');
+            alert_2(
+                $update = $user->update($username, $name, $email, $image, $active, $vaitro, $id_user),
+                'Update successfully !',
+                'Has error in too processor !',
+                'profiles'
+            );
+        } else {
+            $detail = $user->detail( Session::get('ID'));
+            include('view/site/profiles.php');
+        }
     }
     elseif($v == "product_detail"){
         $id = (int)$_GET['id'];
-        // $up_view = $handle_product->tang_view($id);
+        $up_view = $product->tang_view($id);
         if(isset($_POST['cmt'])){
             $id_product = $id;
             $id_user = Session::get('ID');
             $comment_time = date("Y-m-d H:i:s");
             $content =  $_POST['comment'];
-            $detail = $handle_comment->create($id_product,$id_user,$comment_time,$content);
+            $detail = $comment->create($id_product,$id_user,$comment_time,$content);
             echo '<script language="javascript">window.location="?v=product_detail&id=' . $id_product . '";</script>';
         }
         else {
-            $detail = $handle_product->detail($id);
-            $list_with_cate = $handle_product->products_with_cate($detail['id_cate']);
-            $list_cmt = $handle_comment->detail($id);
-            $count = $handle_comment->count_cmt($id);
+            $detail = $product->detail($id);
+            $list_with_cate = $product->products_with_cate($detail['id_cate']);
+            $list_cmt = $comment->detail($id);
+            $count = $comment->count_cmt($id);
             $data = total($detail['price'],$detail['giam_gia']);
             include('view/site/product_detail.php');
         }
@@ -61,15 +84,7 @@
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $username = $_POST['username'];
             $password = $_POST['password'];
-            // if(isset($_POST['save_user'])){
-            //     setcookie("username", $username, time() + (86400 * 30), "/");
-            //     setcookie("password", $password, time() + (86400 * 30), "/");
-            // }else{
-            //     add_cookie("username", '', -1);
-            //     add_cookie("password", '', -1);
-            // }
-            $user_login = $account->login($username,$password);
-            echo ' <script language="javascript"> location.href = "?"; </script>';
+            $user_login = $user->login($username,$password);
         }
         include 'view/site/account/sign_in.php';
     }
@@ -88,7 +103,7 @@
                 $image = 'user.png';
             }
             alert_2(
-                $create = $account->sign_up($username,$name,$email,$password,$image),
+                $create = $user->sign_up($username,$name,$email,$password,$image),
                 'Đăng ký tài khoản thành công !',
                 'Has error in too processor !',
                 '?v=sign_in'
@@ -100,8 +115,8 @@
         Session::destroy();
     }
     else {
-        $read_prd = $handle_product->read();
-        $top_view = $handle_product->top_product();
+        $read_prd = $product->read();
+        $top_view = $product->top_product();
         include('view/site/home.php');
     }
 ?>

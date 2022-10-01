@@ -1,3 +1,6 @@
+<?php 
+    // $url = $this->url ;
+?>
 <div class="mb-3 w-100 text-center">
     <button onclick="location.href='<?= $url ?>&act=chart'" class="btn btn-outline-success">View Chart</button>
 </div>

@@ -74,31 +74,5 @@
                 return $detail;
             }
         }
-        public function delete_checked($id){
-            if(empty($id)){
-                $alert = "Please select all checkbox";
-                return $alert;
-            }
-            else {
-                $sql = "DELETE FROM `tbl_blogs` WHERE id_blog = ?";
-                $delete_checked=  $this->process->execute($sql, $id);
-                return $delete_checked;
-            }
-        }
-        public function count_all(){ 
-            $sql = "SELECT count(*) FROM `tbl_blogs`";
-            $count_all_user = $this->process->query_value($sql);
-            return $count_all_user;
-        }
-        public function count_one($id){ 
-            if(empty($id)){
-                $alert = "Please enter ID blog !";
-                return $alert;
-            }else {
-                $sql = "SELECT count(*) FROM `tbl_blogs` WHERE id_blog = ?";
-                $count_one_user = $this->process->query_value($sql,$id) > 0;
-                return $count_one_user;
-            }
-        }
     }
 ?>

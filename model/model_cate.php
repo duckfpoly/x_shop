@@ -1,5 +1,5 @@
 <?php
-    $handle_cate = new categories();
+    $cate = new categories();
     class categories {
         public function __construct(){
             $this->process = new process();

@@ -16,7 +16,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                    <li><a class="dropdown-item" href="?module=sign_out">Sign Out</a></li>
                 </ul>
             </div>
         </div>

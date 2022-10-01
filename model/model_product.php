@@ -1,5 +1,5 @@
 <?php
-    $handle_product = new product();
+    $product = new product();
     class product {
         private $process;
         public function __construct(){
