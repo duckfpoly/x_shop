@@ -11,7 +11,7 @@
 </section>
 <div class="container ">
     <div class="mt-3 mb-3 card-header rounded bg-transparent">
-        <h3 class="fw-bold"><?= strtoupper($detail['name_prd'])?></h3>
+        <h3 class="fw-bold"><?= strtoupper($detail['name_prd']) ?></h3>
     </div>
     <div class="d-flex justify-content-between mb-5 flex-wrap">
         <div class="col-lg-6 col-sm-12">
@@ -81,11 +81,19 @@
                     </div>
                 </div>
                 <?php if ($detail['so_luong'] > 0) { ?>
-                    <div class="d-flex align-items-center mb-3">
+                    <div>
                         <label for="">Số lượng:</label>&emsp;
-                        <input type="number" min="1" value="1" class="form-control w-25" id="">&emsp;
-                        <button class="btn btn-success">Thêm vào giỏ hàng</button>&emsp;
-                        <button id="heart" class="btn border border-danger p-1 rounded text-danger"><i class="fa-solid fa-heart"></i></button>
+                        <form method="post">
+                            <input type="hidden" name="id_prd" id="id_prd" value="<?= $detail['id_prd'] ?>">
+                            <input type="hidden" name="name_prd" id="name_prd" value="<?= $detail['name_prd'] ?>">
+                            <input type="hidden" name="price_prd" id="price_prd" value="<?= $data ?>">
+                            <input type="hidden" name="image_prd" id="image_prd" value="<?= $detail['image'] ?>">
+                            <div class="d-flex align-items-center mb-3">
+                                <input type="number" name="quantity_prd" id="quantity_prd" min="1" value="1" class="form-control w-25">&emsp;
+                                <button type="submit" name="addcart" id="addcart" value="addcart" class="btn btn-success">Thêm vào giỏ hàng</button>&emsp;
+                                <button id="heart" class="btn border border-danger p-1 rounded text-danger"><i class="fa-solid fa-heart"></i></button>
+                            </div>
+                        </form>
                     </div>
                     <div>
                         <button onclick="" class="btn btn-danger w-100">ĐẶT MUA NGAY<br> <small>Giao hàng tận nơi, nhanh chóng</small></button>
@@ -173,7 +181,8 @@
             </div>
         </div>
         <div class="row">
-            <?php foreach ($list_with_cate as $items => $values) { $data = total($values['price'], $values['giam_gia']); ?>
+            <?php foreach ($list_with_cate as $items => $values) {
+                $data = total($values['price'], $values['giam_gia']); ?>
                 <div class="col-lg-3 col-sm-6 prd_same" data-aos="zoom-in">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
@@ -187,23 +196,23 @@
                             <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
                         </div>
                         <div class="fw-bold d-flex justify-content-between align-items-center">
-                        <p>Price: $<?= number_format($data, 0, '', ','); ?></p> 
-                        <?php if ($values['so_luong'] > 0) {
-                            echo '
+                            <p>Price: $<?= number_format($data, 0, '', ','); ?></p>
+                            <?php if ($values['so_luong'] > 0) {
+                                echo '
                                 <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
                             ';
-                        } else {
-                            echo '
+                            } else {
+                                echo '
                                 <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Contact</small>
                             ';
-                        } ?>
-                        
-                    </div>
+                            } ?>
+
+                        </div>
                     </div>
                 </div>
             <?php } ?>
             <div class="text-center">
-                <a href="#" class="btn animate__animated animate__fadeInUp" id="loadMoreother" >Load More</a>
+                <a href="#" class="btn animate__animated animate__fadeInUp" id="loadMoreother">Load More</a>
                 <a href="#" class="btn d-none animate__animated animate__fadeInUp" id="loadLessother">Load Less</a>
             </div>
         </div>
@@ -260,21 +269,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>
 <script src="src/JS/loadContent.js"></script>
+<script src="src/JS/addcart.js"></script>
 <script>
     // cmt
-    load_more(".comment-list"   ,"#loadMore"        ,"#loadLess"        ,2);
-    load_less(".comment-list"   ,"#loadLess"        ,"#loadMore"        ,2);
+    load_more(".comment-list", "#loadMore", "#loadLess", 2);
+    load_less(".comment-list", "#loadLess", "#loadMore", 2);
     // product the same
-    load_more(".prd_same"       ,"#loadMoreother"  ,"#loadLessother"    ,4);
-    load_less(".prd_same"       ,"#loadLessother"  ,"#loadMoreother"    ,4);
+    load_more(".prd_same", "#loadMoreother", "#loadLessother", 4);
+    load_less(".prd_same", "#loadLessother", "#loadMoreother", 4);
 </script>
-<style>
-    @media only screen and (max-width: 768px) {
-        .thumb {
-            width: 25% !important;
-        }
-        .desc {
-
-        }
-    }
-</style>

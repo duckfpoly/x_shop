@@ -42,13 +42,13 @@
         }
         public function delete($id){ 
             if(empty($id)){
-                $alert = "Please enter ID Cate !";
+                $alert = "Please enter ID comments !";
                 return $alert;
             }
             else {
                 $sql = "DELETE FROM `tbl_comments` WHERE id_cmt = ?";
-                $delete_cate = $this->process->query_sql($sql,$id);
-                return $delete_cate;
+                $delete_cmt = $this->process->query_sql($sql,$id);
+                return $delete_cmt;
             }
         }
         public function detail($id){

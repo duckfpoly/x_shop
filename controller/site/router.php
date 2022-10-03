@@ -9,6 +9,7 @@
     require_once 'model/model_user.php';
     require_once 'model/model_statistical.php';
     require_once 'model/model_blog.php';
+    require_once 'model/model_cart.php';
 
     include 'global.php';
 
@@ -113,6 +114,44 @@
     }
     elseif($v == "sign_out"){
         Session::destroy();
+    }
+    elseif($v == "search"){
+        if(isset($_POST['key'])){
+            $key = $_POST['key'];
+            $search = $this->product->searchs($key);
+            include('view/site/search.php');
+        }else {
+            echo '<script language="javascript">window.location="?";</script>';
+        }
+    }
+    elseif($v == "cart"){
+        if(isset($_POST['addcart'])){
+            $id_prd             = isset($_POST['id_prd']) ? $_POST['id_prd'] : "" ;
+            $name_prd           = isset($_POST['name_prd']) ? $_POST['name_prd'] : "" ;
+            $price_prd          = isset($_POST['price_prd']) ? $_POST['price_prd'] : "" ;
+            $image_prd          = isset($_POST['image_prd']) ? $_POST['image_prd'] : "" ;
+            $quantity_prd       = isset($_POST['quantity_prd']) ? $_POST['quantity_prd'] : "" ;
+            $addcart            = add_cart($id_prd,$name_prd,$price_prd,$image_prd,$quantity_prd);
+            echo '<script language="javascript">window.location="?v=cart";</script>';
+        }
+        if(isset($_POST['delete_prd_cart'])){
+            $id_prd             = isset($_POST['id_product']) ? $_POST['id_product'] : "" ;
+            $del_product_cart   = delete_product_cart($id_prd);
+            echo '<script language="javascript">window.location="?v=cart";</script>';
+        }
+        if(isset($_POST['update_prd_cart'])){
+            $id_prd                 = isset($_POST['id_product'])   ? $_POST['id_product']  : "" ;
+            $qty                    = isset($_POST['qty'])          ? $_POST['qty']         : "" ;
+            $update_product_cart    = update_product_cart($id_prd,$qty);
+            echo '<script language="javascript">window.location="?v=cart";</script>';
+        }
+        include('view/site/cart.php');
+    }
+    elseif($v == "checkout"){
+        include('view/site/checkout.php');
+    }
+    elseif($v == "confirm_order"){
+        include('view/site/confirm_order.php');
     }
     else {
         $read_prd = $product->read();

@@ -27,10 +27,8 @@
         }
         elseif($act == 'delete'){
             $id = (int)$_GET['id'];
-            if($id){
-                $delete = $comment->delete($id);
-                header('Location: ?module=comments');
-            }
+            $delete = $comment->delete($id);
+            echo '<script language="javascript">location.href = "?module=comments";</script>';
         }
         else {
             $list = $comment->show_list();

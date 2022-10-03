@@ -73,8 +73,8 @@
                 Validator.isRequired('#username', 'Vui lòng nhập username'),
                 Validator.isRequired('#password', 'Vui lòng nhập passwword'),
                 Validator.isRequired('#repassword', 'Vui lòng nhập lại passwword'),
-                Validator.minLength('#username', 1),
-                Validator.minLength('#password', 1),
+                Validator.minLength('#username', 6),
+                Validator.minLength('#password', 6),
                 Validator.isConfirmed('#repassword', function() {
                     return document.querySelector('#form-1 #password').value;
                 }, 'Mật khẩu nhập lại không chính xác')

@@ -1,7 +1,6 @@
 <?php
     $product = new product();
     class product {
-        private $process;
         public function __construct(){
             $this->process = new process();
         }
@@ -77,6 +76,17 @@
                 return $detail;
             }
         }
+        public function products_cart($id){
+            if(empty($id)){
+                $alert = "Please enter ID Products !";
+                return $alert;
+            }
+            else {
+                $sql = "SELECT * FROM `tbl_products`  INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate  WHERE tbl_products.id_prd IN (?)";
+                $cart = $this->process->query($sql,$id);
+                return $cart;
+            }
+        }
         public function tang_view($id){
             if(empty($id)){
                 $alert = "Please enter ID Products !";
@@ -86,6 +96,17 @@
                 $sql = "UPDATE `tbl_products` SET so_luot_xem = so_luot_xem + 1 WHERE `tbl_products`.id_prd = ?";
                 $detail = $this->process->query($sql,$id);
                 return $detail;
+            }
+        }
+        public function searchs($key){
+            if(empty($key)){
+                $alert = "Please enter search key !";
+                return $alert;
+            }
+            else {
+                $sql = "SELECT * FROM `tbl_products` WHERE tbl_products.name_prd LIKE '%$key%'";
+                $search = $this->process->query($sql);
+                return $search;
             }
         }
     }

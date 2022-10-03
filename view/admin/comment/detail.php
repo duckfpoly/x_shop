@@ -20,7 +20,7 @@
             <td><?= $value['content'] ?></td>
             <td><?= $value['time'] ?></td>
             <td><?= $value['username'] ?></td>
-            <td><a href="?module=comment&act=delete&id=<?= $value['id_cmt'] ?>" class="btn btn-danger">Del</a></td>
+            <td><a href="<?= $url ?>&act=delete&id=<?= $value['id_cmt'] ?>" class="btn btn-danger">Del</a></td>
         </tr>
         <?php } ?>
     </tbody>

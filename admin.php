@@ -30,7 +30,7 @@
             <?php include 'view/admin/layout/sidebar.php'      ?>
             <div class=""style="width: 88%;">
                 <?php include 'view/admin/layout/header.php'       ?>
-                <div class="mt-5" style="margin: 20px;">
+                <div class="mt-2" style="margin: 20px;">
                     <?php include 'controller/admin/router.php'    ?>
                 </div>
             </div>

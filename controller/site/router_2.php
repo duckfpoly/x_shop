@@ -7,6 +7,7 @@
     require_once 'model/model_user.php';
     require_once 'model/model_statistical.php';
     require_once 'model/model_blog.php';
+    require_once 'model/model_cart.php';
 
     include 'global.php';
 
@@ -14,7 +15,6 @@
 
     class Router {
         public function __construct(){
-
             $this->cate         = new categories();
             $this->product      = new product();
             $this->comment      = new comment();
@@ -23,7 +23,9 @@
             $this->blogs        = new blogs();
 
             if(isset($_GET['v']) == true){
+                
                 $v = $_GET['v'];
+
                 if    ($v == "shop")            {   $this->shop();              }
                 elseif($v == "blog")            {   $this->blog();              }
                 elseif($v == "about")           {   $this->about();             }
@@ -36,6 +38,13 @@
                 elseif($v == "sign_out")        {   $this->sign_out();          }
                 elseif($v == "blog_detail")     {   $this->blog_detail();       }
                 elseif($v == "product_detail")  {   $this->product_detail();    }
+
+                elseif($v == "search")          {   $this->search();            }
+                elseif($v == "cart")            {   $this->cart();              }
+                elseif($v == "checkout")        {   $this->checkout();          }
+                elseif($v == "confirm_order")   {   $this->confirm_order();     }
+                elseif($v == "not_found")       {   $this->not_found();         }
+
             }
             else { 
                 $this->home(); 
@@ -64,7 +73,31 @@
             include('view/site/feedback.php');
         }
         private function profiles(){ 
-            include('view/site/profiles.php');
+            if(isset($_POST['update_info_user'])){
+                $id_user = Session::get('ID');
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $active = Session::get('active');
+                $name = $_POST['name'];
+                $image_goc = $_POST['image'];
+                $image_up = $_FILES['image_update']['name'];
+                if ($image_up == '') {
+                    $image = $image_goc;
+                } else {
+                    $image = $image_up;
+                    $image_uploads = save_file("image_update", "assets/uploads/admin/user/");
+                }
+                $vaitro = Session::get('vaitro');
+                alert_2(
+                    $update = $this->user->update($username, $name, $email, $image, $active, $vaitro, $id_user),
+                    'Update successfully !',
+                    'Has error in too processor !',
+                    'profiles'
+                );
+            } else {
+                $detail = $this->user->detail(Session::get('ID'));
+                include('view/site/profiles.php');
+            }
         }
         private function sign_in(){ 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -120,6 +153,47 @@
                 $data = total($detail['price'],$detail['giam_gia']);
                 include('view/site/product_detail.php');
             }
+        }
+        private function search(){
+            if(isset($_POST['key'])){
+                $key = $_POST['key'];
+                $search = $this->product->searchs($key);
+                include('view/site/search.php');
+            }else {
+                echo '<script language="javascript">window.location="?";</script>';
+            }
+        }
+        private function cart(){
+            if(isset($_POST['addcart'])){
+                $id_prd             = isset($_POST['id_prd']) ? $_POST['id_prd'] : "" ;
+                $name_prd           = isset($_POST['name_prd']) ? $_POST['name_prd'] : "" ;
+                $price_prd          = isset($_POST['price_prd']) ? $_POST['price_prd'] : "" ;
+                $image_prd          = isset($_POST['image_prd']) ? $_POST['image_prd'] : "" ;
+                $quantity_prd       = isset($_POST['quantity_prd']) ? $_POST['quantity_prd'] : "" ;
+                $addcart            = add_cart($id_prd,$name_prd,$price_prd,$image_prd,$quantity_prd);
+                echo '<script language="javascript">window.location="?v=cart";</script>';
+            }
+            if(isset($_POST['delete_prd_cart'])){
+                $id_prd             = isset($_POST['id_product']) ? $_POST['id_product'] : "" ;
+                $del_product_cart   = delete_product_cart($id_prd);
+                echo '<script language="javascript">window.location="?v=cart";</script>';
+            }
+            if(isset($_POST['update_prd_cart'])){
+                $id_prd                 = isset($_POST['id_product'])   ? $_POST['id_product']  : "" ;
+                $qty                    = isset($_POST['qty'])          ? $_POST['qty']         : "" ;
+                $update_product_cart    = update_product_cart($id_prd,$qty);
+                echo '<script language="javascript">window.location="?v=cart";</script>';
+            }
+            include('view/site/cart.php');
+        }
+        private function checkout(){
+            include('view/site/checkout.php');
+        }
+        private function confirm_order(){
+            include('view/site/confirm_order.php');
+        }
+        private function not_found(){
+            include('view/404notfound.php');
         }
     }
 ?>
