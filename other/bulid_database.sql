@@ -21,7 +21,6 @@ CREATE TABLE tbl_products (
     ID_Cate INT NULL
 )
 
-
 CREATE TABLE tbl_comments ( 
     id_cmt INT NULL AUTO_INCREMENT,
     ID_Product INT NULL,
@@ -29,7 +28,6 @@ CREATE TABLE tbl_comments (
     time DATE NULL,
     content TEXT NULL
 )
-
 
 CREATE TABLE tbl_user (
     ID INT NULL AUTO_INCREMENT,
@@ -68,9 +66,29 @@ ALTER TABLE tbl_comments ADD CONSTRAINT
 FK_ID_PRD FOREIGN KEY (ID_Product) 
 REFERENCES tbl_products (id_prd)
 
-ALTER TABLE tbl_comments ADD CONSTRAINT 
-FK_ID_USER FOREIGN KEY (ID_User) 
+ALTER TABLE tbl_order_detail ADD CONSTRAINT 
+FK_ORDER_CODE FOREIGN KEY (order_code) 
+REFERENCES tbl_orders (order_code)
+
+ALTER TABLE tbl_order_detail ADD CONSTRAINT 
+FK_ID_PRDS FOREIGN KEY (product_id) 
+REFERENCES tbl_products (id_prd)
+
+ALTER TABLE tbl_custromer ADD CONSTRAINT 
+FK_ID_CUSTOMER FOREIGN KEY (id_customer) 
+REFERENCES tbl_custromer (id_customer)
+
+ALTER TABLE tbl_comment_blog ADD CONSTRAINT 
+FK_ID_BLOG FOREIGN KEY (id_blog) 
+REFERENCES tbl_blogs (id_blog)
+
+ALTER TABLE tbl_comment_blog ADD CONSTRAINT 
+FK_ID_BLOG_USER FOREIGN KEY (id_user) 
 REFERENCES tbl_user (ID)
+
+ALTER TABLE tbl_blogs ADD CONSTRAINT 
+FK_ID_BLOG_CATE FOREIGN KEY (id_category) 
+REFERENCES tbl_categories (id_cate)
 
 
 INSERT INTO `tbl_categories`(`name_cate`) VALUES 
@@ -106,3 +124,12 @@ INSERT INTO `tbl_products`(`name_prd`, `price`, `image`, `giam_gia`, `ngay_nhap`
 INSERT INTO `tbl_user`(`name`, `email`, `password`, `image`, `active`, `vaitro`) VALUES 
 ('Nguyễn Đức','duc@gmail.com','$2y$10$/N6vxt2O9t0PIdlWyaq4jedfc7uXEE9ZmEcuBb/536u/o7wPX2WUe','image.jpg',0,1),
 ('Bùi Huy','huy@gmail.com','$2y$10$2d1ZgTKdis285hImgZbt.OgLu4OArF8QJ4v5YVcQbjV1Rfl1MFuZ2','user.png',0,0)
+
+
+filter price
+- desc: SELECT * FROM `tbl_products` ORDER BY price DESC
+- asc: SELECT * FROM `tbl_products` ORDER BY price ASC
+- range : SELECT * FROM `tbl_products` where price BETWEEN 1000000 AND 20000000
+filter name 
+- desc: SELECT * FROM `tbl_products` ORDER BY name DESC
+- asc: SELECT * FROM `tbl_products` ORDER BY name ASC

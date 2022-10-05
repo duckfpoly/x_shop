@@ -42,19 +42,23 @@ $(document).ready(function() {
         }
     });
 });
-// filter
-document.querySelector('#searchInput').addEventListener('keyup', function(e) {
-    // UI Element
-    let namesLI = document.getElementsByClassName('product-item');
-    // Get Search Query
-    let searchQuery = searchInput.value.toLowerCase();
-    // Search Compare & Display
-    for (let index = 0; index < namesLI.length; index++) {
-        const name = namesLI[index].textContent.toLowerCase();
-        if (name.includes(searchQuery)) {
-            namesLI[index].style.display = 'block';
-        } else {
-            namesLI[index].style.display = 'none';
+const shop = new URLSearchParams(window.location.search).get('v');
+if(shop){
+    if(shop == 'shop'){
+        document.querySelector('#searchInput').addEventListener('keyup', function(e) {
+            // UI Element
+            let namesLI = document.getElementsByClassName('product-item');
+            // Get Search Query
+        let searchQuery = searchInput.value.toLowerCase();
+        // Search Compare & Display
+        for (let index = 0; index < namesLI.length; index++) {
+            const name = namesLI[index].textContent.toLowerCase();
+            if (name.includes(searchQuery)) {
+                namesLI[index].style.display = 'block';
+            } else {
+                namesLI[index].style.display = 'none';
+            }
         }
+        });
     }
-});
+}

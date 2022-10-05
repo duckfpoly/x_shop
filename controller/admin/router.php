@@ -12,6 +12,9 @@
     require_once 'model/model_user.php';
     require_once 'model/model_statistical.php';
     require_once 'model/model_blog.php';
+    require_once 'model/model_order.php';
+
+    require_once 'global.php';
     
     if($module == "categories") {
         include('components/categories.php');
@@ -30,6 +33,9 @@
     }
     elseif($module == "blog"){
         include('components/blog.php');
+    }
+    elseif($module == "orders"){
+        include('components/orders.php');
     }
     elseif($module == "sign_out"){
         Session::destroy();

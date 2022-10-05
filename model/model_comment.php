@@ -1,12 +1,9 @@
 <?php
     $comment = new comment();
-    class comment {
-        public function __construct(){
-            $this->process = new process();
-        }
+    class comment extends process{
         public function read(){
             $sql = "SELECT * FROM `tbl_comments`";
-            $read = $this->process->query($sql);
+            $read = $this->query($sql);
             return $read;
         }
         public function show_list(){
@@ -21,7 +18,7 @@
             GROUP BY `tbl_products`.id_prd, `tbl_products`.name_prd
             HAVING so_luong > 0
             ";
-            $read = $this->process->query($sql);
+            $read = $this->query($sql);
             return $read;
         }
         public function create($id_product,$id_user,$time,$content_cmt){
@@ -36,7 +33,7 @@
                 `time` = ?,
                 `content` = ?
                 ";
-                $create_cate = $this->process->query_sql($sql,$id_product,$id_user,$time,$content_cmt);
+                $create_cate = $this->query_sql($sql,$id_product,$id_user,$time,$content_cmt);
                 return $create_cate;
             }
         }
@@ -47,7 +44,7 @@
             }
             else {
                 $sql = "DELETE FROM `tbl_comments` WHERE id_cmt = ?";
-                $delete_cmt = $this->process->query_sql($sql,$id);
+                $delete_cmt = $this->query_sql($sql,$id);
                 return $delete_cmt;
             }
         }
@@ -70,7 +67,7 @@
                 WHERE tbl_comments.ID_Product = ?
                 ORDER BY `tbl_comments`.id_cmt DESC
                 ";
-                $detail = $this->process->query($sql,$id);
+                $detail = $this->query($sql,$id);
                 return $detail;
             }
         }
@@ -81,7 +78,7 @@
             }
             else {
                 $sql = "SELECT COUNT(*) so_cmt FROM `tbl_comments` WHERE tbl_comments.ID_Product = ?";
-                $getCmt = $this->process->query_value($sql,$id);
+                $getCmt = $this->query_value($sql,$id);
                 return $getCmt;
             }
         }

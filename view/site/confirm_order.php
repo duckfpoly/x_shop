@@ -13,12 +13,12 @@
     <!-- breadcrumb part end-->
 
   <!--================ confirmation part start =================-->
-  <section class="confirmation_part section_padding">
+  <section class="confirmation_part mt-5">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="confirmation_tittle">
-            <span>Thank you. Your order has been received.</span>
+            <h1>Thank you. Your order has been received.</h1>
           </div>
         </div>
         <div class="col-lg-6 col-lx-4">

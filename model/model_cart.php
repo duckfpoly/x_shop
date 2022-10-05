@@ -37,16 +37,18 @@
                     unset($_SESSION['cart'][$key]);
                 }
             }
-        }else {
+        }
+        else {
             echo '<script language="javascript">window.location="?";</script>';
         }
     }
     function update_product_cart($id_prd,$qty){
         foreach($qty as $key => $qty) { 
-            foreach($_SESSION['cart'] as $session => $values ) {
+            foreach($_SESSION['cart'] as $cart => $values ) {
                 if($values['id_prd'] == $key && $qty >= 1){
-                    $_SESSION['cart'][$session]['quantity_prd'] = $qty;
-                }elseif($values['id_prd'] == $key && $qty <= 0){
+                    $_SESSION['cart'][$cart]['quantity_prd'] = $qty;
+                }
+                elseif($values['id_prd'] == $key && $qty <= 0){
                     unset($_SESSION['cart'][$key]);
                 }
             }

@@ -1,4 +1,4 @@
-
+AOS.init();
 const view = new URLSearchParams(window.location.search).get('v');
 if(view){
     if(view == 'shop'){

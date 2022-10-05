@@ -23,10 +23,10 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Image</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">SubTotal</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Thành tiền</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,13 +48,13 @@
                                     <p><?= $values['name_prd'] ?></p>
                                 </td>
                                 <td>
-                                    <h5>$<?= number_format($values['price_prd'], 0, '', ',') ?></h5>
+                                    <h5><?= number_format($values['price_prd'], 0, '', ',') ?>₫</h5>
                                 </td>
                                 <td>
                                 <input type="number" min="1" class="form-control w-25" name="qty[<?= $values['id_prd'] ?>]" value="<?= $values['quantity_prd'] ?>">
                                 </td>
                                 <td>
-                                    <h5>$<?= number_format($subtotal, 0, '', ',') ?></h5>
+                                    <h5><?= number_format($subtotal, 0, '', ',') ?>₫</h5>
                                 </td>
                                 <td>
                                     <input type="hidden" name="id_product" value="<?= $values['id_prd'] ?>">
@@ -73,17 +73,17 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <h3>Total</h3>
+                                <h3>Tổng tiền <small>(tạm tính)</small></h3>
                             </td>
                             <td>
-                                <h3>$<?= number_format($total, 0, '', ',') ?></h3>
+                                <h3><?= number_format($total, 0, '', ',') ?>₫</h3>
                             </td>
                         </tr>
                     </tfoot>
                 </table>
                 <div class="checkout_btn_inner float-right">
-                    <a class="btn_1" href="?v=shop">Continue Shopping</a>
-                    <a class="btn_1 checkout_btn_1" href="?v=checkout">Proceed to checkout</a>
+                    <a class="btn_1" href="?v=shop">Tiếp tục mua sắm</a>
+                    <a class="btn_1 checkout_btn_1" href="?v=checkout">Thanh toán</a>
                 </div>
             </div>
         </div>

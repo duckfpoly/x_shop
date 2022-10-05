@@ -1,4 +1,3 @@
-console.log('Link file Successfully !');
 // load more
 function load_more (array,btn_more,btn_less,view) {
     $(array).hide();

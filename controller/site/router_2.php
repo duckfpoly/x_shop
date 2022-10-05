@@ -8,6 +8,7 @@
     require_once 'model/model_statistical.php';
     require_once 'model/model_blog.php';
     require_once 'model/model_cart.php';
+    require_once 'model/model_order.php';
 
     include 'global.php';
 
@@ -15,12 +16,15 @@
 
     class Router {
         public function __construct(){
+            $this->url          = $_SERVER['REQUEST_URI'];
+
             $this->cate         = new categories();
             $this->product      = new product();
             $this->comment      = new comment();
             $this->user         = new user();
             $this->statistical  = new statistical();
             $this->blogs        = new blogs();
+            $this->order        = new orders();
 
             if(isset($_GET['v']) == true){
                 
@@ -57,7 +61,26 @@
         }
         private function shop(){ 
             $read_cate = $this->cate->read();
-            $read_prd = $this->product->read_all();
+            $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+            if(isset($_GET['cate'])){
+                $cate = $_GET['cate'];
+                $read_prd = $this->product->product_cate($cate);
+            }
+            else{
+                $read_prd = $this->product->read_all();
+            }
+            if($sort == 'price_desc'){
+                $read_prd = $this->product->filter_price_desc(); 
+            }
+            elseif($sort == 'price_asc'){
+                $read_prd = $this->product->filter_price_asc(); 
+            }
+            elseif($sort == 'name_desc'){
+                $read_prd = $this->product->filter_name_desc(); 
+            }
+            elseif($sort == 'name_asc'){
+                $read_prd = $this->product->filter_name_asc(); 
+            }
             require_once 'view/site/shop.php';
         }
         private function about(){ 
@@ -74,13 +97,13 @@
         }
         private function profiles(){ 
             if(isset($_POST['update_info_user'])){
-                $id_user = Session::get('ID');
-                $username = $_POST['username'];
-                $email = $_POST['email'];
-                $active = Session::get('active');
-                $name = $_POST['name'];
-                $image_goc = $_POST['image'];
-                $image_up = $_FILES['image_update']['name'];
+                $id_user        = Session::get('ID');
+                $username       = $_POST['username'];
+                $email          = $_POST['email'];
+                $active         = Session::get('active');
+                $name           = $_POST['name'];
+                $image_goc      = $_POST['image'];
+                $image_up       = $_FILES['image_update']['name'];
                 if ($image_up == '') {
                     $image = $image_goc;
                 } else {
@@ -94,7 +117,8 @@
                     'Has error in too processor !',
                     'profiles'
                 );
-            } else {
+            }
+            else {
                 $detail = $this->user->detail(Session::get('ID'));
                 include('view/site/profiles.php');
             }
@@ -165,10 +189,10 @@
         }
         private function cart(){
             if(isset($_POST['addcart'])){
-                $id_prd             = isset($_POST['id_prd']) ? $_POST['id_prd'] : "" ;
-                $name_prd           = isset($_POST['name_prd']) ? $_POST['name_prd'] : "" ;
-                $price_prd          = isset($_POST['price_prd']) ? $_POST['price_prd'] : "" ;
-                $image_prd          = isset($_POST['image_prd']) ? $_POST['image_prd'] : "" ;
+                $id_prd             = isset($_POST['id_prd'])       ? $_POST['id_prd'] : "" ;
+                $name_prd           = isset($_POST['name_prd'])     ? $_POST['name_prd'] : "" ;
+                $price_prd          = isset($_POST['price_prd'])    ? $_POST['price_prd'] : "" ;
+                $image_prd          = isset($_POST['image_prd'])    ? $_POST['image_prd'] : "" ;
                 $quantity_prd       = isset($_POST['quantity_prd']) ? $_POST['quantity_prd'] : "" ;
                 $addcart            = add_cart($id_prd,$name_prd,$price_prd,$image_prd,$quantity_prd);
                 echo '<script language="javascript">window.location="?v=cart";</script>';
@@ -187,6 +211,45 @@
             include('view/site/cart.php');
         }
         private function checkout(){
+            if(isset($_POST['process_pay'])){
+                // order code
+                $order_code = rand(0,999999);
+                // thời gian đặt hàng
+                $order_date = date("Y-m-d H:i:s");
+                // trạng thái đơn hàng (0: Chưa thanh toán - 1: Đã thanh toán)
+                $order_status = 0;
+                // thông tin khách hàng
+                $name           = isset($_POST['name'])             ? $_POST['name']            : "" ;
+                $email          = isset($_POST['email'])            ? $_POST['email']           : "" ;
+                $phone          = isset($_POST['phone'])            ? $_POST['phone']           : "" ;
+                $province       = isset($_POST['province'])         ? $_POST['province']        : "" ;
+                $district       = isset($_POST['district'])         ? $_POST['district']        : "" ;
+                $ward           = isset($_POST['ward'])             ? $_POST['ward']            : "" ;
+                $address        = $province." ".$district." ".$ward;
+                $address_detail = isset($_POST['address_detail'])   ? $_POST['address_detail']  : "" ;
+                $message        = isset($_POST['message'])          ? $_POST['message']         : "" ;
+                // Phương thức thanh toán và vận chuyển
+                $order_pay      = isset($_POST['pay_option'])       ? $_POST['pay_option']      : "" ;
+                $order_track   = isset($_POST['truck'])             ? $_POST['truck']           : "" ;
+                // giỏ hàng
+                if(Session::get('cart') == true){
+                    foreach(Session::get('cart') as $key => $values){
+                        $product_id         = $values['id_prd']; 
+                        $product_quantity   = $values['quantity_prd']; 
+                        // thêm từng sản phẩm vào table 
+                        $add_order_detail   = $this->order->add_order_detail($order_code,$product_id,$product_quantity);
+                    }
+                }
+                // tổng tiền
+                $total_orders   = isset($_POST['total_orders'])    ? $_POST['total_orders'] : "" ;
+                // insert db
+                $add_order               = $this->order->add_order($order_code,$order_date,$order_status,$order_pay,$order_track,$total_orders);
+                $add_order_customer      = $this->order->add_order_customer($name,$email,$phone,$address,$address_detail,$message,$order_code);
+                // clear giỏ hàng
+                unset($_SESSION['cart']);
+                // view hiển thị đặt hàng thành công !
+                echo '<script language="javascript">window.location="?v=confirm_order";</script>';
+            }
             include('view/site/checkout.php');
         }
         private function confirm_order(){

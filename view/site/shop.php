@@ -15,23 +15,35 @@
             <div class="col-md-2">
                 <div class="product_sidebar">
                     <div class="single_sedebar">
-                        <form action="#">
-                            <input type="text" name="#" placeholder="Search keyword" id="searchInput" >
+                        <form method="post" action="?v=search">
+                            <input type="text" name="key" placeholder="Search keyword" id="searchInput" >
                             <i class="ti-search"></i>
                         </form>
                     </div>
                     <div class="single_sedebar">
                         <div class="select_option">
-                            <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
+                            <div class="select_option_list">Products <i class="right fas fa-caret-down"></i> </div>
                             <div class="select_option_dropdown filter-link">
                                 <p>
-                                    <a class="filter_button" href="#" data-filter="0">All</a>
+                                    <a class="filter_button" href="?v=shop">All</a>
                                 </p>
                                 <?php foreach ($read_cate as $row => $values) { ?>
                                     <p>
-                                        <a class="filter_button" href="#" data-filter="<?= $values['id_cate'] ?>"><?= $values['name_cate'] ?></a>
+                                        <a class="filter_button" href="?v=shop&cate=<?= strtolower($values['name_cate']) ?>"><?= $values['name_cate'] ?></a>
                                     </p>
                                 <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_sedebar">
+                        <div class="select_option">
+                            <div class="select_option_list">Filter <i class="right fas fa-caret-down"></i> </div>
+                            <div class="select_option_dropdown filter-link">
+                                <p><a class="filter_button" href="?v=shop">Mặc định</a></p>
+                                <p><a class="filter_button" href="?v=shop&sort=price_desc">Giá từ cao -> thấp</a></p>
+                                <p><a class="filter_button" href="?v=shop&sort=price_asc">Giá từ thấp -> cao</a></p>
+                                <p><a class="filter_button" href="?v=shop&sort=name_desc">Tên từ Z -> A</a></p>
+                                <p><a class="filter_button" href="?v=shop&sort=name_asc">Tên từ A -> Z</a></p>
                             </div>
                         </div>
                     </div>
@@ -43,7 +55,7 @@
                         <?php foreach ($read_prd as $items => $values) {
                             $data = total($values['price'], $values['giam_gia']);
                         ?>
-                            <div class="col-lg-3 col-sm-6 product-item item-child animate__animated" data-group="<?= $values['id_cate'] ?>">
+                            <div class="col-lg-3 col-sm-6 product-item item-child animate__animated">
                                 <div class="single_product_item">
                                     <div class="single_product_item_thumb">
                                         <a href="?v=product_detail&id=<?= $values['id_prd'] ?>">
@@ -52,11 +64,11 @@
                                     </div>
                                     <h3 style="font-size: 20px;"> <a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
                                     <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
-                                        <del>$<?= number_format($values['price'], 0, '', ',');  ?></del>&emsp;
+                                        <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                                         <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
                                     </div>
                                     <div class="fw-bold d-flex justify-content-between align-items-center">
-                                        <p>Price: $<?= number_format($data, 0, '', ','); ?></p> 
+                                        <p>Price: <?= number_format($data, 0, '', ','); ?>₫</p> 
                                         <?php if ($values['so_luong'] > 0) {
                                             echo '
                                                 <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
@@ -141,10 +153,6 @@
         </div>
     </div>
 </section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>
-<script src="src/JS/loadContent.js"></script>
-<script src="src/JS/shop.js"></script>
 <script>
     const lenght = 8;
     load_more(".product-item","#loadMore","#loadLess",lenght);

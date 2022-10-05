@@ -70,7 +70,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>Some featured products</h2>
+                    <h2>Sản phẩm mới</h2>
                 </div>
             </div>
         </div>
@@ -87,18 +87,18 @@
                         </div>
                         <h3 style="font-size: 20px;"> <a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
-                            <del>$<?= number_format($values['price'], 0, '', ',');  ?></del>&emsp;
-                            <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
+                            <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
+                            <span class="text-danger">Tiết kiệm ( <?= $values['giam_gia'] ?>% )</span>
                         </div>
                         <div class="fw-bold d-flex justify-content-between align-items-center">
-                            <p>Price: $<?= number_format($data, 0, '', ','); ?></p>
+                            <p><?= number_format($data, 0, '', ','); ?>₫</p>
                             <?php if ($values['so_luong'] > 0) {
                                 echo '
-                                <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
+                                <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;còn hàng</small>
                             ';
                             } else {
                                 echo '
-                                <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Contact</small>
+                                <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;liên hệ</small>
                             ';
                             } ?>
                         </div>
@@ -172,7 +172,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>Top 8 products with high views</h2>
+                    <h2>Top 8 sản phẩm được xem nhiều nhất</h2>
                 </div>
             </div>
         </div>
@@ -189,18 +189,18 @@
                         </div>
                         <h3 style="font-size: 20px;"> <a href="?v=product_detail"><?= $values['name_prd'] ?></a> </h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
-                            <del>$<?= number_format($values['price'], 0, '', ',');  ?></del>&emsp;
-                            <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
+                            <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
+                            <span class="text-danger">Tiết kiệm ( <?= $values['giam_gia'] ?>% )</span>
                         </div>
                         <div class="fw-bold d-flex justify-content-between align-items-center">
-                            <p>Price: $<?= number_format($data, 0, '', ','); ?></p>
+                            <p><?= number_format($data, 0, '', ','); ?>₫</p>
                             <?php if ($values['so_luong'] > 0) {
                                 echo '
-                                <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
+                                <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Còn hàng</small>
                             ';
                             } else {
                                 echo '
-                                <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Contact</small>
+                                <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Liên hệ</small>
                             ';
                             } ?>
 

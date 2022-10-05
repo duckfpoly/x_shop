@@ -13,15 +13,15 @@
                                 <a class="nav-link" id="home" href="?">Home</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" id="shop" href="#" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Shop
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                     <a class="dropdown-item" href="?v=shop">All</a>
-                                    <a class="dropdown-item" href="?v=shop">Laptop</a>
-                                    <a class="dropdown-item" href="?v=shop">Mobile</a>
-                                    <a class="dropdown-item" href="?v=shop">Tablet</a>
-                                    <a class="dropdown-item" href="?v=shop">Headphones</a>
+                                    <a class="dropdown-item" href="?v=shop&cate=laptop">Laptop</a>
+                                    <a class="dropdown-item" href="?v=shop&cate=mobile">Mobile</a>
+                                    <a class="dropdown-item" href="?v=shop&cate=tablet">Tablet</a>
+                                    <a class="dropdown-item" href="?v=shop&cate=headphones">Headphones</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -38,31 +38,31 @@
                             </li>
                             <li class="nav-item dropdown" id="header_account">
                                 <?php if(empty(Session::get('ID'))){ ?>
-                                <a href="#" >
-                                    <div class="dropdown show">
-                                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa-solid fa-user"></i>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="?v=sign_in"><i class="fa-solid fa-right-to-bracket" style="color:#fff !important; "></i>&emsp;Sign In</a>
-                                            <a class="dropdown-item" href="?v=sign_up"><i class="fa-solid fa-user-plus" style="color:#fff !important; "></i>&emsp;Sign Up</a>
-                                        </div>
+                            <a href="#" >
+                                <div class="dropdown show">
+                                    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa-solid fa-user"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="?v=sign_in"><i class="fa-solid fa-right-to-bracket" style="color:#fff !important; "></i>&emsp;Sign In</a>
+                                        <a class="dropdown-item" href="?v=sign_up"><i class="fa-solid fa-user-plus" style="color:#fff !important; "></i>&emsp;Sign Up</a>
                                     </div>
-                                </a>
-                                <?php } else { ?>
-                                <a href="#" >
-                                    <div class="dropdown show">
-                                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img style="width: 30px;border-radius: 50%" src="assets/uploads/admin/user/<?= Session::get('image') ?>" alt="">&emsp;<?= Session::get('name') ?>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <?= Session::get('vaitro') == 1 ? '<a class="dropdown-item" href="admin.php"><i class="fa-solid fa-paper-plane" style="color:#fff !important; "></i>&emsp;Admin</a>' : '' ?>
-                                            <a class="dropdown-item" href="?v=profiles"><i class="fa-solid fa-address-card" style="color:#fff !important; "></i>&emsp;Profiles</a>
-                                            <a class="dropdown-item" href="#"><i class="fa-solid fa-money-bill" style="color:#fff !important; "></i>&emsp;Bill</a>
-                                            <a class="dropdown-item" href="?v=sign_out"><i class="fa-solid fa-right-from-bracket" style="color:#fff !important; "></i>&emsp;Sign Out</a>
-                                        </div>
+                                </div>
+                            </a>
+                            <?php } else { ?>
+                            <a href="#" >
+                                <div class="dropdown show">
+                                    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img style="width: 30px;border-radius: 50%" src="assets/uploads/admin/user/<?= Session::get('image') ?>" alt="">&emsp;<?= Session::get('name') ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <?= Session::get('vaitro') == 1 ? '<a class="dropdown-item" href="admin.php"><i class="fa-solid fa-paper-plane" style="color:#fff !important; "></i>&emsp;Admin</a>' : '' ?>
+                                        <a class="dropdown-item" href="?v=profiles"><i class="fa-solid fa-address-card" style="color:#fff !important; "></i>&emsp;Profiles</a>
+                                        <a class="dropdown-item" href="#"><i class="fa-solid fa-money-bill" style="color:#fff !important; "></i>&emsp;Bill</a>
+                                        <a class="dropdown-item" href="?v=sign_out"><i class="fa-solid fa-right-from-bracket" style="color:#fff !important; "></i>&emsp;Sign Out</a>
                                     </div>
-                                </a>
+                                </div>
+                            </a>
                             <?php } ?>
                             </li>
                         </ul>

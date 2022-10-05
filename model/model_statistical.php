@@ -1,9 +1,6 @@
 <?php
     $statistical = new statistical();
-    class statistical {
-        public function __construct(){
-            $this->process = new process();
-        }
+    class statistical extends process{
         public function list(){
             $sql = "SELECT 
             `tbl_categories`.id_cate,
@@ -16,7 +13,7 @@
             INNER JOIN tbl_categories ON tbl_categories.id_cate = tbl_products.ID_Cate
             GROUP BY `tbl_categories`.id_cate, `tbl_categories`.name_cate
             ";
-            $read = $this->process->query($sql);
+            $read = $this->query($sql);
             return $read;
         }
     }

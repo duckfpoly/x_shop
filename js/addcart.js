@@ -1,4 +1,3 @@
-console.log('addcart');
 $(document).ready(function createItem() {
     $("#addcart").click(function (e) {
 

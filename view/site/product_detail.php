@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
-                    <h2>Product Detail</h2>
+                    <h2>Chi tiết sản phẩm</h2>
                 </div>
             </div>
         </div>
@@ -61,14 +61,14 @@
                     </ul>
                     <div class="border p-2 rounded mb-3">
                         <small class="<?= $detail['giam_gia'] == 0 ? "invisible" : "" ?>">
-                            <del>Giá gốc:&nbsp;$<?= number_format($detail['price'], 0, '', ',');  ?></del>&nbsp;
+                            <del>Giá gốc:&nbsp;<?= number_format($detail['price'], 0, '', ',');  ?>₫</del>&nbsp;
                             <span class="text-dark fw-bold">(Tiết kiệm: <?= $detail['giam_gia'] ?>%)</span>
                         </small>
                         <h5 class="card-text mt-4 mb-3 fw-bold text-danger">
                             <?php if ($detail['giam_gia'] == 0) {
-                                echo " Giá: $" . number_format("$data", 0, '', ',') . "</h5> ";
+                                echo " Giá: " . number_format("$data", 0, '', ',') . "₫</h5> ";
                             } else {
-                                echo " Giá khuyến mại: $" . number_format("$data", 0, '', ',') . "</h5> ";
+                                echo " Giá khuyến mại: " . number_format("$data", 0, '', ',') . "₫</h5> ";
                             } ?>
                     </div>
                     <div class="card">
@@ -159,7 +159,7 @@
         </div>
     </div>
     <?php if (empty(Session::get('ID'))) { ?>
-        <h4>Bạn cần đăng nhập để thực hiện bình luận ! <a href="?v=signin">Đăng nhập ngay</a></h4>
+        <h4>Bạn cần đăng nhập để thực hiện bình luận ! <a href="?v=sign_in">Đăng nhập ngay</a></h4>
     <?php } else { ?>
         <div>
             <h4>Comment</h4>
@@ -176,7 +176,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>Products in the same category</h2>
+                    <h2>Sản phẩm liên quan</h2>
                 </div>
             </div>
         </div>
@@ -192,11 +192,11 @@
                         </div>
                         <h3 style="font-size: 20px;"> <a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
-                            <del>$<?= number_format($values['price'], 0, '', ',');  ?></del>&emsp;
+                            <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                             <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
                         </div>
                         <div class="fw-bold d-flex justify-content-between align-items-center">
-                            <p>Price: $<?= number_format($data, 0, '', ','); ?></p>
+                            <p>Price: <?= number_format($data, 0, '', ','); ?>₫</p>
                             <?php if ($values['so_luong'] > 0) {
                                 echo '
                                 <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
@@ -264,12 +264,6 @@
         </div>
     </div>
 </section>
-<!-- feature part end -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>
-<script src="src/JS/loadContent.js"></script>
-<script src="src/JS/addcart.js"></script>
 <script>
     // cmt
     load_more(".comment-list", "#loadMore", "#loadLess", 2);

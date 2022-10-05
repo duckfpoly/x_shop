@@ -1,9 +1,10 @@
 <?php 
+    require_once 'config/db.php';
     class process {
-        private $servername = "localhost";
-        private $username = "root";
-        private $password = "";
-        private $db = "xshop";
+        private $servername = DB_HOST;
+        private $username   = DB_USER;
+        private $password   = DB_PASS;
+        private $db         = DB_NAME;
         private function connect(){
             $this->conn = null;
             try {
