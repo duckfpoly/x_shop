@@ -138,12 +138,6 @@ $( "#apply_id_coupon" ).click(function() {
         }
     });
 });
-
-
-
-
-
-
 // tổng tiền giỏ hàng
 var subtotal = Number($('#subtotal').text());
 $('#subtotal').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(subtotal));
@@ -157,3 +151,61 @@ $('#coupon').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'
 var total_order = ship + coupon + subtotal;
 $('#total_orders').val(total_order);
 $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
+
+// function confirm() {
+//     // Thông tin khách hàng
+//     var name            = $("#name").val();
+//     var email           = $("#email").val();
+//     var phone           = $("#phone").val();
+//     var province        = $("#province").val();
+//     var district        = $("#district").val();
+//     var address_detail  = $("#address_detail").val();
+//     var message         = $("#message").val();
+//     // Thông tin giao hàng và thanh toán 
+//     var truck           = $('input[name=truck').val();
+//     var pay_option      = $('input[name=pay_option').val();
+//     // Tổng tiền hóa đơn 
+//     var total_orders    = $("#total_orders").val();
+//     var order_status    = 0;
+//     // Sản phẩm
+//     var arr_id = [];
+//     $('#example .id_prd').each(function() {
+//         arr_id.push($(this).html());
+//     });
+//     var arr_quantity = [];
+//     $('#example .quantity').each(function() {
+//         arr_quantity.push($(this).html());
+//     });
+//     var data_id         = JSON.stringify(arr_id);
+//     var data_quantity   = JSON.stringify(arr_quantity);
+//     // btn process
+//     var btn_submit = $("#process_pay").val();
+//     $("#process_pay").click(function(e) {
+//         e.preventDefault();
+//         $.ajax({
+//             type: "POST",
+//             url: '?v=confirm_order',
+//             data: {
+//                 btn_submit      : btn_submit,
+//                 name            : name,
+//                 email           : email,
+//                 phone           : phone,
+//                 province        : province,
+//                 district        : district,
+//                 ward            : ward,
+//                 address_detail  : address_detail,
+//                 message         : message,
+//                 truck           : truck,
+//                 pay_option      : pay_option,
+//                 order_status    : order_status,
+//                 data_id         : data_id,
+//                 data_quantity   : data_quantity,
+//                 total_orders    : total_orders,
+//             },
+//             success: function() {
+//                 location.href = '?v=confirm_order';
+//             }
+//         });
+//     });
+// }
+// confirm()

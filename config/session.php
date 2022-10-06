@@ -25,7 +25,6 @@ class Session {
         echo ' <script language="javascript"> location.href = "?"; </script>';
     }
     public static function unset($key){
-        session_unset($key);
-        echo ' <script language="javascript"> location.href = "?"; </script>';
+        unset($_SESSION[$key]);
     }
 }

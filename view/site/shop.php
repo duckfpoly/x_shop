@@ -23,14 +23,12 @@
                     <div class="single_sedebar">
                         <div class="select_option">
                             <div class="select_option_list">Products <i class="right fas fa-caret-down"></i> </div>
-                            <div class="select_option_dropdown filter-link">
+                            <div class="select_option_dropdown filter-link <?= isset($_GET['cate']) == true ? "d-block" : "" ?>">
                                 <p>
                                     <a class="filter_button" href="?v=shop">All</a>
                                 </p>
                                 <?php foreach ($read_cate as $row => $values) { ?>
-                                    <p>
-                                        <a class="filter_button" href="?v=shop&cate=<?= strtolower($values['name_cate']) ?>"><?= $values['name_cate'] ?></a>
-                                    </p>
+                                    <p><a class="filter_button" id="<?= strtolower($values['name_cate']) ?>" href="?v=shop&cate=<?= strtolower($values['name_cate']) ?>"><?= $values['name_cate'] ?></a></p>
                                 <?php } ?>
                             </div>
                         </div>
@@ -38,12 +36,12 @@
                     <div class="single_sedebar">
                         <div class="select_option">
                             <div class="select_option_list">Filter <i class="right fas fa-caret-down"></i> </div>
-                            <div class="select_option_dropdown filter-link">
+                            <div class="select_option_dropdown filter-link <?= isset($_GET['sort']) == true ? "d-block" : "" ?>">
                                 <p><a class="filter_button" href="?v=shop">Mặc định</a></p>
-                                <p><a class="filter_button" href="?v=shop&sort=price_desc">Giá từ cao -> thấp</a></p>
-                                <p><a class="filter_button" href="?v=shop&sort=price_asc">Giá từ thấp -> cao</a></p>
-                                <p><a class="filter_button" href="?v=shop&sort=name_desc">Tên từ Z -> A</a></p>
-                                <p><a class="filter_button" href="?v=shop&sort=name_asc">Tên từ A -> Z</a></p>
+                                <p><a class="filter_button" id="price_desc" href="?v=shop&sort=price_desc">Giá từ cao -> thấp</a></p>
+                                <p><a class="filter_button" id="price_asc" href="?v=shop&sort=price_asc">Giá từ thấp -> cao</a></p>
+                                <p><a class="filter_button" id="name_desc" href="?v=shop&sort=name_desc">Tên từ Z -> A</a></p>
+                                <p><a class="filter_button" id="name_asc" href="?v=shop&sort=name_asc">Tên từ A -> Z</a></p>
                             </div>
                         </div>
                     </div>
@@ -70,15 +68,11 @@
                                     <div class="fw-bold d-flex justify-content-between align-items-center">
                                         <p>Price: <?= number_format($data, 0, '', ','); ?>₫</p> 
                                         <?php if ($values['so_luong'] > 0) {
-                                            echo '
-                                                <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
-                                            ';
-                                        } else {
-                                            echo '
-                                                <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Contact</small>
-                                            ';
+                                            echo '<small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>';
+                                        } 
+                                        else {
+                                            echo '<small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Contact</small>';
                                         } ?>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -157,4 +151,34 @@
     const lenght = 8;
     load_more(".product-item","#loadMore","#loadLess",lenght);
     load_less_scroll(".product-item","#loadLess","#loadMore",lenght,440);
+    const cate = new URLSearchParams(window.location.search).get('cate');
+    if(cate){
+        if(cate == 'laptop'){
+            $('#laptop').addClass('fw-bold');  
+        }
+        else if (cate == 'mobile'){
+            $('#mobile').addClass('fw-bold');  
+        }
+        else if (cate == 'tablet'){
+            $('#tablet').addClass('fw-bold');  
+        }
+        else if (cate == 'headphones'){
+            $('#headphones').addClass('fw-bold');  
+        }
+    }
+    const sort = new URLSearchParams(window.location.search).get('sort');
+    if(sort){
+        if(sort == 'price_desc'){
+            $('#price_desc').addClass('fw-bold');  
+        }
+        else if (sort == 'price_asc'){
+            $('#price_asc').addClass('fw-bold');  
+        }
+        else if (sort == 'name_desc'){
+            $('#name_desc').addClass('fw-bold');  
+        }
+        else if (sort == 'name_asc'){
+            $('#name_asc').addClass('fw-bold');  
+        }
+    }
 </script>

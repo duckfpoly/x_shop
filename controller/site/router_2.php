@@ -154,7 +154,16 @@
             include 'view/site/account/sign_up.php'; 
         }
         private function sign_out(){ 
-            Session::destroy();
+            Session::unset('user_login');
+            Session::unset('ID');
+            Session::unset('username');
+            Session::unset('name');
+            Session::unset('email');
+            Session::unset('password');
+            Session::unset('image');
+            Session::unset('active');
+            Session::unset('vaitro');
+            echo ' <script language="javascript"> location.href = "?"; </script>';
         }
         private function blog_detail(){ 
         }

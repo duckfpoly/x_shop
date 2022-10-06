@@ -196,5 +196,8 @@
             $read = $this->query($sql);
             return $read;
         }
+        public function panigation(){
+            
+        }
     }
 ?>

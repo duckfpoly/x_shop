@@ -38,7 +38,7 @@
         include('components/orders.php');
     }
     elseif($module == "sign_out"){
-        Session::destroy();
+        // Session::destroy();
     }
     else {
         include('components/dashboard.php');

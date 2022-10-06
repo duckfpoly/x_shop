@@ -12,21 +12,21 @@
             </div>
         </section>
         <section class="mt-5">
-            <form method="post" id="forms">
+            <form method="post" id="forms" >
                 <div class="d-flex flex-wrap justify-content-between align-items-start" id="main_content">
                     <div class="col-lg-3 col-md-12 col-sm-12">
                         <h3>Thông tin người nhận</h3>
                         <div class="col-md-12 form-group mb-4">
                             <label for="name" class="form-label">Họ tên</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= !empty(Session::get('ID')) ?  Session::get('name') : "" ?>" required/>
+                            <input type="text" class="form-control" id="name" name="name" value="<?= !empty(Session::get('ID')) ?  Session::get('name') : "" ?>" required />
                         </div>
                         <div class="col-md-12 form-group mb-4">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" value="<?= !empty(Session::get('ID')) ?  Session::get('email') : "" ?>" required/>
+                            <input type="text" class="form-control" id="email" name="email" value="<?= !empty(Session::get('ID')) ?  Session::get('email') : "" ?>" required />
                         </div>
                         <div class="col-md-12 form-group mb-4">
                             <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required/>
+                            <input type="text" class="form-control" id="phone" name="phone" required />
                         </div>
                         <div class="col-md-12 form-group mb-4">
                             <label for="province" class="form-label">Tỉnh, Thành phố</label>
@@ -74,7 +74,7 @@
                                     Cước phí vận chuyển : 50.000 VNĐ
                                 </div>
                             </label>
-                            </div>
+                        </div>
                         <div class="mt-5">
                             <div class="mb-3">
                                 <h3>Thanh toán</h3>
@@ -140,19 +140,18 @@
                     <div class="col-lg-5 col-md-12 col-sm-12">
                         <div class="order_box">
                             <h2>Thông tin đơn hàng</h2>
-                            <table class="table">
+                            <table class="table" id="example">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Image</th>
                                         <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
+                                        <th>Số lượng(c)</th>
                                         <th>Giá</th>
                                         <th>Thành tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $i = 1;
                                     $cart = $_SESSION['cart'];
                                     $total = 0;
                                     foreach ($cart as $key => $values) {
@@ -160,13 +159,19 @@
                                         $total += $subtotal;
                                     ?>
                                         <tr>
-                                            <td><img style="width: 65px; height: 65px;" class="rounded" src="assets/uploads/admin/products/<?= $values['image_prd'] ?>" alt=""></td>
-                                            <td><span class="d-inline-block text-truncate" style="max-width: 150px;"">
-                                        <?= $values['name_prd'] ?>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est.</td>
-                                    </span> 
-                                    <td>x 0<?= $values['quantity_prd'] ?></td>
-                                    <td id=" price_product"><?= number_format($values['price_prd'], 0, '', '.') ?> VND</td>
-                                            <td id="total_product"><?= number_format($subtotal, 0, '', '.') ?> VND</td>
+                                            <td><a class="text-dark" href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                                                    <img style="width: 65px; height: 65px;" class="rounded" src="assets/uploads/admin/products/<?= $values['image_prd'] ?>" alt="">
+                                                </a> 
+                                            </td>
+                                            <td><a class="text-dark" href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                                                    <span class="d-inline-block text-truncate" style="max-width: 150px;"">
+                                                        <?= $values['name_prd'] ?>
+                                                    </span> 
+                                            </a></td>
+                                            <td class="id_prd d-none"><?= $values['id_prd'] ?></td>
+                                            <td class="quantity"><?= $values['quantity_prd'] ?></td>
+                                            <td><?= number_format($values['price_prd'], 0, '', '.') ?> VND</td>
+                                            <td><?= number_format($subtotal, 0, '', '.') ?> VND</td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -200,7 +205,7 @@
                                 </li>
                             </ul>
                             <div class="mt-4 text-center">
-                                <button type="submit" name="process_pay" id="process_pay" class="btn_1" href="#">Đặt hàng</button>
+                                <button type="submit" name="process_pay" id="process_pay" class="btn_1" value="process_pay">Đặt hàng</button>
                             </div>
                             <div>
                                 <a href="?v=shop"><i class="fa-solid fa-arrow-left"></i> Quay lại mua hàng</a>
