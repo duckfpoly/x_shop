@@ -1,6 +1,5 @@
 <?php 
     $url = $_SERVER['REQUEST_URI']; 
-    // include 'global.php';
     include 'config/session.php';
     // kiểm tra đăng nhập
     Session::checkSession();

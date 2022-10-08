@@ -164,7 +164,7 @@
                                                 </a> 
                                             </td>
                                             <td><a class="text-dark" href="?v=product_detail&id=<?= $values['id_prd'] ?>">
-                                                    <span class="d-inline-block text-truncate" style="max-width: 150px;"">
+                                                    <span class="d-inline-block text-truncate" style="max-width: 150px;">
                                                         <?= $values['name_prd'] ?>
                                                     </span> 
                                             </a></td>

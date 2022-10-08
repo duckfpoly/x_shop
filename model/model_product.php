@@ -2,7 +2,7 @@
     $product = new product();
     class product extends process {
         public function read(){
-            $sql = "SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate ORDER BY RAND() LIMIT 6" ;
+            $sql = "SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate ORDER BY RAND() LIMIT 8" ;
             $read = $this->query($sql);
             return $read;
         }

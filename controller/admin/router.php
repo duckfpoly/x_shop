@@ -38,7 +38,16 @@
         include('components/orders.php');
     }
     elseif($module == "sign_out"){
-        // Session::destroy();
+        Session::unset('user_login');
+        Session::unset('ID');
+        Session::unset('username');
+        Session::unset('name');
+        Session::unset('email');
+        Session::unset('password');
+        Session::unset('image');
+        Session::unset('active');
+        Session::unset('vaitro');
+        echo ' <script language="javascript"> location.href = "./"; </script>';
     }
     else {
         include('components/dashboard.php');

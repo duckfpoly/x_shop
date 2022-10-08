@@ -12,12 +12,12 @@ CREATE TABLE tbl_products (
     name_prd VARCHAR(255) NULL,
     price FLOAT NULL,
     image VARCHAR(255) NULL,
-    giam_gia FLOAT NULL,
-    ngay_nhap DATE NULL,
-    dac_biet TINYINT NULL,
-    so_luot_xem INT NULL,
+    discount FLOAT NULL,
+    create_at DATE NULL,
+    special TINYINT NULL,
+    view INT NULL,
     description VARCHAR(255) NULL,
-    so_luong INT NULL,
+    quantity INT NULL,
     ID_Cate INT NULL
 )
 

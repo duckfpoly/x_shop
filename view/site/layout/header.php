@@ -69,41 +69,96 @@
                     </div>
                     <div class="hearer_icon d-flex align-items-center justify-content-center">
                         <div>
-                            <a id="search_1" href="javascript:void(0)" >
+                            <a id="search_1" href="?v=cart" >
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
                         </div>
-                        <div>
-                            <a href="?v=cart" type="button" class="position-relative">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <span 
-                                    class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" 
-                                    style="z-index: 10; top:-3px;" 
-                                    id="count_cart">
-                                    <?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : "0" ?>
-                                </span>
+                        <div id="spc" style="padding-left: 15px;">
+                            <a href="?v=cart" id="cart-lg">
+                                <div class="dropdown show ">
+                                    <a class="dropdown-toggle" data-bs-display="static" class="position-relative" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                        <span 
+                                            class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" 
+                                            style="z-index: 10; top:-3px;" 
+                                            id="count_cart">
+                                            <?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : "0" ?>
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu bg-light" style="position: absolute; right: 0px;">
+                                        <?php if(isset($_SESSION['cart'])){ if(count($_SESSION['cart']) > 0 ){  $total = 0; ?>
+                                        <div class="card" style="border:none">
+                                            <div class="card-header fw-bold" >
+                                                Giỏ hàng
+                                            </div>
+                                        </div>
+                                        <div class="card-body overflow-auto" style="width: 450px; max-height: 242px;">
+                                            <table class="table">
+                                                <?php foreach($_SESSION['cart'] as $key => $values){
+                                                        $subtotal = $values['price_prd'] * $values['quantity_prd']; $total += $subtotal;    
+                                                ?>
+                                                <form class="w-100">
+                                                    <input type="hidden" id="id_product" value="<?= $values['id_prd'] ?>">
+                                                    <tr>
+                                                        <td>
+                                                            <img class="rounded" style="width: 80px; height: 80px" src="assets/uploads/admin/products/<?= $values['image_prd'] ?>" alt="" />
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex justify-content-between mb-2">
+                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;"><?= $values['name_prd'] ?></span>
+                                                            </div>
+                                                            <?= number_format($subtotal, 0, '', ',') ?>₫
+                                                        </td>
+                                                        <td>
+                                                            <span>x<?= $values['quantity_prd'] ?></span><br>
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-danger" type="button" id="delete_prd_cart" name="delete_prd_cart" value="delete_prd_cart"><i class="fa-solid fa-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                                <?php } ?>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer bg-transparent">
+                                            <a href="?v=cart" class="btn btn-outline-secondary">Xem giỏ hàng</a>
+                                        </div>
+                                        <?php } 
+                                        else {
+                                            echo '
+                                                <div class="m-5" style="width:200px; height:200px">
+                                                    <img src="https://bizweb.dktcdn.net/100/438/328/themes/836630/assets/empty-cart.png?1636877535162" alt="">
+                                                </div>
+                                            ';
+                                        }
+                                        } else {
+                                            echo '
+                                                <div class="m-5" style="width:200px; height:200px">
+                                                    <img src="https://bizweb.dktcdn.net/100/438/328/themes/836630/assets/empty-cart.png?1636877535162" alt="">
+                                                </div>
+                                            ';
+                                        } ?>
+                                    </div>
+                                </div>
                             </a>
                         </div>
-                        <div style="padding-left: 15px;">
+                        <div style="padding-left:50px">
                             <?php if(empty(Session::get('ID'))){ ?>
-                            <a href="#">
                                 <div class="dropdown show" id="account">
-                                    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa-solid fa-user"></i>
+                                    <a class=" dropdown-toggle" data-bs-display="static" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img style="width: 30px; border-radius: 50%" src="https://cdn.icon-icons.com/icons2/2506/PNG/512/user_icon_150670.png" alt="">
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-menu" style="position: absolute; right: 0px;">
                                         <a class="dropdown-item" href="?v=sign_in"><i class="fa-solid fa-right-to-bracket" style="color:#fff !important; "></i>&emsp;Sign In</a>
                                         <a class="dropdown-item" href="?v=sign_up"><i class="fa-solid fa-user-plus" style="color:#fff !important; "></i>&emsp;Sign Up</a>
                                     </div>
                                 </div>
-                            </a>
                             <?php } else { ?>
-                            <a href="#" >
                                 <div class="dropdown show" id="account">
-                                    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class=" dropdown-toggle" data-bs-display="static" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img style="width: 30px; border-radius: 50%" src="assets/uploads/admin/user/<?= Session::get('image') ?>" alt="">
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-menu" style="position: absolute; right: 0px;">
                                         <a href=""> </a>
                                         <a class="dropdown-item" href="?v=profiles">Hello, <?= Session::get('name') ?></a>
                                         <?= Session::get('vaitro') == 1 ? '<a class="dropdown-item" href="admin.php"><i class="fa-solid fa-paper-plane" style="color:#fff !important; "></i>&emsp;Admin</a>' : '' ?>
@@ -112,7 +167,6 @@
                                         <a class="dropdown-item" href="?v=sign_out"><i class="fa-solid fa-right-from-bracket" style="color:#fff !important; "></i>&emsp;Sign Out</a>
                                     </div>
                                 </div>
-                            </a>
                             <?php } ?>
                         </div>
                     </div>
@@ -130,3 +184,25 @@
         </div>
     </div>
 </header>
+
+<script>
+    $(document).ready(function createItem() {
+    $("#delete_prd_cart").click(function (e) {
+        var delete_prd_cart = $("#delete_prd_cart").val();
+        var id_prd = $("#id_product").val();
+        var dataString =
+            'delete_prd_cart=' + delete_prd_cart +
+            '&id_product=' + id_prd;
+        $.ajax({
+            type: "POST",
+            url: '?v=cart',
+            data: dataString,
+            success: function () {
+                alert('Xóa thành công !');
+                location.reload();
+            }
+        });
+    });
+});
+
+</script>
