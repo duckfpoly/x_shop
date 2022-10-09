@@ -21,7 +21,7 @@
     />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
-    <link rel="stylesheet" href="src/CSS/style.css">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
     <div class="containerr">
@@ -53,5 +53,7 @@
     
     <!-- file js -->
     <script src="js/admin.js"></script>
+    <script src="js/validate.js"></script>
+
 </body>
 </html>

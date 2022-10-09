@@ -141,38 +141,38 @@ if (empty(Session::get('ID'))) {
                 $("#profiles").removeClass("d-none");
             });
         });
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     Validator({
-        //         form: '#form_info',
-        //         formGroupSelector: '.form-group',
-        //         errorSelector: '.form-message',
-        //         rules: [
-        //             Validator.isRequired('#name', 'Vui lòng nhập đầy đủ họ tên'),
-        //             Validator.isRequired('#username', 'Vui lòng nhập username'),
-        //             Validator.isRequired('#email', 'Vui lòng nhập email'),
-        //             Validator.isEmail('#email'),
-        //             Validator.minLength('#username', 6)
-        //         ],
-        //     });
-        // });
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     Validator({
-        //         form: '#form_pass',
-        //         formGroupSelector: '.form-group',
-        //         errorSelector: '.form-message',
-        //         rules: [
-        //             Validator.isRequired('#old_password', 'Vui lòng nhập passwword'),
-        //             Validator.isRequired('#new_password', 'Vui lòng nhập lại passwword'),
-        //             Validator.isRequired('#re_new_password', 'Vui lòng nhập lại passwword'),
-        //             Validator.minLength('#old_password', 6),
-        //             Validator.minLength('#new_password', 6),
-        //             Validator.minLength('#re_new_password', 6),
-        //             Validator.isConfirmed('#re_new_password', function() {
-        //                 return document.querySelector('#form_pass #new_password').value;
-        //             }, 'Mật khẩu nhập lại không chính xác')
-        //         ]
-        //     })
-        // });
+        document.addEventListener('DOMContentLoaded', function() {
+            Validator({
+                form: '#form_info',
+                formGroupSelector: '.form-group',
+                errorSelector: '.form-message',
+                rules: [
+                    Validator.isRequired('#name', 'Vui lòng nhập đầy đủ họ tên'),
+                    Validator.isRequired('#username', 'Vui lòng nhập username'),
+                    Validator.isRequired('#email', 'Vui lòng nhập email'),
+                    Validator.isEmail('#email'),
+                    Validator.minLength('#username', 6)
+                ],
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            Validator({
+                form: '#form_pass',
+                formGroupSelector: '.form-group',
+                errorSelector: '.form-message',
+                rules: [
+                    Validator.isRequired('#old_password', 'Vui lòng nhập passwword cũ'),
+                    Validator.isRequired('#new_password', 'Vui lòng nhập passwword mới'),
+                    Validator.isRequired('#re_new_password', 'Vui lòng nhập lại passwword'),
+                    Validator.minLength('#old_password', 6),
+                    Validator.minLength('#new_password', 6),
+                    Validator.minLength('#re_new_password', 6),
+                    Validator.isConfirmed('#re_new_password', function() {
+                        return document.querySelector('#form_pass #new_password').value;
+                    }, 'Mật khẩu nhập lại không chính xác')
+                ]
+            })
+        });
     </script>
     <style>
         #img_info {

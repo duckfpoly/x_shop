@@ -61,10 +61,16 @@
                     <?= $detail['so_luot_xem'] ?>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="" class="form-label">Product Type</label>
                 <div class="form-control">
                     <?= $detail['name_cate'] ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="form-label">Quantity</label>
+                <div class="form-control">
+                    <?= $detail['so_luong'] ?>
                 </div>
             </div>
         </div>

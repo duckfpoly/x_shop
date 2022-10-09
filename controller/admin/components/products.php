@@ -9,7 +9,8 @@
                 $price = $_POST['price'];
                 $image = $_FILES['image']['name'];
                 $giam_gia = $_POST['giam_gia'];
-                $ngay_nhap = $_POST['date'];
+                $ngay_nhap = date("Y-m-d H:i:s");
+
                 $dac_biet = $_POST['special'];
                 $description = $_POST['description'];
                 $id_cate = $_POST['id_cate'];
@@ -26,33 +27,30 @@
             }
         }
         elseif($act == 'update'){
-            $id = $_GET['id'];
-            if(isset($_POST['update_product'])){
-                $id_product = $id;
-                $name = $_POST['name'];
-                $price = $_POST['price'];
-                $image_goc = $_POST['image'];
-                $image_up = $_FILES['image_update']['name'];
-                if($image_up == ''){
-                    $image = $image_goc;
-                }
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $id_product     = $_POST['id_product'];
+                $name           = $_POST['name'];
+                $price          = $_POST['price'];
+                $giam_gia       = $_POST['giam_gia'];
+                $dac_biet       = $_POST['special'];
+                $description    = $_POST['description'];
+                $quantity       = $_POST['quantity'];
+                $id_cate        = $_POST['id_cate'];
+                $image_goc      = $_POST['image'];
+                $image_up       = $_FILES['image_update']['name'];
+                if($image_up == ''){ $image = $image_goc; }
                 else {
                     $image = $image_up;
-                    $image_uploads = save_file("image_update", "$IMAGE_DIR/admin/products/");
+                    $image_uploads = save_file("image_update", "assets/uploads/admin/products/");
                 }
-                $giam_gia = $_POST['giam_gia'];
-                $ngay_nhap = $_POST['date'];
-                $dac_biet = $_POST['special'];
-                $description = $_POST['description'];
-                $id_cate = $_POST['id_cate'];
-                $uploads = save_file("image_update", "$IMAGE_DIR/admin/products/");
                 alert(
-                    $update = $product->update($name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$id_cate,$id_product),
+                    $update = $product->update($name,$price,$image,$giam_gia,$dac_biet,$description,$quantity,$id_cate,$id_product),
                     'Update products successfully !',
                     'Has error in too processor !',
                     'products'
                 );
-            }else {
+            }
+            else {
                 $id = (int)$_GET['id'];
                 $cate = $cate->read();
                 $detail = $product->detail($id);

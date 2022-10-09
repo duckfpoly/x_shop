@@ -17,21 +17,29 @@
                 return $alert;
             }
             else {
-                $sql = "INSERT INTO `tbl_products` SET `name_prd` = ?, `price` = ?, `image` = ?,`giam_gia` = ?, `ngay_nhap` = ?,`dac_biet` = ?,`description` = ?,`id_cate` = ?";
+                $sql = "INSERT INTO `tbl_products` SET 
+                `name_prd`      = ?, 
+                `price`         = ?, 
+                `image`         = ?,
+                `giam_gia`      = ?, 
+                `ngay_nhap`     = ?,
+                `dac_biet`      = ?,
+                `description`   = ?,
+                `id_cate`       = ?";
                 $create_product = $this->query_sql($sql,$name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$id_cate);
                 return $create_product;
             }
         }
-        public function update($name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$id_cate,$id){
-            if(empty($name) || empty($price) || empty($image) || empty($ngay_nhap) || empty($description) || empty($id_cate)){ 
-                $alert = "Please enter your all fields to create a new products !";
-                return $alert;
-            }
-            else {
-                $sql = "UPDATE `tbl_products` SET `name_prd` = ?, `price` = ?, `image` = ?,`giam_gia` = ?, `ngay_nhap` = ?,`dac_biet` = ?,`description` = ?,`id_cate` = ? WHERE id_prd = ?";
-                $update_product = $this->query_sql($sql,$name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$id_cate,$id);
+        public function update($name,$price,$image,$giam_gia,$dac_biet,$description,$quantity,$id_cate,$id){
+            // if(empty($name) || empty($price) || empty($quantity)){ 
+            //     $alert = "Please enter your all fields to update products !";
+            //     return $alert;
+            // }
+            // else {
+                $sql = "UPDATE `tbl_products` SET `name_prd` = ?,`price` = ?,`image` = ?,`giam_gia` = ?,`dac_biet` = ?,`description` = ?,`so_luong` = ?,`ID_Cate` = ? WHERE id_prd = ? ";
+                $update_product = $this->query_sql($sql,$name,$price,$image,$giam_gia,$dac_biet,$description,$quantity,$id_cate,$id);
                 return $update_product;
-            }
+            // }
         }
         public function delete($id){ 
             if(empty($id)){

@@ -118,10 +118,18 @@
                     'profiles'
                 );
             }
-            else {
-                $detail = $this->user->detail(Session::get('ID'));
-                include('view/site/profiles.php');
+            if(isset($_POST['update_pass_user'])){
+                $new_password = $_POST['new_password'];
+                $id = Session::get('ID');
+                alert_2(
+                    $update = $this->user->change_password($new_password,$id),
+                    'Update successfully !',
+                    'Has error in too processor !',
+                    'profiles'
+                );
             }
+            $detail = $this->user->detail(Session::get('ID'));
+            include('view/site/profiles.php');
         }
         private function sign_in(){ 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){

@@ -125,7 +125,7 @@
             }
         }
         public function change_password($password,$id){
-            if(empty($email) || empty($id)){ 
+            if(empty($password) || empty($id)){ 
                 $alert = "Please enter your all fields to update !";
                 return $alert;
             }

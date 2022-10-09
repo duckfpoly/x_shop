@@ -41,7 +41,7 @@
                 }
             ?>
 
-                <tr>
+                <tr class="<?= $values['dac_biet'] == 1 ? "bg-light" : "" ?>">
                     <td><input type="checkbox" name="checkbox" class="checkbox"></td>
                     <td><?= $values['id_prd'] ?></td>
                     <td><?= $values['name_prd'] ?></td>

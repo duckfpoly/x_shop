@@ -3058,7 +3058,7 @@ input:focus {
 
 /* line 1, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_trending_items.scss */
 .trending_items {
-  background-color: #F4EDF2;
+  /* background-color: #F4EDF2; */
   padding: 200px 0 130px;
 }
 

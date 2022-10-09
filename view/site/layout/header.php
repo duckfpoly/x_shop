@@ -69,7 +69,7 @@
                     </div>
                     <div class="hearer_icon d-flex align-items-center justify-content-center">
                         <div>
-                            <a id="search_1" href="?v=cart" >
+                            <a id="search_1" href="#" >
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
                         </div>
