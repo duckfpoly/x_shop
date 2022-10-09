@@ -1,12 +1,9 @@
 <?php
-    class comment {
-        private $process;
-        public function __construct($process){
-            $this->process = $process;
-        }
+    $comment = new comment();
+    class comment extends process{
         public function read(){
             $sql = "SELECT * FROM `tbl_comments`";
-            $read = $this->process->query($sql);
+            $read = $this->query($sql);
             return $read;
         }
         public function show_list(){
@@ -21,7 +18,7 @@
             GROUP BY `tbl_products`.id_prd, `tbl_products`.name_prd
             HAVING so_luong > 0
             ";
-            $read = $this->process->query($sql);
+            $read = $this->query($sql);
             return $read;
         }
         public function create($id_product,$id_user,$time,$content_cmt){
@@ -36,24 +33,24 @@
                 `time` = ?,
                 `content` = ?
                 ";
-                $create_cate = $this->process->query_sql($sql,$id_product,$id_user,$time,$content_cmt);
+                $create_cate = $this->query_sql($sql,$id_product,$id_user,$time,$content_cmt);
                 return $create_cate;
             }
         }
         public function delete($id){ 
             if(empty($id)){
-                $alert = "Please enter ID Cate !";
+                $alert = "Please enter ID comments !";
                 return $alert;
             }
             else {
                 $sql = "DELETE FROM `tbl_comments` WHERE id_cmt = ?";
-                $delete_cate = $this->process->query_sql($sql,$id);
-                return $delete_cate;
+                $delete_cmt = $this->query_sql($sql,$id);
+                return $delete_cmt;
             }
         }
         public function detail($id){
             if(empty($id)){
-                $alert = "Please enter ID Comments !";
+                $alert = "Please enter ID Products !";
                 return $alert;
             }
             else {
@@ -67,8 +64,10 @@
                 FROM `tbl_comments`
                 INNER JOIN `tbl_products` ON `tbl_products`.id_prd = `tbl_comments`.ID_Product
                 INNER JOIN `tbl_user` ON `tbl_user`.ID = `tbl_comments`.ID_User 
-                WHERE tbl_comments.ID_Product = ?";
-                $detail = $this->process->query($sql,$id);
+                WHERE tbl_comments.ID_Product = ?
+                ORDER BY `tbl_comments`.id_cmt DESC
+                ";
+                $detail = $this->query($sql,$id);
                 return $detail;
             }
         }
@@ -79,12 +78,10 @@
             }
             else {
                 $sql = "SELECT COUNT(*) so_cmt FROM `tbl_comments` WHERE tbl_comments.ID_Product = ?";
-                $getCmt = $this->process->query_value($sql,$id);
+                $getCmt = $this->query_value($sql,$id);
                 return $getCmt;
             }
         }
-        
     }
-    include_once 'config/process.php';
-    $handle_comment = new comment($process);
+    
 ?>

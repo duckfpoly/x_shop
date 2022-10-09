@@ -11,6 +11,7 @@
         <a href="?module=users" id="users" class="btn w-100 mb-2" style="text-align: left;">&emsp;&emsp;<i class="fa-solid fa-users"></i>&emsp;Users</a>
         <a href="?module=statisticals" id="sta" class="btn  w-100 mb-2" style="text-align: left;">&emsp;&emsp;<i class="fa-brands fa-squarespace"></i>&emsp;Statisticals</a>
         <a href="?module=blog" id="blog" class="btn  w-100 mb-2" style="text-align: left;">&emsp;&emsp;<i class="fa-solid fa-blog"></i>&emsp;Blogs</a>
+        <a href="?module=orders" id="orders" class="btn  w-100 mb-2" style="text-align: left;">&emsp;&emsp;<i class="fa-brands fa-jedi-order"></i>&emsp;Orders</a>
         
     </div> 
 </aside>

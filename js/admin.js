@@ -12,6 +12,12 @@ if(view){
     else if (view == 'users'){
         $('#users').addClass('active fw-bold');  
     }
+    else if (view == 'blog'){
+        $('#blog').addClass('active fw-bold');  
+    }
+    else if (view == 'orders'){
+        $('#orders').addClass('active fw-bold');  
+    }
     else if (view == 'statisticals'){
         $('#sta').addClass('active fw-bold');  
     }

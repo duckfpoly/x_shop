@@ -2,3 +2,6 @@
     width: 100%;
     height: 21px;
 }
+.dropdown-toggle::after {
+    display: none;
+}

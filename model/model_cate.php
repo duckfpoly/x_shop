@@ -1,12 +1,9 @@
 <?php
-    class cate {
-        private $process;
-        public function __construct($process){
-            $this->process = $process;
-        }
+    $cate = new categories();
+    class categories extends process{
         public function read(){
             $sql = "SELECT * FROM `tbl_categories`";
-            $read = $this->process->query($sql);
+            $read = $this->query($sql);
             return $read;
         }
         public function create($name){
@@ -16,7 +13,7 @@
             }
             else {
                 $sql = "INSERT INTO `tbl_categories` SET `name_cate` = ?";
-                $create_cate = $this->process->query_sql($sql,$name);
+                $create_cate = $this->query_sql($sql,$name);
                 return $create_cate;
             }
         }
@@ -27,7 +24,7 @@
             }
             else {
                 $sql = "UPDATE `tbl_categories` SET `name_cate`= ? WHERE id_cate = ?";
-                $update_cate = $this->process->query_sql($sql,$name,$id);
+                $update_cate = $this->query_sql($sql,$name,$id);
                 return $update_cate;
             }
         }
@@ -38,7 +35,7 @@
             }
             else {
                 $sql = "DELETE FROM `tbl_categories` WHERE id_cate = ?";
-                $delete_cate = $this->process->query_sql($sql,$id);
+                $delete_cate = $this->query_sql($sql,$id);
                 return $delete_cate;
             }
         }
@@ -49,7 +46,7 @@
             }
             else {
                 $sql = "SELECT * FROM `tbl_categories` WHERE id_cate = ?";
-                $detail = $this->process->query_one($sql,$id);
+                $detail = $this->query_one($sql,$id);
                 return $detail;
             }
         }
@@ -60,13 +57,13 @@
             }
             else {
                 $sql = "DELETE FROM `tbl_categories` WHERE id_cate = ?";
-                $delete_checked=  $this->process->execute($sql, $id);
+                $delete_checked=  $this->query($sql, $id);
                 return $delete_checked;
             }
         }
         public function count_all(){ 
             $sql = "SELECT count(*) FROM `tbl_categories`";
-            $count_all_user = $this->process->query_value($sql);
+            $count_all_user = $this->query_value($sql);
             return $count_all_user;
         }
         public function count_one($id){ 
@@ -75,11 +72,10 @@
                 return $alert;
             }else {
                 $sql = "SELECT count(*) FROM `tbl_categories` WHERE id_cate = ?";
-                $count_one_user = $this->process->query_value($sql,$id) > 0;
+                $count_one_user = $this->query_value($sql,$id) > 0;
                 return $count_one_user;
             }
         }
     }
-    include_once 'config/process.php';
-    $handle_cate = new cate($process);
+    
 ?>

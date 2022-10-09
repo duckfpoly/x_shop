@@ -13,14 +13,14 @@
 	}
 
 
-body::-webkit-scrollbar {
-  width: 0px;
-}
+  body::-webkit-scrollbar {
+    width: 10px;
+  }
 
 body::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom, #7A7FBA, #11C37C);
+  /* background: #B08EAD; */
   border-radius: 10px;
-  
 }
 
 body::-webkit-scrollbar-track {
@@ -3058,7 +3058,7 @@ input:focus {
 
 /* line 1, /Applications/MAMP/htdocs/old/palash/cl/shop_html/sass/_trending_items.scss */
 .trending_items {
-  background-color: #F4EDF2;
+  /* background-color: #F4EDF2; */
   padding: 200px 0 130px;
 }
 

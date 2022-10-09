@@ -3,15 +3,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
-                    <h2>Product Detail</h2>
+                    <h2>Chi tiết sản phẩm</h2>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<div class="container p-lg-5 p-2">
+<div class="container ">
     <div class="mt-3 mb-3 card-header rounded bg-transparent">
-        <h3 class="fw-bold"><?= strtoupper($detail['name_prd'])?></h3>
+        <h3 class="fw-bold"><?= strtoupper($detail['name_prd']) ?></h3>
     </div>
     <div class="d-flex justify-content-between mb-5 flex-wrap">
         <div class="col-lg-6 col-sm-12">
@@ -61,14 +61,14 @@
                     </ul>
                     <div class="border p-2 rounded mb-3">
                         <small class="<?= $detail['giam_gia'] == 0 ? "invisible" : "" ?>">
-                            <del>Giá gốc:&nbsp;$<?= number_format($detail['price'], 0, '', ',');  ?></del>&nbsp;
+                            <del>Giá gốc:&nbsp;<?= number_format($detail['price'], 0, '', ',');  ?>₫</del>&nbsp;
                             <span class="text-dark fw-bold">(Tiết kiệm: <?= $detail['giam_gia'] ?>%)</span>
                         </small>
                         <h5 class="card-text mt-4 mb-3 fw-bold text-danger">
                             <?php if ($detail['giam_gia'] == 0) {
-                                echo " Giá: $" . number_format("$data", 0, '', ',') . "</h5> ";
+                                echo " Giá: " . number_format("$data", 0, '', ',') . "₫</h5> ";
                             } else {
-                                echo " Giá khuyến mại: $" . number_format("$data", 0, '', ',') . "</h5> ";
+                                echo " Giá khuyến mại: " . number_format("$data", 0, '', ',') . "₫</h5> ";
                             } ?>
                     </div>
                     <div class="card">
@@ -81,11 +81,19 @@
                     </div>
                 </div>
                 <?php if ($detail['so_luong'] > 0) { ?>
-                    <div class="d-flex align-items-center mb-3">
+                    <div>
                         <label for="">Số lượng:</label>&emsp;
-                        <input type="number" min="1" value="1" class="form-control w-25" id="">&emsp;
-                        <button class="btn btn-success">Thêm vào giỏ hàng</button>&emsp;
-                        <button id="heart" class="btn border border-danger p-1 rounded text-danger"><i class="fa-solid fa-heart"></i></button>
+                        <form method="post">
+                            <input type="hidden" name="id_prd" id="id_prd" value="<?= $detail['id_prd'] ?>">
+                            <input type="hidden" name="name_prd" id="name_prd" value="<?= $detail['name_prd'] ?>">
+                            <input type="hidden" name="price_prd" id="price_prd" value="<?= $data ?>">
+                            <input type="hidden" name="image_prd" id="image_prd" value="<?= $detail['image'] ?>">
+                            <div class="d-flex align-items-center mb-3">
+                                <input type="number" name="quantity_prd" id="quantity_prd" min="1" value="1" class="form-control w-25">&emsp;
+                                <button type="submit" name="addcart" id="addcart" value="addcart" class="btn btn-success">Thêm vào giỏ hàng</button>&emsp;
+                                <button id="heart" class="btn border border-danger p-1 rounded text-danger"><i class="fa-solid fa-heart"></i></button>
+                            </div>
+                        </form>
                     </div>
                     <div>
                         <button onclick="" class="btn btn-danger w-100">ĐẶT MUA NGAY<br> <small>Giao hàng tận nơi, nhanh chóng</small></button>
@@ -114,9 +122,9 @@
         </div>
     </div>
 </div>
-<div class=" container comments-area w-100 p-lg-5" style="border: none;">
+<div class=" container comments-area w-100" style="border: none;">
     <h4><?= $count ?> Review for <?= $detail['name_prd'] ?></h4>
-    <div class="">
+    <div>
         <?php if (empty($list_cmt)) {
             echo '
             <div class="comment-list fw-bold">No review !</div>
@@ -124,8 +132,8 @@
         } else {
             foreach ($list_cmt as $cmt) { ?>
                 <div class="comment-list">
-                    <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
+                    <div class="single-comment">
+                        <div class="user d-flex w-100">
                             <div class="thumb">
                                 <img src="assets/uploads/admin/user/<?= $cmt['image'] ?>" alt="">
                             </div>
@@ -145,19 +153,20 @@
                 </div>
         <?php }
         } ?>
-        <div class="text-center d-flex">
-            <a href="#" class="btn btn-secondary" id="loadMore">Load More</a>
+        <div class="text-center mb-4">
+            <a href="#" class="btn animate__animated animate__fadeInUp" id="loadMore">Load More</a>
+            <a href="#" class="btn d-none animate__animated animate__fadeInUp" id="loadLess">Load Less</a>
         </div>
     </div>
     <?php if (empty(Session::get('ID'))) { ?>
-        <h4>Bạn cần đăng nhập để thực hiện bình luận ! <a href="?v=signin">Đăng nhập ngay</a></h4>
+        <h4>Bạn cần đăng nhập để thực hiện bình luận ! <a href="?v=sign_in">Đăng nhập ngay</a></h4>
     <?php } else { ?>
         <div>
             <h4>Comment</h4>
-            <form class="form-contact comment_form w-75 d-flex" id="commentForm">
+            <form class="form-contact comment_form w-100 d-flex" id="commentForm" method="post">
                 <img src="assets/uploads/admin/user/<?= Session::get('image') ?>" alt="" width="50px" style="border-radius: 50%; margin-right:20px;">
-                <input class="form-control border border-dark" name="cmt" id="cmt" type="text" placeholder="Viết bình luận ">
-                <button class="btn btn-outline-secondary" style="margin-left: 20px;" type="submit">Send</button>
+                <input class="form-control border border-dark" name="comment" id="comment" type="text" placeholder="Viết bình luận ">
+                <button class="btn btn-outline-secondary" name="cmt" style="margin-left: 20px;" type="submit">Send</button>
             </form>
         </div>
     <?php } ?>
@@ -167,46 +176,49 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>Products in the same category</h2>
+                    <h2>Sản phẩm liên quan</h2>
                 </div>
             </div>
         </div>
         <div class="row">
-            <?php foreach ($list_with_cate as $items => $values) { $data = total($values['price'], $values['giam_gia']); ?>
-                <div class="col-lg-3 col-sm-6 prd_same <?= $_GET['id'] == $values['id_prd'] ? "d-none" : "" ?> " data-aos="zoom-in">
+            <?php foreach ($list_with_cate as $items => $values) {
+                $data = total($values['price'], $values['giam_gia']); ?>
+                <div class="col-lg-3 col-sm-6 prd_same" data-aos="zoom-in">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
-                            <a href="product_detail/<?= $values['id_prd'] ?>">
+                            <a href="?v=product_detail&id=<?= $values['id_prd'] ?>">
                                 <img style="width: 100% !important; height: 300px !important; " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid rounded">
                             </a>
                         </div>
                         <h3 style="font-size: 20px;"> <a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
-                            <del>$<?= number_format($values['price'], 0, '', ',');  ?></del>&emsp;
+                            <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                             <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
                         </div>
                         <div class="fw-bold d-flex justify-content-between align-items-center">
-                        <p>Price: $<?= number_format($data, 0, '', ','); ?></p> 
-                        <?php if ($values['so_luong'] > 0) {
-                            echo '
+                            <p>Price: <?= number_format($data, 0, '', ','); ?>₫</p>
+                            <?php if ($values['so_luong'] > 0) {
+                                echo '
                                 <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
                             ';
-                        } else {
-                            echo '
+                            } else {
+                                echo '
                                 <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Contact</small>
                             ';
-                        } ?>
-                        
-                    </div>
+                            } ?>
+
+                        </div>
                     </div>
                 </div>
             <?php } ?>
-        </div>
-        <div class="text-center">
-            <a href="#" class="btn btn-outline-secondary" id="loadMore_other">Load More</a>
+            <div class="text-center">
+                <a href="#" class="btn animate__animated animate__fadeInUp" id="loadMoreother">Load More</a>
+                <a href="#" class="btn d-none animate__animated animate__fadeInUp" id="loadLessother">Load Less</a>
+            </div>
         </div>
     </div>
 </section>
+
 <!-- feature part here -->
 <section class="feature_part section_padding">
     <div class="container">
@@ -252,42 +264,11 @@
         </div>
     </div>
 </section>
-<!-- feature part end -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>
 <script>
-    $(document).ready(function() {
-        $(".comment-list").slice(0, 2).show();
-        if ($(".comment-list").length <= 2) {
-            $("#loadMore").text("End Content").addClass("d-none pe-none text-dark bg-transparent");
-        } else {
-            $("#loadMore").on("click", function(e) {
-                e.preventDefault();
-                $(".comment-list:hidden").slice(0, 2).slideDown();
-                if ($(".comment-list:hidden").length == 0) {
-                    $("#loadMore").text("End Content").addClass("noContent");
-                }
-            });
-        }
-    });
-    $(document).ready(function() {
-        $(".prd_same").slice(0, 4).show();
-        if ($(".prd_same").length <= 4) {
-            $("#loadMore_other").text("End Content").addClass("d-none pe-none text-dark bg-transparent");
-        } else {
-            $("#loadMore_other").on("click", function(e) {
-                e.preventDefault();
-                $(".prd_same:hidden").slice(0, 4).slideDown();
-                if ($(".prd_same:hidden").length == 0) {
-                    $("#loadMore_other").text("End Content").addClass("noContent");
-                }
-            });
-        }
-    });
+    // cmt
+    load_more(".comment-list", "#loadMore", "#loadLess", 2);
+    load_less(".comment-list", "#loadLess", "#loadMore", 2);
+    // product the same
+    load_more(".prd_same", "#loadMoreother", "#loadLessother", 4);
+    load_less(".prd_same", "#loadLessother", "#loadMoreother", 4);
 </script>
-<style>
-    .comment-list, .prd_same {
-        display: none;
-    }
-</style>

@@ -1,0 +1,7 @@
+.form-message { 
+    width: 100%;
+    height: 21px;
+}
+.form-group.invalid .form-control {
+    border-color: #f33a58;
+}

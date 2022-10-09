@@ -1,15 +1,200 @@
+AOS.init();
+const view = new URLSearchParams(window.location.search).get('v');
+if(view){
+    if(view == 'shop'){
+        $('#shop').addClass('active fw-bold');  
+    }
+    else if (view == 'about'){
+        $('#about').addClass('active fw-bold');  
+    }
+    else if (view == 'contact'){
+        $('#contact').addClass('active fw-bold');  
+    }
+    else if (view == 'feedback'){
+        $('#feedback').addClass('active fw-bold');  
+    }
+    else if (view == 'blog'){
+        $('#blog').addClass('active fw-bold');  
+    }
+}
+else {
+    $('#home').addClass('active fw-bold');  
+}
+
+var btn = $('#btn-back-to-top');
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.removeClass('d-none');
+    btn.addClass('d-block');
+  } else {
+    btn.addClass('d-none');
+    btn.removeClass('d-block');
+  }
+});
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({
+    scrollTop: 0
+  }, 0);
+});
 (function ($) {
   "use strict";
+
+
+
+  // $('.popup-youtube, .popup-vimeo').magnificPopup({
+  //   // disableOn: 700,
+  //   type: 'iframe',
+  //   mainClass: 'mfp-fade',
+  //   removalDelay: 160,
+  //   preloader: false,
+  //   fixedContentPos: false
+  // });
+
+  // var review = $('.client_review_slider');
+  // if (review.length) {
+  //   review.owlCarousel({
+  //     items: 1,
+  //     loop: true,
+  //     dots: true,
+  //     autoplay: true,
+  //     autoplayHoverPause: true,
+  //     autoplayTimeout: 5000,
+  //     nav: true,
+  //     dots: false,
+  //     navText: [" <i class='ti-angle-left'></i> ", "<i class='ti-angle-right'></i> "],
+  //     responsive: {
+  //       0: {
+  //         nav: false
+  //       },
+  //       768: {
+  //         nav: false
+  //       },
+  //       991: {
+  //         nav: true
+  //       }
+  //     }
+  //   });
+  // }
+
+
+  // var product_slide = $('.product_img_slide');
+  // if (product_slide.length) {
+  //   product_slide.owlCarousel({
+  //     items: 1,
+  //     loop: true,
+  //     dots: true,
+  //     autoplay: true,
+  //     autoplayHoverPause: true,
+  //     autoplayTimeout: 5000,
+  //     nav: true,
+  //     dots: false,
+  //     navText: [" <i class='ti-angle-left'></i> ", "<i class='ti-angle-right'></i> "],
+  //     responsive: {
+  //       0: {
+  //         nav: false
+  //       },
+  //       768: {
+  //         nav: false
+  //       },
+  //       991: {
+  //         nav: true
+  //       }
+  //     }
+  //   });
+  // }
+
+  //product list slider
+  // var product_list_slider = $('.product_list_slider');
+  // if (product_list_slider.length) {
+  //   product_list_slider.owlCarousel({
+  //     items: 1,
+  //     loop: true,
+  //     dots: false,
+  //     autoplay: true,
+  //     autoplayHoverPause: true,
+  //     autoplayTimeout: 5000,
+  //     nav: true,
+  //     navText: ["next", "previous"],
+  //     smartSpeed: 1000,
+  //     responsive: {
+  //       0: {
+  //         margin: 15,
+  //         nav: false,
+  //         items: 1
+  //       },
+  //       600: {
+  //         margin: 15,
+  //         items: 1,
+  //         nav: false
+  //       },
+  //       768: {
+  //         margin: 30,
+  //         nav: true,
+  //         items: 1
+  //       }
+  //     }
+  //   });
+  // }
+
+  // if ($('.img-gal').length > 0) {
+  //   $('.img-gal').magnificPopup({
+  //     type: 'image',
+  //     gallery: {
+  //       enabled: true
+  //     }
+  //   });
+  // }
+
+  // niceSelect js code
+  // $(document).ready(function () {
+  //   $('select').niceSelect();
+  // });
 
   // menu fixed js code
   $(window).scroll(function () {
     var window_top = $(window).scrollTop() + 1;
-    if (window_top > 10) {
+    if (window_top > 50) {
       $('.main_menu').addClass('menu_fixed animated fadeInDown');
     } else {
       $('.main_menu').removeClass('menu_fixed animated fadeInDown');
     }
   });
+
+  // $('.counter').counterUp({
+  //   time: 2000
+  // });
+
+  // $('.slider').slick({
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   arrows: false,
+  //   speed: 300,
+  //   infinite: true,
+  //   asNavFor: '.slider-nav-thumbnails',
+  //   autoplay: true,
+  //   pauseOnFocus: true,
+  //   dots: true,
+  // });
+
+  // $('.slider-nav-thumbnails').slick({
+  //   slidesToShow: 3,
+  //   slidesToScroll: 1,
+  //   asNavFor: '.slider',
+  //   focusOnSelect: true,
+  //   infinite: true,
+  //   prevArrow: false,
+  //   nextArrow: false,
+  //   centerMode: true,
+  //   responsive: [{
+  //     breakpoint: 480,
+  //     settings: {
+  //       centerMode: false,
+  //     }
+  //   }]
+  // });
+
+
   // Search Toggle
   $("#search_input_box").hide();
   $("#search_1").on("click", function () {
@@ -19,7 +204,6 @@
   $("#close_search").on("click", function () {
     $('#search_input_box').slideUp(500);
   });
-
   //------- makeTimer js --------//  
   function makeTimer() {
 
@@ -95,9 +279,13 @@
 })();
 
 inputNumber($('.input-number'));
+
+
+
   setInterval(function () {
     makeTimer();
   }, 1000);
+ 
 
  $('.select_option_dropdown').hide();
  $(".select_option_list").click(function () {
@@ -121,43 +309,3 @@ inputNumber($('.input-number'));
 
 }(jQuery));
 
-
-
-const view = new URLSearchParams(window.location.search).get('v');
-if(view){
-    if(view == 'shop'){
-        $('#shop').addClass('active fw-bold');  
-    }
-    else if (view == 'about'){
-        $('#about').addClass('active fw-bold');  
-    }
-    else if (view == 'contact'){
-        $('#contact').addClass('active fw-bold');  
-    }
-    else if (view == 'feedback'){
-        $('#feedback').addClass('active fw-bold');  
-    }
-    else if (view == 'blog'){
-        $('#blog').addClass('active fw-bold');  
-    }
-}
-else {
-    $('#home').addClass('active fw-bold');  
-}
-
-var btn = $('#btn-back-to-top');
-$(window).scroll(function() {
-  if ($(window).scrollTop() > 300) {
-    btn.removeClass('d-none');
-    btn.addClass('d-block');
-  } else {
-    btn.addClass('d-none');
-    btn.removeClass('d-block');
-  }
-});
-btn.on('click', function(e) {
-  e.preventDefault();
-  $('html, body').animate({
-    scrollTop: 0
-  }, 0);
-});

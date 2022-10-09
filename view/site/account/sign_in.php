@@ -61,7 +61,7 @@
                 rules: [
                     Validator.isRequired('#username', 'Vui lòng nhập username'),
                     Validator.isRequired('#password', 'Vui lòng nhập passwword'),
-                    Validator.minLength('#username', 1),
+                    Validator.minLength('#username', 6),
                     Validator.minLength('#password', 1)
                 ]
             })

@@ -1,3 +1,6 @@
+<?php 
+    // $url = $this->url ;
+?>
 <div class="mb-3 w-100 text-center">
     <button class="btn btn-outline-primary" onclick='selects()'>Checked All</button>
     <button class="btn btn-outline-info" onclick='deSelect()'>Unchecked All</button>
@@ -37,8 +40,8 @@
                     $total = $price - $tt;
                 }
             ?>
-                <!-- <tr onclick="location.href='<?= $url ?>&act=detail&id=<?= $values['id_prd']?> '"> -->
-                <tr>
+
+                <tr class="<?= $values['dac_biet'] == 1 ? "bg-light" : "" ?>">
                     <td><input type="checkbox" name="checkbox" class="checkbox"></td>
                     <td><?= $values['id_prd'] ?></td>
                     <td><?= $values['name_prd'] ?></td>

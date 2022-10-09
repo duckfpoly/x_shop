@@ -1,8 +1,9 @@
 <?php 
     $url = $_SERVER['REQUEST_URI']; 
-    include 'global.php';
     include 'config/session.php';
+    // kiểm tra đăng nhập
     Session::checkSession();
+    // kiểm tran vai trò (phân quyền)
     Session::get('vaitro') !== 1 ? header('Location: ./') : '';
 ?>
 <!DOCTYPE html>
@@ -20,12 +21,12 @@
     />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
-    <link rel="stylesheet" href="src/CSS/style.css">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
     <div class="containerr">
         <div class="d-flex justify-content-between">
-            <?php include 'view/admin/layout/sidebar.php'      ?>
+            <?php include 'view/admin/layout/sidebar.php'          ?>
             <div class=""style="width: 88%;">
                 <?php include 'view/admin/layout/header.php'       ?>
                 <div class="mt-2" style="margin: 20px;">
@@ -33,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <?php include 'view/admin/layout/footer.php'           ?>
+        <?php include 'view/admin/layout/footer.php'               ?>
     </div>
     <!-- lib -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -51,6 +52,8 @@
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
     
     <!-- file js -->
-    <script src="src/JS/admin.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/validate.js"></script>
+
 </body>
 </html>

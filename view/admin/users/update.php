@@ -1,7 +1,7 @@
 <form action="" method="post" id="form" enctype="multipart/form-data">
     <div class="row d-flex flex-wrap">
         <div class="col-4">
-            <img class="rounded" width="100%" src="<?= $host ?>assets/uploads/admin/user/<?= $detail['image'] ?>" alt="">
+            <img class="rounded" width="100%" src="assets/uploads/admin/user/<?= $detail['image'] ?>" alt="">
         </div>
         <div class="col-4">
             <div class="form-group mb-3">
