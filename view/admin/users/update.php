@@ -7,10 +7,12 @@
             <div class="form-group mb-3">
                 <label for="" class="form-label">Tên đăng nhập</label>
                 <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?= $detail['username'] ?>">
+                <div class="form-message text-danger mt-1"><br></div>
             </div>
             <div class="form-group mb-3">
                 <label for="" class="form-label">Email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="example@gmail.com" value="<?= $detail['email'] ?>">
+                <div class="form-message text-danger mt-1"><br></div>
             </div>
             <div class="form-group mb-3">
                 <label for="" class="form-label">Kích hoạt ?</label>
@@ -26,17 +28,21 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-message text-danger mt-1"><br></div>
+
             </div>
         </div>
         <div class="col-4">
             <div class="form-group mb-3">
                 <label for="" class="form-label">Họ và tên</label>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Nguyễn Văn A" value="<?= $detail['name'] ?>">
+                <div class="form-message text-danger mt-1"><br></div>
             </div>
             <div class="form-group mb-3">
                 <label for="" class="form-label">Hình ảnh</label>
                 <input type="file" name="image_update" id="image_update" class="form-control">
                 <input type="text" class="form-control" hidden value="<?= $detail['image'] ?>" name="image">
+                <div class="form-message text-danger mt-1"><br></div>
             </div>
             <div class="form-group mb-3">
                 <label for="" class="form-label">Vai trò</label>
@@ -52,6 +58,7 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-message text-danger mt-1"><br></div>
             </div>
         </div>
     </div>

@@ -1,8 +1,6 @@
 <?php 
-    require_once 'config/df.php';
-    include_once 'vendor/autoload.php';
+    include 'global.php';
     require_once 'model/model_process.php';
-
     require_once 'model/model_cate.php';
     require_once 'model/model_product.php';
     require_once 'model/model_comment.php';
@@ -11,21 +9,16 @@
     require_once 'model/model_blog.php';
     require_once 'model/model_cart.php';
     require_once 'model/model_order.php';
-
-    include 'global.php';
-
     $router = new Router();
-
     class Router {
         public function __construct(){
             $this->url          = $_SERVER['REQUEST_URI'];
-
             $this->client       = new Google_Client();
             $this->google_oauth = new Google_Service_Oauth2($this->client);
-
             $this->client->setClientId("860322000129-aa3jsl9jc2upei7jjitjeknhol9p552f.apps.googleusercontent.com");
             $this->client->setClientSecret("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");
-
+            $this->client->addScope("email");
+            $this->client->addScope("profile");
             $this->cate         = new categories();
             $this->product      = new product();
             $this->comment      = new comment();
@@ -33,7 +26,6 @@
             $this->statistical  = new statistical();
             $this->blogs        = new blogs();
             $this->order        = new orders(); 
-
             if(isset($_GET['v']) == true){
                 
                 $v = $_GET['v'];
@@ -146,16 +138,12 @@
                 $user_login = $this->user->login($data,$password);
             }
             $this->client->setRedirectUri("http://localhost/xshop/?v=sign_in");
-            $this->client->addScope("email");
-            $this->client->addScope("profile");
             if (isset($_GET['code'])) {
                 $token = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
                 $this->client->setAccessToken($token['access_token']);
                 $google_account_info = $this->google_oauth->userinfo->get();
                 $email =  $google_account_info->email;
                 $user_login = $this->user->login_gg($email);
-            } else {
-                // include 'view/site/account/sign_in.php';
             }
             include 'view/site/account/sign_in.php';
         }
@@ -176,24 +164,38 @@
                     $create = $this->user->sign_up($username,$name,$email,$password,$image),
                     'Đăng ký tài khoản thành công !',
                     'Has error in too processor !',
-                    '?v=sign_in'
+                    'sign_in'
                 );
             };
             $this->client->setRedirectUri("http://localhost/xshop/?v=sign_up");
-            $this->client->addScope("email");
-            $this->client->addScope("profile");
             if (isset($_GET['code'])) {
                 $token = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
                 $this->client->setAccessToken($token['access_token']);
                 $google_account_info = $this->google_oauth->userinfo->get();
-                $email  =  $google_account_info->email;
-                $name   =  $google_account_info->name;
-                $user_sign_up = $this->user->sign_up_gg($email,$name);
-            } else {
-                // include 'view/site/account/sign_up.php'; 
-            }
+                $email      =  $google_account_info->email;
+                $name_user  =  $google_account_info->name;
+                $username   =  rand_username(6);
+                $password   =  rand(0,9999990);
+                $create     = $this->user->sign_up_gg($username,$name_user,$email,$password);
+                $output     = '<p>Dear ,'.$name_user.'</p>';
+                $output .= '
+                    <h1>Đăng ký tài khoản thành công</h1>
+                    <p>X Store xin được gửi tài khoản và mật khẩu của quý khách:</p>
+                    <ul>
+                        <li><strong>Tài khoản: </strong>'.$username.'</li>
+                        <li><strong>Mật khẩu: </strong>'.$password.'</li>
+                    </ul>
+                '; 
+                $output .= '
+                    <p>Nếu không phải bạn đăng ký <br>
+                    Vui lòng nhấn <a href="mailto:ndcake.store@gmai.com">vào đây</a> để gửi email liên hệ lại với chúng tôi 
+                    hoặc có thể liên hệ trực tiếp qua số điện thoại: <a href="tel:+84823565831">+8482 3565 831</a></p>
+                ';         
+                $output .= '<p>Thanks,</p>';
+                $output .= '<p>ADMIN X SHOP</p>';
+                send_mail($email,$output);
+            } 
             include 'view/site/account/sign_up.php'; 
-
         }
         private function sign_out(){ 
             Session::unset('user_login');

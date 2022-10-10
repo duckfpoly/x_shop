@@ -26,7 +26,7 @@
         } 
         elseif ($act == 'update') {
             $id = $_GET['id'];
-            if (isset($_POST['update_user'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $id_user = $id;
                 $username = $_POST['username'];
                 $email = $_POST['email'];
@@ -38,7 +38,7 @@
                     $image = $image_goc;
                 } else {
                     $image = $image_up;
-                    $image_uploads = save_file("image_update", "$IMAGE_DIR/admin/user/");
+                    $image_uploads = save_file("image_update", "assets/uploads/admin/user/");
                 }
                 $vaitro = $_POST['role'];
                 alert(
