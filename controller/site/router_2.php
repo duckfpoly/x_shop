@@ -177,23 +177,28 @@
                 $username   =  rand_username(6);
                 $password   =  rand(0,9999990);
                 $create     = $this->user->sign_up_gg($username,$name_user,$email,$password);
-                $output     = '<p>Dear ,'.$name_user.'</p>';
-                $output .= '
-                    <h1>Đăng ký tài khoản thành công</h1>
-                    <p>X Store xin được gửi tài khoản và mật khẩu của quý khách:</p>
-                    <ul>
-                        <li><strong>Tài khoản: </strong>'.$username.'</li>
-                        <li><strong>Mật khẩu: </strong>'.$password.'</li>
-                    </ul>
-                '; 
-                $output .= '
-                    <p>Nếu không phải bạn đăng ký <br>
-                    Vui lòng nhấn <a href="mailto:ndcake.store@gmai.com">vào đây</a> để gửi email liên hệ lại với chúng tôi 
-                    hoặc có thể liên hệ trực tiếp qua số điện thoại: <a href="tel:+84823565831">+8482 3565 831</a></p>
-                ';         
-                $output .= '<p>Thanks,</p>';
-                $output .= '<p>ADMIN X SHOP</p>';
-                send_mail($email,$output);
+                if(isset($create)) {
+                    echo '<script type="text/javascript">alert("Email đã được sử dụng !"); location.href="?v=sign_up"</script> ';
+                }
+                else {
+                    $output     = '<p>Dear ,'.$name_user.'</p>';
+                    $output .= '
+                        <h1>Đăng ký tài khoản thành công</h1>
+                        <p>X Store xin được gửi tài khoản và mật khẩu của quý khách:</p>
+                        <ul>
+                            <li><strong>Tài khoản: </strong>'.$username.'</li>
+                            <li><strong>Mật khẩu: </strong>'.$password.'</li>
+                        </ul>
+                    '; 
+                    $output .= '
+                        <p>Nếu không phải bạn đăng ký <br>
+                        Vui lòng nhấn <a href="mailto:ndcake.store@gmai.com">vào đây</a> để gửi email liên hệ lại với chúng tôi 
+                        hoặc có thể liên hệ trực tiếp qua số điện thoại: <a href="tel:+84823565831">+8482 3565 831</a></p>
+                    ';         
+                    $output .= '<p>Thanks,</p>';
+                    $output .= '<p>ADMIN X SHOP</p>';
+                    send_mail($email,$output);
+                }
             } 
             include 'view/site/account/sign_up.php'; 
         }
