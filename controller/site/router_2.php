@@ -34,9 +34,14 @@
                 elseif($v == "blog")            {   $this->blog();              }
                 elseif($v == "about")           {   $this->about();             }
                 elseif($v == "contact")         {   $this->contact();           }
-                elseif($v == "profiles")        {   $this->profiles();          }
                 elseif($v == "feedback")        {   $this->feedback();          }
 
+                elseif($v == "profiles")        {   $this->profiles();          }
+                elseif($v == "update_info")     {   $this->update_info();       }
+                elseif($v == "changed_pass")    {   $this->changed_pass();      }
+                elseif($v == "forgot_pass")     {   $this->forgot_pass();       }
+                elseif($v == "reset_pass")      {   $this->reset_pass();        }
+                
                 elseif($v == "sign_in")         {   $this->sign_in();           }
                 elseif($v == "sign_up")         {   $this->sign_up();           }
                 elseif($v == "sign_out")        {   $this->sign_out();          }
@@ -96,7 +101,12 @@
             include('view/site/feedback.php');
         }
         private function profiles(){ 
-            if(isset($_POST['update_info_user'])){
+            $detail = $this->user->detail(Session::get('ID'));
+            include('view/site/account/profiles.php');
+        }
+        private function update_info(){
+            $detail = $this->user->detail(Session::get('ID'));
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $id_user        = Session::get('ID');
                 $username       = $_POST['username'];
                 $email          = $_POST['email'];
@@ -118,18 +128,90 @@
                     'profiles'
                 );
             }
-            if(isset($_POST['update_pass_user'])){
+            include('view/site/account/update_info.php');
+        }
+        private function changed_pass(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $new_password = $_POST['new_password'];
+                $old_password = $_POST['old_password'];
                 $id = Session::get('ID');
-                alert_2(
-                    $update = $this->user->change_password($new_password,$id),
-                    'Update successfully !',
-                    'Has error in too processor !',
-                    'profiles'
-                );
+                $update = $this->user->change_password($old_password,$new_password,$id);
             }
-            $detail = $this->user->detail(Session::get('ID'));
-            include('view/site/profiles.php');
+            include('view/site/account/changed_pass.php');
+        }
+        private function forgot_pass(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $email = $_POST['email'];
+                $checkemail = $this->user->check_email($email);
+                if(isset($checkemail)){}   
+                else {
+                    $expFormat = mktime(
+                        date("H"),
+                        date("i"),
+                        date("s"),
+                        date("m"),
+                        date("d") + 1,
+                        date("Y")
+                    );
+                    $expDate = date("Y-m-d H:i:s", $expFormat);
+                    $key = md5((2418 * 2) + $email);
+                    $addKey = substr(md5(uniqid(rand(), 1)), 3, 10);
+                    $key = $key . $addKey;
+                    $password_reset_temp = $this->user->reset_pass($email,$key,$expDate);
+                     $output = '<p>Dear user,</p>';
+                    $output .= '<p>Vui lòng click vào liên kết sau để đặt lại mật khẩu của bạn.</p>';
+                    $output .= '<p>-------------------------------------------------------------</p>';
+                    $output .= '<p><a href="nguyenduc.tk?v=reset_pass&key=' . $key . '&email=' . $email . '&action=reset" target="_blank">Đặt lại mật khẩu</a></p>';
+                    $output .= '<p>-------------------------------------------------------------</p>';
+                    $output .= '<p>Hãy đảm bảo sao chép toàn bộ liên kết vào trình duyệt của bạn.
+                            Liên kết sẽ hết hạn sau 1 ngày vì lý do bảo mật.</p>';
+                    $output .= '<p>Nếu bạn không yêu cầu email quên mật khẩu này, không có hành động nào
+                            là cần thiết, mật khẩu của bạn sẽ không được đặt lại. Tuy nhiên, bạn có thể muốn đăng nhập vào
+                            tài khoản của bạn và thay đổi mật khẩu bảo mật của bạn như ai đó có thể đã đoán ra.</p>';
+                    $output .= '<p>Thanks,</p>';
+                    $output .= '<p>ADMIN TEAM X STORE</p>';
+                    send_mail($email,$output);
+                    echo '<script language="javascript">alert("Một email đã được gửi với hướng dẫn về cách đặt lại mật khẩu của bạn."); window.location="https://mail.google.com/";</script>';
+                }
+            }
+            include('view/site/account/forgot_pass.php');
+        }
+        private function reset_pass(){
+            $error = '';
+            if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($_GET["action"] == "reset") && !isset($_POST["action"])) {
+                $key = $_GET["key"];
+                $email = $_GET["email"];
+                $curDate = date("Y-m-d H:i:s");
+                $row = $this->user->read_code_reset_pass($key,$email);
+                if ($row == "") {
+                  $error .= '<h2>Liên kết không hợp lệ</h2>
+                              <p>Liên kết không hợp lệ / hết hạn. Hoặc bạn đã không sao chép đúng liên kết
+                              từ email hoặc bạn đã sử dụng khóa trong trường hợp đó
+                              đã ngừng hoạt động.</p>
+                              <p><a href="nguyenduc.tk?v=forgot_pass">
+                              Click here</a> to reset password.</p>';
+                } else {
+                    $row = $this->user->read_code_reset_pass_assoc($key,$email);
+                    $expDate = $row['expDate'];
+                    if ($expDate >= $curDate) {
+                        include('view/site/account/reset_pass.php');
+                    }else {
+                    $error .= "<h2>Link Expired</h2>
+                            <p>The link is expired. You are trying to use the expired link which 
+                            as valid only 24 hours (1 days after request).<br /><br /></p>";
+                    }
+                }
+                if ($error != "") {
+                    echo "<div class='error'>" . $error . "</div><br />";
+                }
+            }
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $error = "";
+                $new_password = $_POST['new_password'];
+                $reset = $this->user->reset_password($new_password,$email);
+                $delete = $this->user->delete_code_reset_pass($email);
+                echo ' <script language="javascript"> alert("cập nhật mật khẩu thành công. Đăng nhập thôi nào !"); location.href="?v=sign_in";</script>';
+            }
         }
         private function sign_in(){ 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){

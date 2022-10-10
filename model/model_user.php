@@ -182,16 +182,66 @@
                 }
             }
         }
-        public function change_password($password,$id){
-            if(empty($password) || empty($id)){ 
+        public function change_password($old_password,$new_password,$id){
+            if(empty($old_password) || empty($new_password) || empty($id)){ 
                 $alert = "Please enter your all fields to update !";
                 return $alert;
             }
             else {
-                $pass = password_hash($password,PASSWORD_DEFAULT);
+                $sql = "SELECT * FROM `tbl_user` WHERE ID = ?";
+                $value = $this->query_one($sql, $id);
+                $checkPass = password_verify($old_password, $value['password']);
+                if($checkPass > 0 ){
+                    $pass = password_hash($new_password,PASSWORD_DEFAULT);
+                    $sql = " UPDATE `tbl_user` SET `password` = ? WHERE ID = ?";
+                    $update = $this->query_sql($sql,$pass,$id);
+                    echo ' <script language="javascript"> alert("cập nhật mật khẩu thành công !"); location.href="?v=profiles";</script>';
+                }
+                else {
+                    $alert = "Mật khẩu cũ không đúng !";
+                    return $alert;
+                }
+            }
+        }
+        public function check_email($email){
+            if(empty($email)){
+                $alert = "Vui lòng nhập địa chỉ email !";
+                return $alert;
+            }
+            else{
+                $sql = "SELECT * FROM `tbl_user` WHERE email = ?";
+                $check_email = $this->query_one($sql, $email);
+                if($check_email > 0) {
+                    $alert = "Email đã được sử dụng !";
+                    return $alert;
+                }
+            }
+        }
+        public function reset_pass($email,$key,$expdate){
+            $sql = "INSERT INTO `password_reset_temp` SET `email` = ?, `keyy` = ?, `expDate` = ?";
+            $create_user = $this->query_sql($sql,$email,$key,$expdate);
+        }
+        public function delete_code_reset_pass($email){
+            $sql = "DELETE FROM `password_reset_temp` WHERE `email` = $email";
+            $create_user = $this->query_sql($sql,$email);
+        }
+        public function read_code_reset_pass($keyy,$email){
+            $sql = "SELECT * FROM `password_reset_temp` WHERE `key`= $keyy AND `email`= $email ;";
+            $create_user = $this->query($sql);
+        }
+        public function read_code_reset_pass_assoc($keyy,$email){
+            $sql = "SELECT * FROM `password_reset_temp` WHERE `key`= $keyy AND `email`= $email ;";
+            $create_user = $this->query_one($sql);
+        }
+        public function reset_password($new_password,$email){
+            if(empty($new_password) || empty($email)){ 
+                $alert = "Please enter your all fields to reset pass !";
+                return $alert;
+            }
+            else {
+                $pass = password_hash($new_password,PASSWORD_DEFAULT);
                 $sql = " UPDATE `tbl_user` SET `password` = ? WHERE ID = ?";
-                $update_user = $this->query_sql($sql,$pass,$id);
-                return $update_user;
+                $reset = $this->query_sql($sql,$pass,$email);
             }
         }
     }
