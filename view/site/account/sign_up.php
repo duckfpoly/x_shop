@@ -45,6 +45,17 @@
                                 <button type="submit" name="register" class="btn_3">Register</button>
                             </div>
                         </form>
+                        <hr class="my-4">
+                        <div class="d-grid mb-2">
+                            <a href="<?= $this->client->createAuthUrl() ?>" class="btn btn-google btn-login  p-2" type="button">
+                                <i class="fab fa-google me-2"></i> Sign up with Google
+                            </a>
+                        </div>
+                        <div class="d-grid">
+                            <a href="login_gg/login.php" class="btn btn-facebook btn-login  p-2" type="button">
+                                <i class="fab fa-facebook-f me-2"></i> Sign up with Facebook
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,9 +67,15 @@
     .form-group.invalid .form-control{
         border-color: #f33a58;
     }
-    /* .form-group.invalid ::placeholder{
-        color: #000;
-    } */
+    .btn-google {
+        color: white !important;
+        background-color: #ea4335;
+    }
+
+    .btn-facebook {
+        color: white !important;
+        background-color: #3b5998;
+    }
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

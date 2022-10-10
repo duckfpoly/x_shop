@@ -1,4 +1,6 @@
 <?php 
+    require_once 'config/df.php';
+    include_once 'vendor/autoload.php';
     require_once 'model/model_process.php';
 
     require_once 'model/model_cate.php';
@@ -18,13 +20,19 @@
         public function __construct(){
             $this->url          = $_SERVER['REQUEST_URI'];
 
+            $this->client       = new Google_Client();
+            $this->google_oauth = new Google_Service_Oauth2($this->client);
+
+            $this->client->setClientId("860322000129-aa3jsl9jc2upei7jjitjeknhol9p552f.apps.googleusercontent.com");
+            $this->client->setClientSecret("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");
+
             $this->cate         = new categories();
             $this->product      = new product();
             $this->comment      = new comment();
             $this->user         = new user();
             $this->statistical  = new statistical();
             $this->blogs        = new blogs();
-            $this->order        = new orders();
+            $this->order        = new orders(); 
 
             if(isset($_GET['v']) == true){
                 
@@ -133,9 +141,21 @@
         }
         private function sign_in(){ 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $username = $_POST['username'];
+                $data = $_POST['data'];
                 $password = $_POST['password'];
-                $user_login = $this->user->login($username,$password);
+                $user_login = $this->user->login($data,$password);
+            }
+            $this->client->setRedirectUri("http://localhost/xshop/?v=sign_in");
+            $this->client->addScope("email");
+            $this->client->addScope("profile");
+            if (isset($_GET['code'])) {
+                $token = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
+                $this->client->setAccessToken($token['access_token']);
+                $google_account_info = $this->google_oauth->userinfo->get();
+                $email =  $google_account_info->email;
+                $user_login = $this->user->login_gg($email);
+            } else {
+                // include 'view/site/account/sign_in.php';
             }
             include 'view/site/account/sign_in.php';
         }
@@ -159,7 +179,21 @@
                     '?v=sign_in'
                 );
             };
+            $this->client->setRedirectUri("http://localhost/xshop/?v=sign_up");
+            $this->client->addScope("email");
+            $this->client->addScope("profile");
+            if (isset($_GET['code'])) {
+                $token = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
+                $this->client->setAccessToken($token['access_token']);
+                $google_account_info = $this->google_oauth->userinfo->get();
+                $email  =  $google_account_info->email;
+                $name   =  $google_account_info->name;
+                $user_sign_up = $this->user->sign_up_gg($email,$name);
+            } else {
+                // include 'view/site/account/sign_up.php'; 
+            }
             include 'view/site/account/sign_up.php'; 
+
         }
         private function sign_out(){ 
             Session::unset('user_login');

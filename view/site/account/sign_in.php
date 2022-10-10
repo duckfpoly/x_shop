@@ -22,7 +22,7 @@
                             <h5 class="text-danger text-center mb-4"><br><?= isset($user_login) ? $user_login : "" ?></h5>
                             <form class="row contact_form" id="form-1" method="post">
                                 <div class="col-md-12 form-group mb-3">
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                                    <input type="text" class="form-control" id="data" name="data" placeholder="Username or Email">
                                     <div class="form-message text-danger mt-2"><br></div>
                                 </div>
                                 <div class="col-md-12 form-group mb-3">
@@ -30,14 +30,25 @@
                                     <div class="form-message text-danger mt-2"><br></div>
                                 </div>
                                 <div class="col-md-12 form-group mb-4">
-                                <div class="form-group mb-3">
-                                    <input class="form-check-input" type="checkbox" name="save_user" value="save_user" id="flexCheckChecked">
-                                    <label class="form-check-label" for="flexCheckChecked">
-                                        Ghi nhớ tài khoản
-                                    </label>
-                                </div>
+                                    <div class="form-group mb-3">
+                                        <input class="form-check-input" type="checkbox" name="save_user" value="save_user" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Ghi nhớ tài khoản
+                                        </label>
+                                    </div>
                                     <button type="submit" name="sign_in" class="btn_3">Log in</button>
                                     <a class="lost_pass" href="#">forget password?</a>
+                                </div>
+                                <hr class="my-4">
+                                <div class="d-grid mb-2">
+                                    <a href="<?= $this->client->createAuthUrl() ?>" class="btn btn-google btn-login  p-2" type="button">
+                                        <i class="fab fa-google me-2"></i> Sign in with Google
+                                    </a>
+                                </div>
+                                <div class="d-grid">
+                                    <a href="login_gg/login.php" class="btn btn-facebook btn-login  p-2" type="button">
+                                        <i class="fab fa-facebook-f me-2"></i> Sign in with Facebook
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -51,6 +62,16 @@
         .form-group.invalid .form-control {
             border-color: #f33a58;
         }
+
+        .btn-google {
+            color: white !important;
+            background-color: #ea4335;
+        }
+
+        .btn-facebook {
+            color: white !important;
+            background-color: #3b5998;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -59,9 +80,8 @@
                 formGroupSelector: '.form-group',
                 errorSelector: '.form-message',
                 rules: [
-                    Validator.isRequired('#username', 'Vui lòng nhập username'),
+                    Validator.isRequired('#data', 'Vui lòng nhập đầy đủ thông tin'),
                     Validator.isRequired('#password', 'Vui lòng nhập passwword'),
-                    Validator.minLength('#username', 6),
                     Validator.minLength('#password', 1)
                 ]
             })
