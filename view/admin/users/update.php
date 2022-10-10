@@ -1,4 +1,4 @@
-<form action="" method="post" id="form" enctype="multipart/form-data">
+<form action="" method="post" id="form_user" enctype="multipart/form-data">
     <div class="row d-flex flex-wrap">
         <div class="col-4">
             <img class="rounded" width="100%" src="assets/uploads/admin/user/<?= $detail['image'] ?>" alt="">
@@ -64,3 +64,20 @@
         <input type="button" onclick="location.href='?module=users'" value="List" class="btn btn-outline-primary">
     </div>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Validator({
+            form: '#form_user',
+            formGroupSelector: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#username', 'Vui lòng nhập username'),
+                Validator.isRequired('#email', 'Vui lòng nhập email'),
+                Validator.isEmail('#email'),
+                Validator.isRequired('#name', 'Vui lòng nhập đầy đủ họ tên'),
+                Validator.minLength('#username', 6),
+            ]
+        })
+    });
+</script>

@@ -66,15 +66,15 @@
                 return $select_username;
             }
         }
-        public function login($username,$password) {
-            if(empty($username) || empty($password)){ 
+        public function login($data,$password) {
+            if(empty($data) || empty($password)){ 
                 $alert = "Vui lòng nhập đầy đủ thông tin !";
                 return $alert;
             }
             else {
-                $query = "SELECT * FROM tbl_user WHERE username = '$username'";
+                $query = "SELECT * FROM tbl_user WHERE username = '$data' OR email = '$data'";
                 $value = $this->query_one($query);
-                if(isset($value['username'])){
+                if(isset($value['username']) || isset($value['email'])){
                     $checkPass = password_verify($password, $value['password']);
                     if ($checkPass > 0) {
                         Session::set('user_login'   ,true);
@@ -92,8 +92,55 @@
                     }
                 }
                 else {
-                    $alert = "Username không tồn tại !";
+                    $alert = "Tài khoản không tồn tại !";
                     return $alert;
+                }
+            }
+        }
+        public function login_gg($email){
+            if(empty($email)){ 
+                $alert = "Vui lòng nhập đầy đủ thông tin !";
+                return $alert;
+            }
+            else {
+                $query = "SELECT * FROM tbl_user WHERE email = '$email'";
+                $value = $this->query_one($query);
+                if(isset($value['email'])){
+                    Session::set('user_login'   ,true);
+                    Session::set('ID'           ,$value['ID']);
+                    Session::set('username'     ,$value['username']);
+                    Session::set('name'         ,$value['name']);
+                    Session::set('email'        ,$value['email']);
+                    Session::set('password'     ,$value['password']);
+                    Session::set('image'        ,$value['image']);
+                    Session::set('active'       ,$value['active']);
+                    Session::set('vaitro'       ,$value['vaitro']);
+                    echo ' <script language="javascript"> location.href = "?"; </script>';
+                }
+                else {
+                    $alert = "Email chưa được đăng ký !";
+                    return $alert;
+                }
+            }
+        }
+        public function sign_up_gg($email,$name){
+            if(empty($email) || empty($name)){ 
+                $alert = "Vui lòng nhập đầy đủ thông tin !";
+                return $alert;
+            }
+            else {
+                $sql = "SELECT * FROM `tbl_user` WHERE email = ?";
+                $check_email = $this->query_one($sql, $email);
+                if($check_email > 0) {
+                    $alert = "Email đã được sử dụng !";
+                    return $alert;
+                }
+                else{
+                    $password = 1;
+                    $pass = password_hash($password,PASSWORD_DEFAULT);
+                    $sql = "INSERT INTO `tbl_user` SET `name` = ?, `email` = ?, password = ?";
+                    $create_user = $this->query_sql($sql,$name,$email,$pass);
+                    echo '<script language="javascript"> alert("Đăng ký tài khoản thành công! Mật khẩu mặc định của bạn là "123456". Vui lòng đổi mật khẩu sau khi đăng nhập !"); location.href = "?v=sign_in";</script>';
                 }
             }
         }

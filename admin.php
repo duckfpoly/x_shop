@@ -1,10 +1,8 @@
 <?php 
     $url = $_SERVER['REQUEST_URI']; 
     include 'config/session.php';
-    // kiểm tra đăng nhập
+    // kiểm tra đăng nhập và phân quyền
     Session::checkSession();
-    // kiểm tran vai trò (phân quyền)
-    Session::get('vaitro') !== 1 ? header('Location: ./') : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">

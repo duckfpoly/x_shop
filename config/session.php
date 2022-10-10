@@ -17,7 +17,10 @@ class Session {
         self::init();
         if (self::get("user_login") == false) {
             self::destroy();
-            header("Location: ./");
+            header("Location: login.php");
+        }
+        elseif(self::get('vaitro') !== 1){
+            echo ' <script language="javascript"> location.href = "./"; </script>';
         }
     }
     public static function destroy(){
