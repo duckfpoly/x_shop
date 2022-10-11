@@ -143,42 +143,27 @@ $("input[name='truck']").click(function() {
     truck = this.value;
     console.log(truck);
     if(truck == 0) {
-        // tổng tiền giỏ hàng
-        var subtotal = Number($('#subtotal').text());
-        $('#subtotal').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(subtotal));
-        // ship
         let ship = 25000;
         $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
-        // voucher
-        var coupon = Number($('#coupon').text());
-        $('#coupon').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(coupon));
-        // tổng tiền đơn hàng
-        var total_order = ship + coupon + subtotal;
-        $('#total_orders').val(total_order);
-        $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
     }
     else if(truck == 1) {
-        // tổng tiền giỏ hàng
-        var subtotal = Number($('#subtotal').text());
-        $('#subtotal').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(subtotal));
-        // ship
         let ship = 50000;
         $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
-        // voucher
-        var coupon = Number($('#coupon').text());
-        $('#coupon').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(coupon));
-        // tổng tiền đơn hàng
-        var total_order = ship + coupon + subtotal;
-        $('#total_orders').val(total_order);
-        $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
     }
 });
 // tổng tiền giỏ hàng
 var subtotal = Number($('#subtotal').text());
 $('#subtotal').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(subtotal));
+var ship = '';
 // tiền ship 
-var ship = Number($('#shipping').text());
-$('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
+if(Number($('#shipping').text()) == 0){
+    ship = 0;
+    $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
+}
+else {
+    ship = Number($('#shipping').text());
+    $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
+}
 // voucher
 var coupon = Number($('#coupon').text());
 $('#coupon').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(coupon));

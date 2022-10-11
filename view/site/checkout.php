@@ -204,7 +204,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="mt-4 text-center invisible">
+                            <div class="mt-4 text-center">
                                 <button type="submit" name="process_pay" id="process_pay" class="btn_1" value="process_pay">Đặt hàng</button>
                             </div>
                             <div>
