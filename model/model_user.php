@@ -219,19 +219,19 @@
         }
         public function reset_pass($email,$key,$expdate){
             $sql = "INSERT INTO `password_reset_temp` SET `email` = ?, `keyy` = ?, `expDate` = ?";
-            $create_user = $this->query_sql($sql,$email,$key,$expdate);
+            $temp = $this->query_sql($sql,$email,$key,$expdate);
         }
         public function delete_code_reset_pass($email){
             $sql = "DELETE FROM `password_reset_temp` WHERE `email` = $email";
-            $create_user = $this->query_sql($sql,$email);
+            $temp = $this->query_sql($sql,$email);
         }
-        public function read_code_reset_pass($keyy,$email){
-            $sql = "SELECT * FROM `password_reset_temp` WHERE `key`= $keyy AND `email`= $email ;";
-            $create_user = $this->query($sql);
+        public function read_code_reset_pass($email,$keyy){
+            $sql = "SELECT * FROM `password_reset_temp` WHERE `email` = ? AND `keyy` = ?";
+            $temp = $this->query($sql, $email, $keyy);
         }
-        public function read_code_reset_pass_assoc($keyy,$email){
-            $sql = "SELECT * FROM `password_reset_temp` WHERE `key`= $keyy AND `email`= $email ;";
-            $create_user = $this->query_one($sql);
+        public function assoc_read_code_reset_pass($email,$keyy){
+            $sql = "SELECT * FROM `password_reset_temp` WHERE `email` = ? AND `keyy` = ?";
+            $temp2 = $this->query_one($sql, $email, $keyy);
         }
         public function reset_password($new_password,$email){
             if(empty($new_password) || empty($email)){ 

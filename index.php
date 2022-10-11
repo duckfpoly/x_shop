@@ -45,7 +45,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/validate.js"></script>
-    <script src="js/checkout.js"></script>
+    <script src="js/checkouts.js"></script>
     <script src="js/addcart.js"></script>
     <!-- <script src="js/shops.js"></script> -->
     <script src="js/main.js"></script>

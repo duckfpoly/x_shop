@@ -143,7 +143,7 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $email = $_POST['email'];
                 $checkemail = $this->user->check_email($email);
-                if(isset($checkemail)){}   
+                if(!isset($checkemail)){}   
                 else {
                     $expFormat = mktime(
                         date("H"),
@@ -154,14 +154,14 @@
                         date("Y")
                     );
                     $expDate = date("Y-m-d H:i:s", $expFormat);
-                    $key = md5((2418 * 2) + $email);
+                    $key = md5((2418 * 2) . $email);
                     $addKey = substr(md5(uniqid(rand(), 1)), 3, 10);
                     $key = $key . $addKey;
                     $password_reset_temp = $this->user->reset_pass($email,$key,$expDate);
                      $output = '<p>Dear user,</p>';
                     $output .= '<p>Vui lòng click vào liên kết sau để đặt lại mật khẩu của bạn.</p>';
                     $output .= '<p>-------------------------------------------------------------</p>';
-                    $output .= '<p><a href="nguyenduc.tk?v=reset_pass&key=' . $key . '&email=' . $email . '&action=reset" target="_blank">Đặt lại mật khẩu</a></p>';
+                    $output .= '<p><a href="localhost/xshop/?v=reset_pass&key=' . $key . '&email=' . $email . '&action=reset" target="_blank">Đặt lại mật khẩu</a></p>';
                     $output .= '<p>-------------------------------------------------------------</p>';
                     $output .= '<p>Hãy đảm bảo sao chép toàn bộ liên kết vào trình duyệt của bạn.
                             Liên kết sẽ hết hạn sau 1 ngày vì lý do bảo mật.</p>';
@@ -182,17 +182,17 @@
                 $key = $_GET["key"];
                 $email = $_GET["email"];
                 $curDate = date("Y-m-d H:i:s");
-                $row = $this->user->read_code_reset_pass($key,$email);
-                if ($row == "") {
+                $row = $this->user->read_code_reset_pass($email,$key);
+                if ($row != 0) {
                   $error .= '<h2>Liên kết không hợp lệ</h2>
                               <p>Liên kết không hợp lệ / hết hạn. Hoặc bạn đã không sao chép đúng liên kết
                               từ email hoặc bạn đã sử dụng khóa trong trường hợp đó
                               đã ngừng hoạt động.</p>
-                              <p><a href="nguyenduc.tk?v=forgot_pass">
+                              <p><a href="?v=forgot_pass">
                               Click here</a> to reset password.</p>';
                 } else {
-                    $row = $this->user->read_code_reset_pass_assoc($key,$email);
-                    $expDate = $row['expDate'];
+                    $row_2 = $this->user->assoc_read_code_reset_pass($email,$key);
+                    $expDate = $row_2['expDate'];
                     if ($expDate >= $curDate) {
                         include('view/site/account/reset_pass.php');
                     }else {

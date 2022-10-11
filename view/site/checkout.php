@@ -54,7 +54,7 @@
                             <div class="mb-3">
                                 <h3>Giao hàng</h3>
                             </div>
-                            <input type="radio" name="truck" value="0" id="truck_normal" required>
+                            <input type="radio" name="truck" value="0" class="truck" id="truck_normal" required>
                             <label class="item" for="truck_normal">
                                 <div class="title d-flex justify-content-between align-items-center">
                                     Giao hàng tiêu chuẩn (48h - 72h)
@@ -64,7 +64,7 @@
                                     Cước phí vận chuyển : 25.000 VNĐ
                                 </div>
                             </label>
-                            <input type="radio" name="truck" value="1" id="truck_faster" required>
+                            <input type="radio" name="truck" value="1" class="truck" id="truck_faster" required>
                             <label class="item" for="truck_faster">
                                 <div class="title d-flex justify-content-between align-items-center">
                                     Giao hàng nhanh (24 - 36h)
@@ -189,7 +189,7 @@
                                 </li>
                                 <li>
                                     <a href="#">Phí vận chuyển
-                                        <span><span id="shipping">50000</span></span>
+                                        <span><span id="shipping">0</span></span>
                                     </a>
                                 </li>
                                 <li>
@@ -204,7 +204,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="mt-4 text-center">
+                            <div class="mt-4 text-center invisible">
                                 <button type="submit" name="process_pay" id="process_pay" class="btn_1" value="process_pay">Đặt hàng</button>
                             </div>
                             <div>
