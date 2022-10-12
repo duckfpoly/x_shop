@@ -50,7 +50,7 @@
         Session::unset('image');
         Session::unset('active');
         Session::unset('vaitro');
-        echo ' <script language="javascript"> location.href = "./"; </script>';
+        echo ' <script language="javascript"> location.href = "login.php"; </script>';
     }
     else {
         include('components/dashboard.php');

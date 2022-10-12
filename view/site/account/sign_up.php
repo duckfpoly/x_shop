@@ -1,3 +1,6 @@
+<?php if (!empty(Session::get('ID'))) {
+    echo '<script>window.location="home";</script>';
+} else { ?>
 <!--================login_part Area =================-->
 <section class="login_part  ">
     <div class="container">
@@ -100,3 +103,4 @@
         })
     });
 </script>
+<?php } ?>

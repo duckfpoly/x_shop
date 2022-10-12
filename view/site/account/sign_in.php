@@ -1,5 +1,5 @@
 <?php if (!empty(Session::get('ID'))) {
-    echo '<script>window.location="?";</script>';
+    echo '<script>window.location="home";</script>';
 } else { ?>
     <!--================login_part Area =================-->
     <section class="login_part mt-5 ">
