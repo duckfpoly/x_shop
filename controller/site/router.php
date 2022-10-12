@@ -66,7 +66,29 @@
         }
         private function shop(){ 
             $read_cate = $this->cate->read();
-            $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+            if(isset($_GET['req'])){
+                $req = $_GET['req'];
+                if($req == 'detail'){
+                    $id = (int)$_GET['id'];
+                    $up_view = $this->product->tang_view($id);
+                    if(isset($_POST['cmt'])){
+                        $id_product = $id;
+                        $id_user = Session::get('ID');
+                        $comment_time = date("Y-m-d H:i:s");
+                        $content =  $_POST['comment'];
+                        $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
+                        echo '<script language="javascript">window.location="shop?req=detail&id=' . $id_product . '";</script>';
+                    }
+                    else {
+                        $detail = $this->product->detail($id);
+                        $list_with_cate = $this->product->products_with_cate($detail['id_cate']);
+                        $list_cmt = $this->comment->detail($id);
+                        $count = $this->comment->count_cmt($id);
+                        $data = total($detail['price'],$detail['giam_gia']);
+                        include('view/site/product_detail.php');
+                    }
+                }
+            }
             if(isset($_GET['cate'])){
                 $cate = $_GET['cate'];
                 $read_prd = $this->product->product_cate($cate);
@@ -74,6 +96,7 @@
             else{
                 $read_prd = $this->product->read_all();
             }
+            $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
             if($sort == 'price_desc'){
                 $read_prd = $this->product->filter_price_desc(); 
             }
@@ -86,7 +109,12 @@
             elseif($sort == 'name_asc'){
                 $read_prd = $this->product->filter_name_asc(); 
             }
-            require_once 'view/site/shop.php';
+            if(isset($_POST['filter_price_range'])){
+                $min = $_POST['min_price'];
+                $max = $_POST['max_price'];
+                $read_prd = $this->product->filter_price_range($min,$max); 
+            }
+            isset($_GET['req']) == true ? "" : require_once 'view/site/shop.php';
         }
         private function about(){ 
             include('view/site/about.php');
@@ -210,7 +238,7 @@
                 $new_password = $_POST['new_password'];
                 $reset = $this->user->reset_password($new_password,$email);
                 $delete = $this->user->delete_code_reset_pass($email);
-                echo ' <script language="javascript"> alert("cập nhật mật khẩu thành công. Đăng nhập thôi nào !"); location.href="?v=sign_in";</script>';
+                echo ' <script language="javascript"> alert("cập nhật mật khẩu thành công. Đăng nhập thôi nào !"); location.href="sign_in";</script>';
             }
         }
         private function sign_in(){ 
@@ -260,7 +288,7 @@
                 $password   =  rand(0,9999990);
                 $create     = $this->user->sign_up_gg($username,$name_user,$email,$password);
                 if(isset($create)) {
-                    echo '<script type="text/javascript">alert("Email đã được sử dụng !"); location.href="?v=sign_up"</script> ';
+                    echo '<script type="text/javascript">alert("Email đã được sử dụng !"); location.href="sign_up"</script> ';
                 }
                 else {
                     $output     = '<p>Dear ,'.$name_user.'</p>';
@@ -294,7 +322,7 @@
             Session::unset('image');
             Session::unset('active');
             Session::unset('vaitro');
-            echo ' <script language="javascript"> location.href = "?"; </script>';
+            echo ' <script language="javascript"> location.href = "home"; </script>';
         }
         private function blog_detail(){ 
         }
@@ -335,18 +363,18 @@
                 $image_prd          = isset($_POST['image_prd'])    ? $_POST['image_prd'] : "" ;
                 $quantity_prd       = isset($_POST['quantity_prd']) ? $_POST['quantity_prd'] : "" ;
                 $addcart            = add_cart($id_prd,$name_prd,$price_prd,$image_prd,$quantity_prd);
-                echo '<script language="javascript">window.location="?v=cart";</script>';
+                echo '<script language="javascript">window.location="cart";</script>';
             }
             if(isset($_POST['delete_prd_cart'])){
                 $id_prd             = isset($_POST['id_product']) ? $_POST['id_product'] : "" ;
                 $del_product_cart   = delete_product_cart($id_prd);
-                echo '<script language="javascript">window.location="?v=cart";</script>';
+                echo '<script language="javascript">window.location="cart";</script>';
             }
             if(isset($_POST['update_prd_cart'])){
                 $id_prd                 = isset($_POST['id_product'])   ? $_POST['id_product']  : "" ;
                 $qty                    = isset($_POST['qty'])          ? $_POST['qty']         : "" ;
                 $update_product_cart    = update_product_cart($id_prd,$qty);
-                echo '<script language="javascript">window.location="?v=cart";</script>';
+                echo '<script language="javascript">window.location="cart";</script>';
             }
             include('view/site/cart.php');
         }
@@ -388,7 +416,7 @@
                 // clear giỏ hàng
                 unset($_SESSION['cart']);
                 // view hiển thị đặt hàng thành công !
-                echo '<script language="javascript">window.location="?v=confirm_order";</script>';
+                echo '<script language="javascript">window.location="confirm_order";</script>';
             }
             include('view/site/checkout.php');
         }

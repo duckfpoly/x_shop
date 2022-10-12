@@ -39,7 +39,7 @@
             }
         }
         else {
-            echo '<script language="javascript">window.location="?";</script>';
+            echo '<script language="javascript">window.location="home";</script>';
         }
     }
     function update_product_cart($id_prd,$qty){

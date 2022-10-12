@@ -126,7 +126,7 @@
                         Session::set('image'        ,$value['image']);
                         Session::set('active'       ,$value['active']);
                         Session::set('vaitro'       ,$value['vaitro']);
-                        echo ' <script language="javascript"> location.href = "?"; </script>';
+                        echo ' <script language="javascript"> location.href = "home"; </script>';
                     }
                 }
                 else {

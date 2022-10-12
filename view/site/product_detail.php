@@ -82,7 +82,7 @@
                 </div>
                 <?php if ($detail['so_luong'] > 0) { ?>
                     <div>
-                        <label for="">Số lượng:</label>&emsp;
+                        <label class="mb-2">Số lượng:</label>&emsp;
                         <form method="post">
                             <input type="hidden" name="id_prd" id="id_prd" value="<?= $detail['id_prd'] ?>">
                             <input type="hidden" name="name_prd" id="name_prd" value="<?= $detail['name_prd'] ?>">
@@ -109,17 +109,38 @@
                         </form>
                     </div>
                 <?php } ?>
-
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header">
-            <h4>Mô tả sản phẩm</h4>
+    <div class="card border-none ">
+        <div class="card-header bg-light text-center">
+            <h4>Thông tin sản phẩm</h4>
         </div>
-        <div class="card-body">
-            <?= nl2br(nl2br($detail['description'])) ?>
+        <div class="card-body overflow-hidden" style="max-height: 200px;">
+            <span class="d-inline-block text-truncate m-3" style="max-width: 150px;">
+                <?= nl2br(nl2br($detail['description'])) ?>
+            </span> 
         </div>
+        <div class="card-footer text-center bg-transparent">
+            <button id="desc" class="btn btn-outline-secondary w-50">Xem thêm</button>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+        <div id="box_modal_update" class="border bg-white mt-5">
+            <div class="card">
+                <div class="card-header sticky-top bg-light d-flex justify-content-between align-items-center">
+                    <div class="mt-2">
+                        <h4 class="fw-bold">Mô tả sản phẩm</h4>
+                    </div>
+                    <div>
+                        <span id="close_box_update" class="btn btn-outline-danger">X</span>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <?= nl2br(nl2br($detail['description'])) ?>
+                </div>
+            </div>
+        </div>
+</div>
     </div>
 </div>
 <div class=" container comments-area w-100" style="border: none;">
@@ -186,11 +207,11 @@
                 <div class="col-lg-3 col-sm-6 prd_same" data-aos="zoom-in">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
-                            <a href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                            <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
                                 <img style="width: 100% !important; height: 300px !important; " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid rounded">
                             </a>
                         </div>
-                        <h3 style="font-size: 20px;"> <a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
+                        <h3 style="font-size: 20px;"> <a href="shop?req=detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
                             <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                             <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
@@ -218,7 +239,6 @@
         </div>
     </div>
 </section>
-
 <!-- feature part here -->
 <section class="feature_part section_padding">
     <div class="container">

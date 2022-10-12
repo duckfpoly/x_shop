@@ -138,6 +138,7 @@ $( "#apply_id_coupon" ).click(function() {
         }
     });
 });
+
 var truck = null;
 $("input[name='truck']").click(function() {
     truck = this.value;
@@ -154,16 +155,9 @@ $("input[name='truck']").click(function() {
 // tổng tiền giỏ hàng
 var subtotal = Number($('#subtotal').text());
 $('#subtotal').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(subtotal));
-var ship = '';
 // tiền ship 
-if(Number($('#shipping').text()) == 0){
-    ship = 0;
-    $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
-}
-else {
-    ship = Number($('#shipping').text());
-    $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
-}
+var ship = Number($('#shipping').text());
+$('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
 // voucher
 var coupon = Number($('#coupon').text());
 $('#coupon').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(coupon));
@@ -172,6 +166,11 @@ var total_order = ship + coupon + subtotal;
 $('#total_orders').val(total_order);
 $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
 
+
+
+
+
+ 
 var pay_option = null;
 $("input[name='pay_option']").click(function() {
     pay_option = this.value;

@@ -9,7 +9,7 @@
                                 <div class="banner_text_iner animate__animated animate__fadeInLeft animate__slow">
                                     <h1>WELCOME TO XSHOP</h1>
                                     <p>Vietnam flagship store</p>
-                                    <a href="?v=shop" class="btn_1 ">shop now</a>
+                                    <a href="shop" class="btn_1 ">shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                                     <h1>Best quality</h1>
                                     <p>Seamlessly empower fully researched
                                         growth strategies and interoperable internal</p>
-                                    <a href="?v=shop" class="btn_1">shop now</a>
+                                    <a href="shop" class="btn_1">shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                     <h1>Best quality</h1>
                                     <p>Seamlessly empower fully researched
                                         growth strategies and interoperable internal</p>
-                                    <a href="?v=shop" class="btn_1">shop now</a>
+                                    <a href="shop" class="btn_1">shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -81,11 +81,11 @@
                 <div class="col-lg-3 col-sm-6" data-aos="fade-up">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
-                            <a href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                            <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
                                 <img style="width: 100% !important; height: 300px !important " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid">
                             </a>
                         </div>
-                        <h3 style="font-size: 20px;"> <a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
+                        <h3 style="font-size: 20px;"> <a href="shop?req=detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
                             <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                             <span class="text-danger">Tiết kiệm ( <?= $values['giam_gia'] ?>% )</span>
@@ -126,11 +126,11 @@
                 <div class="col-lg-3 col-sm-6" data-aos="zoom-up">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
-                            <a href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                            <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
                                 <img style="width: 100% !important; height: 300px !important " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid">
                             </a>
                         </div>
-                        <h3 style="font-size: 20px;"><a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a></h3>
+                        <h3 style="font-size: 20px;"><a href="shop?req=detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a></h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
                             <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                             <span class="text-danger">Tiết kiệm ( <?= $values['giam_gia'] ?>% )</span>
@@ -187,22 +187,22 @@
                                     <div class="carousel-inner">
                                         <div class="carousel-item active ">
                                             <h5>Best quality</h5>
-                                            <h2> <a href="?v=shop">Seamlessly empower fully researched
+                                            <h2> <a href="shop">Seamlessly empower fully researched
                                                 growth strategies and interoperable internal</a> </h2>
                                         </div>
                                         <div class="carousel-item">
                                             <h5>Best quality</h5>
-                                            <h2> <a href="?v=shop">Seamlessly empower fully researched
+                                            <h2> <a href="shop">Seamlessly empower fully researched
                                             growth strategies and interoperable internal</a> </h2>
                                         </div>
                                         <div class="carousel-item">
                                             <h5>Best quality</h5>
-                                            <h2> <a href="?v=shop">Seamlessly empower fully researched
+                                            <h2> <a href="shop">Seamlessly empower fully researched
                                             growth strategies and interoperable internal</a> </h2>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="?v=blog" class="btn_3">Explore Now</a>
+                                <a href="blog" class="btn_3">Explore Now</a>
                             </div>
                         </div>
                     </div>

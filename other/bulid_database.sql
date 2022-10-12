@@ -133,3 +133,163 @@ filter price
 filter name 
 - desc: SELECT * FROM `tbl_products` ORDER BY name DESC
 - asc: SELECT * FROM `tbl_products` ORDER BY name ASC
+
+
+
+
+SQL Query
+1. Categories
+    - SELECT * FROM `tbl_categories`
+    - INSERT INTO `tbl_categories` SET `name_cate` = ?
+    - UPDATE `tbl_categories` SET `name_cate`= ? WHERE id_cate = ?
+    - DELETE FROM `tbl_categories` WHERE id_cate = ?
+    - SELECT * FROM `tbl_categories` WHERE id_cate = ?
+2. products
+    - SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate ORDER BY RAND() LIMIT 8
+    - SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate ORDER BY RAND()
+    - INSERT INTO `tbl_products` SET 
+        `name_prd`      = ?, 
+        `price`         = ?, 
+        `image`         = ?,
+        `giam_gia`      = ?, 
+        `ngay_nhap`     = ?,
+        `dac_biet`      = ?,
+        `description`   = ?,
+        `id_cate`       = ?
+    - UPDATE `tbl_products` SET `name_prd` = ?,`price` = ?,`image` = ?,`giam_gia` = ?,`dac_biet` = ?,`description` = ?,`so_luong` = ?,`ID_Cate` = ? WHERE id_prd = ? 
+    - DELETE FROM `tbl_products` WHERE tbl_products.id_prd = ?
+    - SELECT * FROM `tbl_products`
+        INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+        WHERE `tbl_products`.id_prd = ?
+    - SELECT * FROM `tbl_products` WHERE so_luot_xem > 0 ORDER BY so_luot_xem DESC LIMIT 0,8
+    - SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate WHERE `tbl_categories`.id_cate = ?
+    - SELECT * FROM `tbl_products`  INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate  WHERE tbl_products.id_prd IN (?)
+    - UPDATE `tbl_products` SET so_luot_xem = so_luot_xem + 1 WHERE `tbl_products`.id_prd = ?
+    - SELECT * FROM `tbl_products`
+        INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+        WHERE `tbl_categories`.name_cate LIKE '%$name%'
+    - SELECT * FROM `tbl_products` WHERE tbl_products.name_prd LIKE '%$key%'
+    - SELECT * FROM `tbl_products`ORDER BY price DESC
+    - SELECT * FROM `tbl_products` ORDER BY price ASC
+    - SELECT * FROM `tbl_products` WHERE price BETWEEN 1000000 AND 20000000
+    - SELECT * FROM `tbl_products` ORDER BY name_prd DESC
+    - SELECT * FROM `tbl_products` ORDER BY name_prd ASC
+    - SELECT * FROM `tbl_products`
+        INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+        WHERE `tbl_categories`.name_cate LIKE '%$key%'
+        ORDER BY `tbl_products`.price DESC
+    - SELECT * FROM `tbl_products`
+        INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+        WHERE `tbl_categories`.name_cate LIKE '%$key%'
+        ORDER BY `tbl_products`.price ASC
+    - SELECT * FROM `tbl_products`
+        INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+        WHERE `tbl_categories`.name_cate LIKE '%$key%'
+        AND `tbl_products`.price BETWEEN $min_price AND $max_price
+    - SELECT * FROM `tbl_products`
+        INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+        WHERE `tbl_categories`.name_cate LIKE '%$key%'
+        ORDER BY `tbl_products`.name_prd DESC
+    - SELECT * FROM `tbl_products`
+        INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+        WHERE `tbl_categories`.name_cate LIKE '%$key%'
+        ORDER BY `tbl_products`.name_prd ASC
+3. User
+    - SELECT * FROM `tbl_user`
+    - INSERT INTO `tbl_user`  SET `username` = ?, `name` = ?, `email` = ?,`password` = ?, `image` = ?,`active` = ?, `vaitro` = ?
+    - UPDATE `tbl_user` SET `username` = ?, `name` = ?, `email` = ?, `image` = ?,`active` = ?, `vaitro` = ? WHERE ID = ?
+    - DELETE FROM `tbl_user` WHERE ID = ?
+    - SELECT * FROM `tbl_user` WHERE ID = ?
+    - SELECT * FROM `tbl_user` WHERE username = ?
+    - SELECT * FROM `tbl_user` WHERE email = ?
+4. Comment
+    - SELECT * FROM `tbl_comments`
+    - SELECT `tbl_products`.id_prd, `tbl_products`.name_prd,
+        COUNT(*) so_luong,
+        MIN(`tbl_comments`.time) cu_nhat,
+        MAX(`tbl_comments`.time) moi_nhat
+        FROM tbl_comments 
+        INNER JOIN tbl_products ON tbl_products.id_prd = tbl_comments.ID_Product
+        GROUP BY `tbl_products`.id_prd, `tbl_products`.name_prd
+        HAVING so_luong > 0
+    - INSERT INTO `tbl_comments` SET `ID_Product` = ?, `ID_User` = ?, `time` = ?, `content` = ?
+    - DELETE FROM `tbl_comments` WHERE id_cmt = ?
+    - SELECT 
+        `tbl_user`.name,
+        `tbl_user`.image,
+        `tbl_user`.username,
+        `tbl_products`.name_prd,
+        `tbl_products`.id_prd,
+        `tbl_comments`.*
+        FROM `tbl_comments`
+        INNER JOIN `tbl_products` ON `tbl_products`.id_prd = `tbl_comments`.ID_Product
+        INNER JOIN `tbl_user` ON `tbl_user`.ID = `tbl_comments`.ID_User 
+        WHERE tbl_comments.ID_Product = ?
+        ORDER BY `tbl_comments`.id_cmt DESC
+5. Statisticals
+    - SELECT 
+        `tbl_categories`.id_cate,
+        `tbl_categories`.name_cate,
+        COUNT(*) so_luong,
+        MIN(`tbl_products`.price) price_min,
+        MAX(`tbl_products`.price) price_max,
+        AVG(`tbl_products`.price) price_avg
+        FROM tbl_products 
+        INNER JOIN tbl_categories ON tbl_categories.id_cate = tbl_products.ID_Cate
+        GROUP BY `tbl_categories`.id_cate, `tbl_categories`.name_cate
+6. Orders
+    - SELECT * FROM `tbl_order_detail`,`tbl_orders`,`tbl_custromer`,tbl_products
+        WHERE `tbl_order_detail`.order_code = `tbl_orders`.order_code
+        AND `tbl_order_detail`.product_id = `tbl_products`.id_prd
+        AND `tbl_orders`.id_customer = `tbl_custromer`.id_customer
+    - SELECT * FROM `tbl_orders`,`tbl_custromer`
+        WHERE `tbl_orders`.id_customer = `tbl_custromer`.id_customer
+        AND `tbl_order_detail`.product_id = `tbl_products`.id_prd
+        AND `tbl_custromer`.id_customer = ?
+    - SELECT * FROM `tbl_order_detail`,`tbl_orders`,`tbl_custromer`,tbl_products
+        WHERE `tbl_order_detail`.order_code = `tbl_orders`.order_code
+        AND `tbl_order_detail`.product_id = `tbl_products`.id_prd
+        AND `tbl_orders`.id_customer = `tbl_custromer`.id_customer
+        AND `tbl_custromer`.id_customer = ?
+    - INSERT INTO `tbl_orders` SET
+        `order_code`    = ?, 
+        `order_date`    = ?, 
+        `order_status`  = ?, 
+        `order_pay`     = ?, 
+        `order_method`  = ?,
+        `total`         = ?
+    - INSERT INTO `tbl_order_detail` SET
+        `order_code`        = ?, 
+        `product_id`        = ?, 
+        `product_quantity`  = ?
+    - INSERT INTO `tbl_custromer` SET
+        `name`              = ?, 
+        `email`             = ?, 
+        `phone`             = ?, 
+        `address`           = ?, 
+        `address_detail`    = ?, 
+        `message`           = ?, 
+        `order_code`        = ?
+7. Blogs
+    - SELECT * FROM `tbl_blogs`
+        INNER JOIN `tbl_user` ON `tbl_blogs`.`user_post` = `tbl_user`.ID
+        INNER JOIN `tbl_categories` ON `tbl_blogs`.`id_category` = `tbl_categories`.id_cate
+    - INSERT INTO `tbl_blogs` SET 
+        `user_post`   = ? ,
+        `time_post`   = ? ,
+        `title`       = ? ,
+        `content`     = ? ,
+        `quote`       = ? ,
+        `image`       = ? ,
+        `id_category` = ? 
+    - UPDATE `tbl_blogs` SET 
+        `user_post`   = ? ,
+        `time_post`   = ? ,
+        `title`       = ? ,
+        `content`     = ? ,
+        `quote`       = ? ,
+        `image`       = ? ,
+        `id_category` = ?  
+        WHERE id_blog = ? 
+    - DELETE FROM `tbl_blogs` WHERE id_blog = ?
+    - SELECT * FROM `tbl_blogs` WHERE id_blog = ?
