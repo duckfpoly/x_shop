@@ -15,8 +15,8 @@
             <form method="post" id="forms" >
                 <div class="d-flex flex-wrap justify-content-between align-items-start" id="main_content">
                     <div class="col-lg-3 col-md-12 col-sm-12">
-                        <h3>Thông tin người nhận</h3>
-                        <div class="col-md-12 form-group mb-4">
+                        <h3>Thông tin người nhận</h3> | <small>Đã có tài khoản ? <a href="sign_in">Đăng nhập ngay</a></small> |
+                        <div class="col-md-12 form-group mb-4 mt-3">
                             <label for="name" class="form-label">Họ tên</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?= !empty(Session::get('ID')) ?  Session::get('name') : "" ?>" required />
                         </div>
@@ -54,7 +54,7 @@
                             <div class="mb-3">
                                 <h3>Giao hàng</h3>
                             </div>
-                            <input type="radio" name="truck" value="0" id="truck_normal" required>
+                            <input type="radio" name="truck" value="0" class="truck" id="truck_normal" required>
                             <label class="item" for="truck_normal">
                                 <div class="title d-flex justify-content-between align-items-center">
                                     Giao hàng tiêu chuẩn (48h - 72h)
@@ -64,7 +64,7 @@
                                     Cước phí vận chuyển : 25.000 VNĐ
                                 </div>
                             </label>
-                            <input type="radio" name="truck" value="1" id="truck_faster" required>
+                            <input type="radio" name="truck" value="1" class="truck" id="truck_faster" required>
                             <label class="item" for="truck_faster">
                                 <div class="title d-flex justify-content-between align-items-center">
                                     Giao hàng nhanh (24 - 36h)
@@ -159,11 +159,11 @@
                                         $total += $subtotal;
                                     ?>
                                         <tr>
-                                            <td><a class="text-dark" href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                                            <td><a class="text-dark" href="shop?req=detail&id=<?= $values['id_prd'] ?>">
                                                     <img style="width: 65px; height: 65px;" class="rounded" src="assets/uploads/admin/products/<?= $values['image_prd'] ?>" alt="">
                                                 </a> 
                                             </td>
-                                            <td><a class="text-dark" href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                                            <td><a class="text-dark" href="shop?req=detail&id=<?= $values['id_prd'] ?>">
                                                     <span class="d-inline-block text-truncate" style="max-width: 150px;">
                                                         <?= $values['name_prd'] ?>
                                                     </span> 
@@ -189,7 +189,7 @@
                                 </li>
                                 <li>
                                     <a href="#">Phí vận chuyển
-                                        <span><span id="shipping">50000</span></span>
+                                        <span><span id="shipping">0</span></span>
                                     </a>
                                 </li>
                                 <li>

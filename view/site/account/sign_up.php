@@ -92,6 +92,7 @@
                 Validator.isRequired('#repassword', 'Vui lòng nhập lại passwword'),
                 Validator.minLength('#username', 6),
                 Validator.minLength('#password', 6),
+                Validator.minLength('#repassword', 6),
                 Validator.isConfirmed('#repassword', function() {
                     return document.querySelector('#form-1 #password').value;
                 }, 'Mật khẩu nhập lại không chính xác')

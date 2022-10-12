@@ -15,33 +15,53 @@
             <div class="col-md-2">
                 <div class="product_sidebar">
                     <div class="single_sedebar">
-                        <form method="post" action="?v=search">
+                        <form method="post" action="search">
                             <input type="text" name="key" placeholder="Search keyword" id="searchInput" >
                             <i class="ti-search"></i>
                         </form>
                     </div>
                     <div class="single_sedebar">
                         <div class="select_option">
-                            <div class="select_option_list">Products <i class="right fas fa-caret-down"></i> </div>
+                            <div class="select_option_list">Danh mục sản phấm <i class="right fas fa-caret-down"></i> </div>
                             <div class="select_option_dropdown filter-link <?= isset($_GET['cate']) == true ? "d-block" : "" ?>">
                                 <p>
-                                    <a class="filter_button" href="?v=shop">All</a>
+                                    <a class="filter_button" href="shop">Tất cả</a>
                                 </p>
                                 <?php foreach ($read_cate as $row => $values) { ?>
-                                    <p><a class="filter_button" id="<?= strtolower($values['name_cate']) ?>" href="?v=shop&cate=<?= strtolower($values['name_cate']) ?>"><?= $values['name_cate'] ?></a></p>
+                                    <p><a class="filter_button" id="<?= strtolower($values['name_cate']) ?>" href="shop?cate=<?= strtolower($values['name_cate']) ?>"><?= $values['name_cate'] ?></a></p>
                                 <?php } ?>
                             </div>
                         </div>
                     </div>
                     <div class="single_sedebar">
                         <div class="select_option">
-                            <div class="select_option_list">Filter <i class="right fas fa-caret-down"></i> </div>
+                            <div class="select_option_list">Lọc sản phẩm <i class="right fas fa-caret-down"></i> </div>
                             <div class="select_option_dropdown filter-link <?= isset($_GET['sort']) == true ? "d-block" : "" ?>">
-                                <p><a class="filter_button" href="?v=shop">Mặc định</a></p>
-                                <p><a class="filter_button" id="price_desc" href="?v=shop&sort=price_desc">Giá từ cao -> thấp</a></p>
-                                <p><a class="filter_button" id="price_asc" href="?v=shop&sort=price_asc">Giá từ thấp -> cao</a></p>
-                                <p><a class="filter_button" id="name_desc" href="?v=shop&sort=name_desc">Tên từ Z -> A</a></p>
-                                <p><a class="filter_button" id="name_asc" href="?v=shop&sort=name_asc">Tên từ A -> Z</a></p>
+                                <p><a class="filter_button" href="shop">Mặc định</a></p>
+                                <p><a class="filter_button" id="price_desc" href="shop?sort=price_desc">Giá từ cao -> thấp</a></p>
+                                <p><a class="filter_button" id="price_asc"  href="shop?sort=price_asc">Giá từ thấp -> cao</a></p>
+                                <p><a class="filter_button" id="name_desc"  href="shop?sort=name_desc">Tên từ Z -> A</a></p>
+                                <p><a class="filter_button" id="name_asc"   href="shop?sort=name_asc">Tên từ A -> Z</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_sedebar">
+                        <div class="select_option">
+                            <div class="select_option_list">Lọc giá tùy chọn <i class="right fas fa-caret-down"></i> </div>
+                            <div class="select_option_dropdown filter-link <?= isset($_GET['sort_price']) == true ? "d-block" : "" ?>">
+                                <form method="post" action="shop?sort_price=price_range">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Từ</label>
+                                        <input type="number" min="0" class="form-control border" name="min_price" placeholder="min" value="<?= isset($_POST['min_price']) ? $_POST['min_price'] : '' ?>">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Đến</label>
+                                        <input type="number" min="0" class="form-control border" name="max_price" placeholder="max" value="<?= isset($_POST['max_price']) ? $_POST['max_price'] : '' ?>">
+                                    </div>
+                                    <div class="form-group mt-5 text-center">
+                                        <button type="submit" name="filter_price_range" class="w-50 btn btn-outline-primary">Lọc</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -56,11 +76,11 @@
                             <div class="col-lg-3 col-sm-6 product-item item-child animate__animated">
                                 <div class="single_product_item">
                                     <div class="single_product_item_thumb">
-                                        <a href="?v=product_detail&id=<?= $values['id_prd'] ?>">
+                                        <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
                                             <img style="width: 100% !important; height: 300px !important " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid rounded">
                                         </a>
                                     </div>
-                                    <h3 style="font-size: 20px;"> <a href="?v=product_detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
+                                    <h3 style="font-size: 20px;"> <a href="shop?req=detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
                                     <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
                                         <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                                         <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>

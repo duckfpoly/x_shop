@@ -137,8 +137,8 @@
             $read = $this->query($sql);
             return $read;
         }
-        public function filter_price_range(){
-            $sql = "SELECT * FROM `tbl_products` WHERE price BETWEEN 1000000 AND 20000000";
+        public function filter_price_range($min,$max){
+            $sql = "SELECT * FROM `tbl_products` WHERE `tbl_products`.price BETWEEN $min AND $max ORDER BY price ASC";
             $read = $this->query($sql);
             return $read;
         }

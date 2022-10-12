@@ -1,5 +1,6 @@
 <?php  
     $url = $_SERVER['REQUEST_URI']; 
+    $host = $_SERVER['HTTP_HOST'];
     include_once 'config/session.php';
     Session::init();
 ?>
@@ -18,21 +19,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/checkout.css">
     <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/mains.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/styless.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/load.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
 </head>
 <body>
     <div id="app">
+        <div id="overlay"></div>
         <a class="btn d-none animate__animated animate__fadeInUp" id="btn-back-to-top"><i class="fa-solid fa-circle-arrow-up"></i></a>
         <?php include 'view/site/layout/header.php' ?>
-        <main><?php include 'controller/site/router_2.php' ?></main>
+        <main><?php include 'controller/site/router.php' ?></main>
         <?php include 'view/site/layout/footer.php' ?>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
@@ -45,9 +45,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/validate.js"></script>
-    <script src="js/checkout.js"></script>
-    <script src="js/addcart.js"></script>
-    <!-- <script src="js/shops.js"></script> -->
-    <script src="js/main.js"></script>
+    <script src="js/checkouts.js"></script>
+    <script src="js/mainss.js"></script>
 </body>
 </html>

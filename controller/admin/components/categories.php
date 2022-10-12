@@ -5,7 +5,7 @@
     <?php 
         if($act == 'create'){
             include('view/admin/categories/add.php');
-            if(isset($_POST['add_cate'])){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $name = $_POST['name'];
                 alert(
                     $create = $cate->create($name),
@@ -16,7 +16,7 @@
             }
         }
         elseif($act == 'update'){
-            if(isset($_POST['update'])){
+            if(($_SERVER['REQUEST_METHOD'] == 'POST')){
                 $id_cate = $_POST['id_cate'];
                 $name = $_POST['name'];
                 alert(

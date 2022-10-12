@@ -1,9 +1,9 @@
-# RewriteEngine On
+RewriteEngine On
 
-# RewriteRule ^admin$ admin.php
+RewriteRule ^admin$ admin.php
 # RewriteRule ^admin/([a-zA-Z0-9_-]+)$ admin.php?module=$1
 # RewriteRule ^product_detail/([0-9]+)$ admin.php?module=product_detail&id=$1
 
-# RewriteRule ^home$ index.php
-# RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?v=$1
+RewriteRule ^home$ index.php
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?v=$1 [QSA]
 # RewriteRule ^product_detail/([0-9]+)$ index.php?v=product_detail&id=$1

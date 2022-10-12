@@ -10,31 +10,31 @@
                     <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" id="home" href="?">Home</a>
+                                <a class="nav-link " id="home" href="home">Home</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="shop" href="#" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Shop
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="?v=shop">All</a>
-                                    <a class="dropdown-item" href="?v=shop&cate=laptop">Laptop</a>
-                                    <a class="dropdown-item" href="?v=shop&cate=mobile">Mobile</a>
-                                    <a class="dropdown-item" href="?v=shop&cate=tablet">Tablet</a>
-                                    <a class="dropdown-item" href="?v=shop&cate=headphones">Headphones</a>
+                                    <a class="dropdown-item " href="shop">All</a>
+                                    <a class="dropdown-item" href="shop?cate=laptop">Laptop</a>
+                                    <a class="dropdown-item" href="shop?cate=mobile">Mobile</a>
+                                    <a class="dropdown-item" href="shop?cate=tablet">Tablet</a>
+                                    <a class="dropdown-item" href="shop?cate=headphones">Headphones</a>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="about" href="?v=about">about</a>
+                                <a class="nav-link" id="about" href="about">about</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="blog" href="?v=blog">blog</a>
+                                <a class="nav-link" id="blog" href="blog">blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="contact" href="?v=contact">Contact</a>
+                                <a class="nav-link" id="contact" href="contact">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="feedback" href="?v=feedback">Feedback</a>
+                                <a class="nav-link" id="feedback" href="feedback">Feedback</a>
                             </li>
                             <li class="nav-item dropdown" id="header_account">
                                 <?php if(empty(Session::get('ID'))){ ?>
@@ -44,8 +44,8 @@
                                         <i class="fa-solid fa-user"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="?v=sign_in"><i class="fa-solid fa-right-to-bracket" style="color:#fff !important; "></i>&emsp;Sign In</a>
-                                        <a class="dropdown-item" href="?v=sign_up"><i class="fa-solid fa-user-plus" style="color:#fff !important; "></i>&emsp;Sign Up</a>
+                                        <a class="dropdown-item" href="sign_in"><i class="fa-solid fa-right-to-bracket" style="color:#fff !important; "></i>&emsp;Sign In</a>
+                                        <a class="dropdown-item" href="sign_up"><i class="fa-solid fa-user-plus" style="color:#fff !important; "></i>&emsp;Sign Up</a>
                                     </div>
                                 </div>
                             </a>
@@ -56,10 +56,10 @@
                                         <img style="width: 30px;border-radius: 50%" src="assets/uploads/admin/user/<?= Session::get('image') ?>" alt="">&emsp;<?= Session::get('name') ?>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <?= Session::get('vaitro') == 1 ? '<a class="dropdown-item" href="admin.php"><i class="fa-solid fa-paper-plane" style="color:#fff !important; "></i>&emsp;Admin</a>' : '' ?>
-                                        <a class="dropdown-item" href="?v=profiles"><i class="fa-solid fa-address-card" style="color:#fff !important; "></i>&emsp;Profiles</a>
+                                        <?= Session::get('vaitro') == 1 ? '<a class="dropdown-item" href="admin"><i class="fa-solid fa-paper-plane" style="color:#fff !important; "></i>&emsp;Admin</a>' : '' ?>
+                                        <a class="dropdown-item" href="profiles"><i class="fa-solid fa-address-card" style="color:#fff !important; "></i>&emsp;Profiles</a>
                                         <a class="dropdown-item" href="#"><i class="fa-solid fa-money-bill" style="color:#fff !important; "></i>&emsp;Bill</a>
-                                        <a class="dropdown-item" href="?v=sign_out"><i class="fa-solid fa-right-from-bracket" style="color:#fff !important; "></i>&emsp;Sign Out</a>
+                                        <a class="dropdown-item" href="sign_out"><i class="fa-solid fa-right-from-bracket" style="color:#fff !important; "></i>&emsp;Sign Out</a>
                                     </div>
                                 </div>
                             </a>
@@ -74,7 +74,7 @@
                             </a>
                         </div>
                         <div id="spc" style="padding-left: 15px;">
-                            <a href="?v=cart" id="cart-lg">
+                            <a href="cart" id="cart-lg">
                                 <div class="dropdown show ">
                                     <a class="dropdown-toggle" data-bs-display="static" class="position-relative" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-cart-shopping"></i>
@@ -121,7 +121,7 @@
                                             </table>
                                         </div>
                                         <div class="card-footer bg-transparent">
-                                            <a href="?v=cart" class="btn btn-outline-secondary">Xem giỏ hàng</a>
+                                            <a href="cart" class="btn btn-outline-secondary">Xem giỏ hàng</a>
                                         </div>
                                         <?php } 
                                         else {
@@ -149,8 +149,8 @@
                                         <img style="width: 30px; border-radius: 50%" src="https://cdn.icon-icons.com/icons2/2506/PNG/512/user_icon_150670.png" alt="">
                                     </a>
                                     <div class="dropdown-menu" style="position: absolute; right: 0px;">
-                                        <a class="dropdown-item" href="?v=sign_in"><i class="fa-solid fa-right-to-bracket" style="color:#fff !important; "></i>&emsp;Sign In</a>
-                                        <a class="dropdown-item" href="?v=sign_up"><i class="fa-solid fa-user-plus" style="color:#fff !important; "></i>&emsp;Sign Up</a>
+                                        <a class="dropdown-item" href="sign_in"><i class="fa-solid fa-right-to-bracket" style="color:#fff !important; "></i>&emsp;Sign In</a>
+                                        <a class="dropdown-item" href="sign_up"><i class="fa-solid fa-user-plus" style="color:#fff !important; "></i>&emsp;Sign Up</a>
                                     </div>
                                 </div>
                             <?php } else { ?>
@@ -160,9 +160,9 @@
                                     </a>
                                     <div class="dropdown-menu" style="position: absolute; right: 0px;">
                                         <a href=""> </a>
-                                        <a class="dropdown-item" href="?v=profiles">Hello, <?= Session::get('name') ?></a>
+                                        <a class="dropdown-item" href="profiles">Hello, <?= Session::get('name') ?></a>
                                         <?= Session::get('vaitro') == 1 ? '<a class="dropdown-item" href="admin.php"><i class="fa-solid fa-paper-plane" style="color:#fff !important; "></i>&emsp;Admin</a>' : '' ?>
-                                        <a class="dropdown-item" href="?v=profiles"><i class="fa-solid fa-address-card" style="color:#fff !important; "></i>&emsp;Profiles</a>
+                                        <a class="dropdown-item" href="profiles"><i class="fa-solid fa-address-card" style="color:#fff !important; "></i>&emsp;Profiles</a>
                                         <a class="dropdown-item" href="#"><i class="fa-solid fa-money-bill" style="color:#fff !important; "></i>&emsp;Bill</a>
                                         <a class="dropdown-item" href="?v=sign_out"><i class="fa-solid fa-right-from-bracket" style="color:#fff !important; "></i>&emsp;Sign Out</a>
                                     </div>
@@ -176,7 +176,7 @@
     </div>
     <div class="search_input" id="search_input_box">
         <div class="container ">
-            <form class="d-flex justify-content-between search-inner" method="post" action="?v=search">
+            <form class="d-flex justify-content-between search-inner" method="post" action="search">
                 <input type="text" class="form-control" name="key" id="search_input" placeholder="Search Here">
                 <button type="submit" class="btn"></button>
                 <span class="ti-close" id="close_search" title="Close Search"></span>
@@ -195,7 +195,7 @@
             '&id_product=' + id_prd;
         $.ajax({
             type: "POST",
-            url: '?v=cart',
+            url: 'cart',
             data: dataString,
             success: function () {
                 alert('Xóa thành công !');

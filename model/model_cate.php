@@ -50,32 +50,7 @@
                 return $detail;
             }
         }
-        public function delete_checked($id){
-            if(empty($id)){
-                $alert = "Please select all checkbox";
-                return $alert;
-            }
-            else {
-                $sql = "DELETE FROM `tbl_categories` WHERE id_cate = ?";
-                $delete_checked=  $this->query($sql, $id);
-                return $delete_checked;
-            }
-        }
-        public function count_all(){ 
-            $sql = "SELECT count(*) FROM `tbl_categories`";
-            $count_all_user = $this->query_value($sql);
-            return $count_all_user;
-        }
-        public function count_one($id){ 
-            if(empty($id)){
-                $alert = "Please enter ID Cate !";
-                return $alert;
-            }else {
-                $sql = "SELECT count(*) FROM `tbl_categories` WHERE id_cate = ?";
-                $count_one_user = $this->query_value($sql,$id) > 0;
-                return $count_one_user;
-            }
-        }
+        
     }
     
 ?>

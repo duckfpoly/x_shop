@@ -82,8 +82,8 @@
                     </tfoot>
                 </table>
                 <div class="checkout_btn_inner float-right">
-                    <a class="btn_1" href="?v=shop">Tiếp tục mua sắm</a>
-                    <a class="btn_1 checkout_btn_1" href="?v=checkout">Thanh toán</a>
+                    <a class="btn_1" href="shop">Tiếp tục mua sắm</a>
+                    <a class="btn_1 checkout_btn_1" href="checkout">Thanh toán</a>
                 </div>
             </div>
         </div>

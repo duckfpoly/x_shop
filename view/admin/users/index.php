@@ -47,15 +47,12 @@
                         ? '<p class="text-center rounded text-light bg-dark">Admin</p>' 
                         : '<p class="text-center rounded text-dark bg-light">Client</p>' ?>
                     </td>
-                    <td><a href="<?= $url ?>&act=update&id=<?= $values['ID'] ?>" class="btn btn-secondary">Edit</a>&nbsp;<a href="<?= $url ?>&act=delete&id=<?= $values['ID'] ?>" class="btn btn-danger">Del</a></td>
+                    <td>
+                        <?= $values['vaitro'] == 1 ? "" : '<a href="'.$url.'&act=update&id='.$values['ID'].'" class="btn btn-secondary">Edit</a>&nbsp;<a href="'.$url.'&act=delete&id='.$values['ID'].'" class="btn btn-danger">Del</a>'?>
+                    </td>
                 </tr>
-                
         <?php }
         } ?>
     </tbody>
     </thead>
 </table>
-
-<script type="text/javascript">
-   
-</script>
