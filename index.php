@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/checkout.css">
     <link rel="stylesheet" href="css/styless.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="js/load.js"></script>
+    <script src="js/loads.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
 </head>
 <body>

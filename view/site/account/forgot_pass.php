@@ -1,5 +1,5 @@
 <?php if (!empty(Session::get('ID'))) {
-    echo '<script>window.location="?";</script>';
+    echo '<script>window.location="home";</script>';
 } else { ?>
     <section class="login_part" style="margin-top: 100px;">
         <div class="container">
