@@ -125,7 +125,7 @@
             <button id="desc" class="btn btn-outline-secondary w-50">Xem thêm</button>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-        <div id="box_modal_update" class="border bg-white mt-5">
+        <div id="box_modal_update" class="border bg-white mt-5" style="border-radius:20px">
             <div class="card">
                 <div class="card-header sticky-top bg-light d-flex justify-content-between align-items-center">
                     <div class="mt-2">

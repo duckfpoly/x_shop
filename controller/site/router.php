@@ -1,5 +1,6 @@
 <?php 
     include 'global.php';
+    
     require_once 'model/model_process.php';
     require_once 'model/model_cate.php';
     require_once 'model/model_product.php';
@@ -9,16 +10,19 @@
     require_once 'model/model_blog.php';
     require_once 'model/model_cart.php';
     require_once 'model/model_order.php';
+
     $router = new Router();
     class Router {
         public function __construct(){
             $this->url          = $_SERVER['REQUEST_URI'];
+
             $this->client       = new Google_Client();
             $this->google_oauth = new Google_Service_Oauth2($this->client);
             $this->client->setClientId("860322000129-aa3jsl9jc2upei7jjitjeknhol9p552f.apps.googleusercontent.com");
             $this->client->setClientSecret("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");
             $this->client->addScope("email");
             $this->client->addScope("profile");
+
             $this->cate         = new categories();
             $this->product      = new product();
             $this->comment      = new comment();
@@ -26,6 +30,7 @@
             $this->statistical  = new statistical();
             $this->blogs        = new blogs();
             $this->order        = new orders(); 
+
             if(isset($_GET['v']) == true){
                 
                 $v = $_GET['v'];
@@ -54,14 +59,20 @@
                 elseif($v == "confirm_order")   {   $this->confirm_order();     }
                 elseif($v == "not_found")       {   $this->not_found();         }
 
+                elseif($v == "admin")       {   $this->admin();         }
+
             }
             else { 
                 $this->home(); 
             }
         }
+        public function admin(){
+            echo '<script>window.location="admin.php";</script>';
+        }
         private function home(){
             $read_prd = $this->product->read();
             $top_view = $this->product->top_product();
+            $name_cate   = $this->cate->read();
             include('view/site/home.php');
         }
         private function shop(){ 
@@ -129,10 +140,12 @@
             include('view/site/feedback.php');
         }
         private function profiles(){ 
+            checkLoginn();
             $detail = $this->user->detail(Session::get('ID'));
             include('view/site/account/profiles.php');
         }
         private function update_info(){
+            checkLoginn();
             $detail = $this->user->detail(Session::get('ID'));
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $id_user        = Session::get('ID');
@@ -159,6 +172,7 @@
             include('view/site/account/update_info.php');
         }
         private function changed_pass(){
+            checkLoginn();
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $new_password = $_POST['new_password'];
                 $old_password = $_POST['old_password'];
@@ -168,39 +182,10 @@
             include('view/site/account/changed_pass.php');
         }
         private function forgot_pass(){
+            checkLogin();
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $email = $_POST['email'];
                 $checkemail = $this->user->check_email($email);
-                if(!isset($checkemail)){}   
-                else {
-                    $expFormat = mktime(
-                        date("H"),
-                        date("i"),
-                        date("s"),
-                        date("m"),
-                        date("d") + 1,
-                        date("Y")
-                    );
-                    $expDate = date("Y-m-d H:i:s", $expFormat);
-                    $key = md5((2418 * 2) . $email);
-                    $addKey = substr(md5(uniqid(rand(), 1)), 3, 10);
-                    $key = $key . $addKey;
-                    $password_reset_temp = $this->user->reset_pass($email,$key,$expDate);
-                     $output = '<p>Dear user,</p>';
-                    $output .= '<p>Vui lòng click vào liên kết sau để đặt lại mật khẩu của bạn.</p>';
-                    $output .= '<p>-------------------------------------------------------------</p>';
-                    $output .= '<p><a href="localhost/xshop/?v=reset_pass&key=' . $key . '&email=' . $email . '&action=reset" target="_blank">Đặt lại mật khẩu</a></p>';
-                    $output .= '<p>-------------------------------------------------------------</p>';
-                    $output .= '<p>Hãy đảm bảo sao chép toàn bộ liên kết vào trình duyệt của bạn.
-                            Liên kết sẽ hết hạn sau 1 ngày vì lý do bảo mật.</p>';
-                    $output .= '<p>Nếu bạn không yêu cầu email quên mật khẩu này, không có hành động nào
-                            là cần thiết, mật khẩu của bạn sẽ không được đặt lại. Tuy nhiên, bạn có thể muốn đăng nhập vào
-                            tài khoản của bạn và thay đổi mật khẩu bảo mật của bạn như ai đó có thể đã đoán ra.</p>';
-                    $output .= '<p>Thanks,</p>';
-                    $output .= '<p>ADMIN TEAM X STORE</p>';
-                    send_mail($email,$output);
-                    echo '<script language="javascript">alert("Một email đã được gửi với hướng dẫn về cách đặt lại mật khẩu của bạn."); window.location="https://mail.google.com/";</script>';
-                }
             }
             include('view/site/account/forgot_pass.php');
         }
@@ -216,12 +201,19 @@
                               <p>Liên kết không hợp lệ / hết hạn. Hoặc bạn đã không sao chép đúng liên kết
                               từ email hoặc bạn đã sử dụng khóa trong trường hợp đó
                               đã ngừng hoạt động.</p>
-                              <p><a href="?v=forgot_pass">
+                              <p><a href="forgot_pass">
                               Click here</a> to reset password.</p>';
                 } else {
                     $row_2 = $this->user->assoc_read_code_reset_pass($email,$key);
                     $expDate = $row_2['expDate'];
                     if ($expDate >= $curDate) {
+                        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            $error = "";
+                            $new_password = $_POST['new_password'];
+                            $reset = $this->user->reset_password($new_password,$email);
+                            $delete = $this->user->delete_code_reset_pass($email);
+                            echo ' <script language="javascript"> alert("cập nhật mật khẩu thành công. Đăng nhập thôi nào !"); location.href="sign_in";</script>';
+                        }
                         include('view/site/account/reset_pass.php');
                     }else {
                     $error .= "<h2>Link Expired</h2>
@@ -233,19 +225,14 @@
                     echo "<div class='error'>" . $error . "</div><br />";
                 }
             }
-            if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $error = "";
-                $new_password = $_POST['new_password'];
-                $reset = $this->user->reset_password($new_password,$email);
-                $delete = $this->user->delete_code_reset_pass($email);
-                echo ' <script language="javascript"> alert("cập nhật mật khẩu thành công. Đăng nhập thôi nào !"); location.href="sign_in";</script>';
-            }
         }
         private function sign_in(){ 
+            checkLogin();
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $data = $_POST['data'];
                 $password = $_POST['password'];
                 $user_login = $this->user->login($data,$password);
+                echo ' <script language="javascript"> history.back(); </script>';
             }
             $this->client->setRedirectUri("http://localhost/xshop/?v=sign_in");
             if (isset($_GET['code'])) {
@@ -258,6 +245,7 @@
             include 'view/site/account/sign_in.php';
         }
         private function sign_up(){ 
+            checkLogin();
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $username     = isset($_POST['username']) ? $_POST['username'] : '';
                 $password     = isset($_POST['password']) ? $_POST['password'] : '';
@@ -284,31 +272,9 @@
                 $google_account_info = $this->google_oauth->userinfo->get();
                 $email      =  $google_account_info->email;
                 $name_user  =  $google_account_info->name;
-                $username   =  rand_username(6);
+                $username   =  cut_email($email);
                 $password   =  rand(0,9999990);
-                $create     = $this->user->sign_up_gg($username,$name_user,$email,$password);
-                if(isset($create)) {
-                    echo '<script type="text/javascript">alert("Email đã được sử dụng !"); location.href="sign_up"</script> ';
-                }
-                else {
-                    $output     = '<p>Dear ,'.$name_user.'</p>';
-                    $output .= '
-                        <h1>Đăng ký tài khoản thành công</h1>
-                        <p>X Store xin được gửi tài khoản và mật khẩu của quý khách:</p>
-                        <ul>
-                            <li><strong>Tài khoản: </strong>'.$username.'</li>
-                            <li><strong>Mật khẩu: </strong>'.$password.'</li>
-                        </ul>
-                    '; 
-                    $output .= '
-                        <p>Nếu không phải bạn đăng ký <br>
-                        Vui lòng nhấn <a href="mailto:ndcake.store@gmai.com">vào đây</a> để gửi email liên hệ lại với chúng tôi 
-                        hoặc có thể liên hệ trực tiếp qua số điện thoại: <a href="tel:+84823565831">+8482 3565 831</a></p>
-                    ';         
-                    $output .= '<p>Thanks,</p>';
-                    $output .= '<p>ADMIN X SHOP</p>';
-                    send_mail($email,$output);
-                }
+                $create     =  $this->user->sign_up_gg($username,$name_user,$email,$password);
             } 
             include 'view/site/account/sign_up.php'; 
         }
@@ -322,7 +288,7 @@
             Session::unset('image');
             Session::unset('active');
             Session::unset('vaitro');
-            echo ' <script language="javascript"> location.href = "home"; </script>';
+            echo ' <script language="javascript"> history.back(); </script>';
         }
         private function blog_detail(){ 
         }
@@ -335,7 +301,7 @@
                 $comment_time = date("Y-m-d H:i:s");
                 $content =  $_POST['comment'];
                 $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
-                echo '<script language="javascript">window.location="?v=product_detail&id=' . $id_product . '";</script>';
+                echo '<script language="javascript">window.location="'. $this->url .'";</script>';
             }
             else {
                 $detail = $this->product->detail($id);
@@ -352,7 +318,7 @@
                 $search = $this->product->searchs($key);
                 include('view/site/search.php');
             }else {
-                echo '<script language="javascript">window.location="?";</script>';
+                echo '<script language="javascript">window.location="home";</script>';
             }
         }
         private function cart(){

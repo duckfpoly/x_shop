@@ -1,6 +1,3 @@
-<?php 
-    // $url = $this->url ;
-?>
 <div class="mb-3 w-100 text-center">
     <button class="btn btn-outline-primary" onclick='selects()' >Checked All</button>
     <button class="btn btn-outline-info"  onclick='deSelect()' >Unchecked All</button>
@@ -35,5 +32,3 @@
             </tbody>
         </thead>
     </table>
-<script type="text/javascript">
-</script>

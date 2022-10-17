@@ -83,4 +83,22 @@
         $mailer->Body = $body;
         $mailer->send();
     }
+
+    function cut_email($email){
+        $string = $email;
+        $return = strrev($string);
+        $string_confirm = strstr($return, '@');
+        $final = strrev($string_confirm) ;
+        return chop($final,"@");
+    }
+    function checkLogin(){
+        if(!empty(Session::get('ID'))){
+            echo '<script>window.location="home";</script>';
+        }
+    }
+    function checkLoginn(){
+        if(empty(Session::get('ID'))){
+            echo '<script>window.location="home";</script>';
+        }
+    }
 ?>

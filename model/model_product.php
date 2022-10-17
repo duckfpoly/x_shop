@@ -72,11 +72,11 @@
         }
         public function products_with_cate($id){
             if(empty($id)){
-                $alert = "Please enter ID Products !";
+                $alert = "Please enter ID Categories !";
                 return $alert;
             }
             else {
-                $sql = "SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate WHERE `tbl_categories`.id_cate = ?";
+                $sql = "SELECT * FROM `tbl_products` WHERE ID_Cate = ?";
                 $detail = $this->query($sql,$id);
                 return $detail;
             }

@@ -21,17 +21,28 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 </head>
 <body>
     <div class="containerr">
         <div class="d-flex justify-content-between">
-            <?php include 'view/admin/layout/sidebar.php'          ?>
-            <div class=""style="width: 88%;">
-                <?php include 'view/admin/layout/header.php'       ?>
+            <?php include 'view/admin/layout/sidebar_2.php'          ?>
+            <section class="home-section">
+                <div class="home-content">
+                    <i class='bx bx-menu'></i>
+                    <!-- <span class="text">Drop Down Sidebar</span> <br /> -->
+                </div>
                 <div class="mt-2" style="margin: 20px;">
                     <?php include 'controller/admin/router.php'    ?>
                 </div>
-            </div>
+            </section>
+            
+            <!-- <div class="" style="width: 88%;">
+                <div class="mt-2" style="margin: 20px;">
+                    <?php include 'controller/admin/router.php'    ?>
+                </div>
+            </div> -->
         </div>
         <?php include 'view/admin/layout/footer.php'               ?>
     </div>
@@ -54,5 +65,10 @@
     <script src="js/admin.js"></script>
     <script src="js/validate.js"></script>
 
+    <script>
+        $('#myTable').DataTable( {
+            responsive: true
+        } );
+    </script>
 </body>
 </html>

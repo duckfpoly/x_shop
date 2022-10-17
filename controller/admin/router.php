@@ -37,9 +37,6 @@
     elseif($module == "orders"){
         include('components/orders.php');
     }
-    // elseif($module == "login"){
-    //     echo ' <script language="javascript"> location.href = "view/admin/account/login.php"; </script>';
-    // }
     elseif($module == "sign_out"){
         Session::unset('user_login');
         Session::unset('ID');
@@ -53,6 +50,6 @@
         echo ' <script language="javascript"> location.href = "login.php"; </script>';
     }
     else {
-        include('components/dashboard.php');
+        include('view/admin/dashboard.php');
     }
 ?>

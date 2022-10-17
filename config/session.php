@@ -13,6 +13,7 @@ class Session {
             return false;
         }
     }
+    
     public static function checkSession(){
         self::init();
         if (self::get("user_login") == false) {
@@ -20,7 +21,7 @@ class Session {
             header("Location: login.php");
         }
         elseif(self::get('vaitro') !== 1){
-            echo ' <script language="javascript"> location.href = "./"; </script>';
+            echo ' <script language="javascript"> location.href = "home"; </script>';
         }
     }
     public static function destroy(){

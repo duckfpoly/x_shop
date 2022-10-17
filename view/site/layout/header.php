@@ -28,13 +28,17 @@
                                 <a class="nav-link" id="about" href="about">about</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="blog" href="blog">blog</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" id="contact" href="contact">Contact</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="feedback" href="feedback">Feedback</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="shop" href="#" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Menu
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                    <a class="dropdown-item" href="feedback">Feedback</a>
+                                    <a class="dropdown-item" href="check_order">Đơn hàng</a>
+                                    <a class="dropdown-item" href="blog">Blog</a>
+                                </div>
                             </li>
                             <li class="nav-item dropdown" id="header_account">
                                 <?php if(empty(Session::get('ID'))){ ?>
@@ -120,8 +124,9 @@
                                                 <?php } ?>
                                             </table>
                                         </div>
-                                        <div class="card-footer bg-transparent">
-                                            <a href="cart" class="btn btn-outline-secondary">Xem giỏ hàng</a>
+                                        <div class="card-footer bg-transparent d-flex justify-content-end">
+                                            <a href="cart" class="btn btn-outline-success">Xem giỏ hàng</a>&emsp;
+                                            <a href="checkout" class="btn btn-outline-primary">Thanh toán ngay</a>
                                         </div>
                                         <?php } 
                                         else {
