@@ -43,10 +43,10 @@ Session::init();
             <div class="animation-preloader">
                 <div class="spinner"></div>
                 <div class="txt-loading">
-                    <span data-text-preloader="T" class="letters-loading">T</span>
-                    <span data-text-preloader="H" class="letters-loading">H</span>
-                    <span data-text-preloader="E" class="letters-loading">E</span>
-                    <span data-text-preloader="&nbsp;" class="letters-loading">&nbsp;</span>
+                    <!-- <span data-text-preloader="T" class="letters-loading">T</span> -->
+                    <!-- <span data-text-preloader="H" class="letters-loading">H</span> -->
+                    <!-- <span data-text-preloader="E" class="letters-loading">E</span> -->
+                    <!-- <span data-text-preloader="&nbsp;" class="letters-loading">&nbsp;</span> -->
                     <span data-text-preloader="X" class="letters-loading">X</span>
                     <span data-text-preloader="&nbsp;" class="letters-loading">&nbsp;</span>
                     <span data-text-preloader="S" class="letters-loading">S</span>
@@ -85,7 +85,7 @@ Session::init();
     <script src="js/bootstrap.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/validate.js"></script>
-    <!-- <script src="js/checkouts.js"></script> -->
+    <script src="js/checkouts.js"></script>
     <script src="js/indexx.js"></script>
 </body>
 

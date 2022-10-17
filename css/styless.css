@@ -13,9 +13,9 @@
 	}
 
 
-  body::-webkit-scrollbar {
-    width: 10px;
-  }
+body::-webkit-scrollbar {
+  width: 10px;
+}
 
 body::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom, #7A7FBA, #11C37C);

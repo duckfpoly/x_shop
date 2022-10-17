@@ -12,7 +12,7 @@
 <section class="product_list section_padding">
     <div class="containerr w-75" style="margin: 0px auto;">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-lg-2 col-md-12 col-12">
                 <div class="product_sidebar">
                     <div class="single_sedebar">
                         <form method="post" action="search">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-lg-10 col-md-12 col-12">
                 <div class="product_list">
                     <div class="row item-list">
                         <?php foreach ($read_prd as $items => $values) {
