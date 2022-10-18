@@ -232,7 +232,7 @@
                 $data = $_POST['data'];
                 $password = $_POST['password'];
                 $user_login = $this->user->login($data,$password);
-                echo ' <script language="javascript"> history.back(); </script>';
+                // echo ' <script language="javascript"> location.href="home" </script>';
             }
             $this->client->setRedirectUri("http://localhost/xshop/?v=sign_in");
             if (isset($_GET['code'])) {

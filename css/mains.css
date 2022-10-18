@@ -8614,12 +8614,18 @@ h6 {
 #header_account {
   display: none !important;
 }
-@media (max-width: 876px) {
+#acc {
+  margin-left: 50px;
+}
+@media (max-width: 877px) {
   #header_account {
     display: block !important;
   }
   #account {
     display: none !important;
+  }
+  #acc {
+    margin-left: 0px;
   }
 }
 

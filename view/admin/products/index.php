@@ -4,7 +4,7 @@
     <button class="btn btn-outline-danger">Delete Checked</button>
     <button onclick="location.href='<?= $url ?>&act=create'" class="btn btn-outline-success">Add New Products</button>
 </div>
-<table id="example" class="table table-hover nowrap " >
+<table id="example" class="table table-hover">
     <thead>
         <tr>
             <th></th>
@@ -27,22 +27,14 @@
             ';
         } else { ?>
             <?php foreach ($read as $row => $values) {
-                $price = $values['price'];
-                $discount = $values['giam_gia'];
-                if ($discount == 0) {
-                    $total = $price;
-                } else {
-                    $tt = ($price * $discount) / 100;
-                    $total = $price - $tt;
-                }
+                $total = total($values['price'],$values['giam_gia'])
             ?>
-
                 <tr class="<?= $values['dac_biet'] == 1 ? "bg-light" : "" ?>">
                     <td><input type="checkbox" name="checkbox" class="checkbox"></td>
                     <td><?= $values['id_prd'] ?></td>
                     <td><?= $values['name_prd'] ?></td>
                     <td><?= number_format($values['price'], 0, '', ','); ?>&nbsp;VNĐ</td>
-                    <td><?= $discount ?>%</td>
+                    <td><?= $values['giam_gia'] ?>%</td>
                     <td><?= $values['so_luot_xem'] ?></td>
                     <td><?= number_format($total, 0, '', ','); ?>&nbsp;VNĐ</td>
                     <td>

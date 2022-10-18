@@ -85,7 +85,14 @@
                                 <img style="width: 100% !important; height: 300px !important " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid">
                             </a>
                         </div>
-                        <h3 style="font-size: 20px;"> <a href="shop?req=detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
+                        
+                        <h3 style="font-size: 20px;"> 
+                            <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
+                                <span class="d-inline-block text-truncate" style="max-width: 100%;">
+                                    <?= $values['name_prd'] ?>
+                                </span> 
+                            </a> 
+                        </h3>
                         <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
                             <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                             <span class="text-danger">Tiết kiệm ( <?= $values['giam_gia'] ?>% )</span>

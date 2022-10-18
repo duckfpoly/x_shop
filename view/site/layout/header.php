@@ -42,7 +42,7 @@
                             </li>
                             <li class="nav-item dropdown" id="header_account">
                                 <?php if(empty(Session::get('ID'))){ ?>
-                            <a href="#" >
+                            <a href="#">
                                 <div class="dropdown show">
                                     <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-user"></i>
@@ -54,7 +54,7 @@
                                 </div>
                             </a>
                             <?php } else { ?>
-                            <a href="#" >
+                            <a href="#">
                                 <div class="dropdown show">
                                     <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img style="width: 30px;border-radius: 50%" src="assets/uploads/admin/user/<?= Session::get('image') ?>" alt="">&emsp;<?= Session::get('name') ?>
@@ -147,7 +147,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div style="padding-left:50px">
+                        <div id="acc">
                             <?php if(empty(Session::get('ID'))){ ?>
                                 <div class="dropdown show" id="account">
                                     <a class=" dropdown-toggle" data-bs-display="static" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
