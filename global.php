@@ -5,6 +5,9 @@
 
     require_once 'vendor/autoload.php'; 
 
+    function location($url){
+        echo '<script>window.location="'.$url.'";</script>';
+    }
     function save_file($fieldname, $target_dir){
         $file_uploaded = $_FILES[$fieldname];
         $file_name = basename($file_uploaded["name"]);
@@ -93,12 +96,13 @@
     }
     function checkLogin(){
         if(!empty(Session::get('ID'))){
-            echo '<script>window.location="home";</script>';
+            location('home');
         }
     }
     function checkLoginn(){
         if(empty(Session::get('ID'))){
-            echo '<script>window.location="home";</script>';
+            location('home');
         }
     }
+    
 ?>

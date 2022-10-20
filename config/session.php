@@ -13,7 +13,6 @@ class Session {
             return false;
         }
     }
-    
     public static function checkSession(){
         self::init();
         if (self::get("user_login") == false) {

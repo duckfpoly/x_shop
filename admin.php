@@ -38,11 +38,6 @@
                 </div>
             </section>
             
-            <!-- <div class="" style="width: 88%;">
-                <div class="mt-2" style="margin: 20px;">
-                    <?php include 'controller/admin/router.php'    ?>
-                </div>
-            </div> -->
         </div>
         <?php include 'view/admin/layout/footer.php'               ?>
     </div>

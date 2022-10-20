@@ -127,13 +127,8 @@
                 return $search;
             }
         }
-        public function filter_price_desc(){
-            $sql = "SELECT * FROM `tbl_products`ORDER BY price DESC";
-            $read = $this->query($sql);
-            return $read;
-        }
-        public function filter_price_asc(){
-            $sql = "SELECT * FROM `tbl_products` ORDER BY price ASC";
+        public function filter($prop,$ordinal){
+            $sql = "SELECT * FROM `tbl_products` ORDER BY $prop $ordinal";
             $read = $this->query($sql);
             return $read;
         }
@@ -142,37 +137,11 @@
             $read = $this->query($sql);
             return $read;
         }
-        public function filter_name_desc(){
-            $sql = "SELECT * FROM `tbl_products` ORDER BY name_prd DESC";
-            $read = $this->query($sql);
-            return $read;
-        }
-        public function filter_name_asc(){
-            $sql = "SELECT * FROM `tbl_products` ORDER BY name_prd ASC";
-            $read = $this->query($sql);
-            return $read;
-        }
-        // public function filter_product_with_cate_asc($key){
-        //     $sql = "SELECT * FROM `tbl_products`
-        //     INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
-        //     WHERE `tbl_products`.name_cate LIKE '%$key%'";
-        //     $read = $this->query_one($sql);
-        //     return $read;
-        // }
-        public function filter_price_product_with_cate_desc($key){
+        public function filter_with_cate($key,$prop,$ordinal){
             $sql = "SELECT * FROM `tbl_products`
             INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
             WHERE `tbl_categories`.name_cate LIKE '%$key%'
-            ORDER BY `tbl_products`.price DESC
-            ";
-            $read = $this->query($sql);
-            return $read;
-        }
-        public function filter_price_product_with_cate_asc($key){
-            $sql = "SELECT * FROM `tbl_products`
-            INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
-            WHERE `tbl_categories`.name_cate LIKE '%$key%'
-            ORDER BY `tbl_products`.price ASC
+            ORDER BY `tbl_products`.$prop $ordinal
             ";
             $read = $this->query($sql);
             return $read;
@@ -186,21 +155,13 @@
             $read = $this->query($sql);
             return $read;
         }
-        public function filter_name_product_with_cate_desc($key){
-            $sql = "SELECT * FROM `tbl_products`
-            INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
-            WHERE `tbl_categories`.name_cate LIKE '%$key%'
-            ORDER BY `tbl_products`.name_prd DESC
-            ";
+        public function filter_special(){
+            $sql = "SELECT * FROM `tbl_products` WHERE dac_biet = 1";
             $read = $this->query($sql);
             return $read;
         }
-        public function filter_name_product_with_cate_asc($key){
-            $sql = "SELECT * FROM `tbl_products`
-            INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
-            WHERE `tbl_categories`.name_cate LIKE '%$key%'
-            ORDER BY `tbl_products`.name_prd ASC
-            ";
+        public function filter_normal(){
+            $sql = "SELECT * FROM `tbl_products` WHERE dac_biet = 0";
             $read = $this->query($sql);
             return $read;
         }

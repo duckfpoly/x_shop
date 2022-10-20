@@ -15,9 +15,9 @@
             <div class="col-lg-2 col-md-12 col-12">
                 <div class="product_sidebar">
                     <div class="single_sedebar">
-                        <form method="post" action="search">
-                            <input type="text" name="key" placeholder="Search keyword" id="searchInput" >
-                            <i class="ti-search"></i>
+                        <form method="post">
+                            <input type="text" name="search_key" placeholder="Search ..." id="searchInput" value="<?= isset($_POST['search_key']) == true ? $_POST['search_key'] : ""  ?>">
+                            <?= isset($_POST['search_key']) == true ? ' <a href="shop" class="text-dark"><i class="ti-close"></i></a>' : '<i class="ti-search"></i>'  ?>
                         </form>
                     </div>
                     <div class="single_sedebar">
@@ -38,10 +38,22 @@
                             <div class="select_option_list">Lọc sản phẩm <i class="right fas fa-caret-down"></i> </div>
                             <div class="select_option_dropdown filter-link <?= isset($_GET['sort']) == true ? "d-block" : "" ?>">
                                 <p><a class="filter_button" href="shop">Mặc định</a></p>
-                                <p><a class="filter_button" id="price_desc" href="shop?sort=price_desc">Giá từ cao -> thấp</a></p>
-                                <p><a class="filter_button" id="price_asc"  href="shop?sort=price_asc">Giá từ thấp -> cao</a></p>
-                                <p><a class="filter_button" id="name_desc"  href="shop?sort=name_desc">Tên từ Z -> A</a></p>
-                                <p><a class="filter_button" id="name_asc"   href="shop?sort=name_asc">Tên từ A -> Z</a></p>
+                                    <?php
+                                        $direct_url = '';
+                                        // $base_url = $this->url;
+                                        if(isset($_GET['cate']) == true){
+                                            $direct_url = "shop?cate=".$_GET['cate']."&sort=";
+                                        }
+                                        else {
+                                            $direct_url = "shop?sort=";
+                                        }
+                                    ?>
+                                <p><a class="filter_button" id="price_desc" href="<?= $direct_url ?>price_desc">Giá từ cao -> thấp</a></p>
+                                <p><a class="filter_button" id="price_asc"  href="<?= $direct_url ?>price_asc">Giá từ thấp -> cao</a></p>
+                                <p><a class="filter_button" id="name_desc"  href="<?= $direct_url ?>name_desc">Tên từ Z -> A</a></p>
+                                <p><a class="filter_button" id="name_asc"   href="<?= $direct_url ?>name_asc">Tên từ A -> Z</a></p>
+                                <p><a class="filter_button" id="special"    href="<?= $direct_url ?>special">Hàng đặc biệt</a></p>
+                                <p><a class="filter_button" id="normal"     href="<?= $direct_url ?>normal">Hàng thường</a></p>
                             </div>
                         </div>
                     </div>
@@ -68,6 +80,13 @@
                 </div>
             </div>
             <div class="col-lg-10 col-md-12 col-12">
+                <div class="text-center">
+                    <?php if(isset($alert) == true ) { ?>
+                        <div>
+                            <img src="https://shop-media.vgsshop.vn/pub/media/khoa-banner-landing-page/PAGE_404-01_1.png" alt="">
+                        </div>
+                    <?php } ?>
+                </div>
                 <div class="product_list">
                     <div class="row item-list">
                         <?php foreach ($read_prd as $items => $values) {
@@ -80,7 +99,13 @@
                                             <img style="width: 100% !important; height: 300px !important " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid rounded">
                                         </a>
                                     </div>
-                                    <h3 style="font-size: 20px;"> <a href="shop?req=detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
+                                    <h3 style="font-size: 20px;">
+                                        <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
+                                            <span class="d-block text-truncate" style="max-width: 100%;">
+                                                <?= $values['name_prd'] ?>
+                                            </span> 
+                                        </a> 
+                                    </h3>
                                     <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
                                         <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
                                         <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
@@ -199,6 +224,12 @@
         }
         else if (sort == 'name_asc'){
             $('#name_asc').addClass('fw-bold');  
+        }
+        else if (sort == 'special'){
+            $('#special').addClass('fw-bold');  
+        }
+        else if (sort == 'normal'){
+            $('#normal').addClass('fw-bold');  
         }
     }
 </script>

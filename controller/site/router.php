@@ -16,8 +16,9 @@
         public function __construct(){
             $this->url          = $_SERVER['REQUEST_URI'];
 
-            $this->client       = new Google_Client();
-            $this->google_oauth = new Google_Service_Oauth2($this->client);
+            $this->client = new Google\Client();
+            $this->google_oauth = new Google\Service\Oauth2($this->client);
+
             $this->client->setClientId("860322000129-aa3jsl9jc2upei7jjitjeknhol9p552f.apps.googleusercontent.com");
             $this->client->setClientSecret("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");
             $this->client->addScope("email");
@@ -67,7 +68,7 @@
             }
         }
         public function admin(){
-            echo '<script>window.location="admin.php";</script>';
+            location('admin.php');
         }
         private function home(){
             $read_prd = $this->product->read();
@@ -77,6 +78,7 @@
         }
         private function shop(){ 
             $read_cate = $this->cate->read();
+            
             if(isset($_GET['req'])){
                 $req = $_GET['req'];
                 if($req == 'detail'){
@@ -88,7 +90,7 @@
                         $comment_time = date("Y-m-d H:i:s");
                         $content =  $_POST['comment'];
                         $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
-                        echo '<script language="javascript">window.location="shop?req=detail&id=' . $id_product . '";</script>';
+                        location('shop?req=detail&id=' . $id_product . '');
                     }
                     else {
                         $detail = $this->product->detail($id);
@@ -107,18 +109,58 @@
             else{
                 $read_prd = $this->product->read_all();
             }
-            $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
-            if($sort == 'price_desc'){
-                $read_prd = $this->product->filter_price_desc(); 
+            if(isset($_GET['sort'])){
+                $sort = $_GET['sort'];
+                if(isset($_GET['cate']) == true){
+                    if($sort == 'price_desc'){
+                        $read_prd = $this->product->filter_with_cate($cate,'price','DESC'); 
+                    }
+                    elseif($sort == 'price_asc'){
+                        $read_prd = $this->product->filter_with_cate($cate,'price','ASC'); 
+                    }
+                    elseif($sort == 'name_desc'){
+                        $read_prd = $this->product->filter_with_cate($cate,'name_prd','DESC'); 
+                    }
+                    elseif($sort == 'name_asc'){
+                        $read_prd = $this->product->filter_with_cate($cate,'name_prd','ASC'); 
+                    }
+                    elseif($sort == 'special'){
+                        $read_prd = $this->product->filter_special(); 
+                    }
+                    elseif($sort == 'normal'){
+                        $read_prd = $this->product->filter_normal(); 
+                    }
+                }
+                else {
+                    if($sort == 'price_desc'){
+                        $read_prd = $this->product->filter('price','DESC'); 
+                    }
+                    elseif($sort == 'price_asc'){
+                        $read_prd = $this->product->filter('price','ASC'); 
+                    }
+                    elseif($sort == 'name_desc'){
+                        $read_prd = $this->product->filter('name_prd','DESC'); 
+                    }
+                    elseif($sort == 'name_asc'){
+                        $read_prd = $this->product->filter('name_prd','ASC'); 
+                    }
+                    elseif($sort == 'special'){
+                        $read_prd = $this->product->filter_special(); 
+                    }
+                    elseif($sort == 'normal'){
+                        $read_prd = $this->product->filter_normal(); 
+                    }
+                }      
             }
-            elseif($sort == 'price_asc'){
-                $read_prd = $this->product->filter_price_asc(); 
-            }
-            elseif($sort == 'name_desc'){
-                $read_prd = $this->product->filter_name_desc(); 
-            }
-            elseif($sort == 'name_asc'){
-                $read_prd = $this->product->filter_name_asc(); 
+            if(isset($_POST['search_key'])){
+                $key = $_POST['search_key'];
+                $read_prd = $this->product->searchs($key);
+                if(empty($read_prd)) {
+                    $alert = 'Không có sản phẩm nào !';
+                }
+                if(empty($key)){
+                    location('shop');
+                }
             }
             if(isset($_POST['filter_price_range'])){
                 $min = $_POST['min_price'];
@@ -232,7 +274,6 @@
                 $data = $_POST['data'];
                 $password = $_POST['password'];
                 $user_login = $this->user->login($data,$password);
-                // echo ' <script language="javascript"> location.href="home" </script>';
             }
             $this->client->setRedirectUri("http://localhost/xshop/?v=sign_in");
             if (isset($_GET['code'])) {
@@ -301,7 +342,7 @@
                 $comment_time = date("Y-m-d H:i:s");
                 $content =  $_POST['comment'];
                 $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
-                echo '<script language="javascript">window.location="'. $this->url .'";</script>';
+                location($this->url);
             }
             else {
                 $detail = $this->product->detail($id);
@@ -315,10 +356,14 @@
         private function search(){
             if(isset($_POST['key'])){
                 $key = $_POST['key'];
+                if(empty($key)){
+                    location('home');
+                }
                 $search = $this->product->searchs($key);
                 include('view/site/search.php');
-            }else {
-                echo '<script language="javascript">window.location="home";</script>';
+            }
+            else {
+                location('search');
             }
         }
         private function cart(){
@@ -329,18 +374,18 @@
                 $image_prd          = isset($_POST['image_prd'])    ? $_POST['image_prd'] : "" ;
                 $quantity_prd       = isset($_POST['quantity_prd']) ? $_POST['quantity_prd'] : "" ;
                 $addcart            = add_cart($id_prd,$name_prd,$price_prd,$image_prd,$quantity_prd);
-                echo '<script language="javascript">window.location="cart";</script>';
+                location('cart');
             }
             if(isset($_POST['delete_prd_cart'])){
                 $id_prd             = isset($_POST['id_product']) ? $_POST['id_product'] : "" ;
                 $del_product_cart   = delete_product_cart($id_prd);
-                echo '<script language="javascript">window.location="cart";</script>';
+                location('cart');
             }
             if(isset($_POST['update_prd_cart'])){
                 $id_prd                 = isset($_POST['id_product'])   ? $_POST['id_product']  : "" ;
                 $qty                    = isset($_POST['qty'])          ? $_POST['qty']         : "" ;
                 $update_product_cart    = update_product_cart($id_prd,$qty);
-                echo '<script language="javascript">window.location="cart";</script>';
+                location('cart');
             }
             include('view/site/cart.php');
         }
@@ -382,7 +427,7 @@
                 // clear giỏ hàng
                 unset($_SESSION['cart']);
                 // view hiển thị đặt hàng thành công !
-                echo '<script language="javascript">window.location="confirm_order";</script>';
+                location('confirm_order');
             }
             include('view/site/checkout.php');
         }
@@ -393,4 +438,3 @@
             include('view/404notfound.php');
         }
     }
-?>

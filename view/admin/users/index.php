@@ -1,13 +1,9 @@
 <div class="mb-3 w-100 text-center">
-    <button class="btn btn-outline-primary" onclick='selects()' >Checked All</button>
-    <button class="btn btn-outline-info"  onclick='deSelect()' >Unchecked All</button>
-    <button class="btn btn-outline-danger">Delete Checked</button>
     <button onclick="location.href='<?= $url ?>&act=create'" class="btn btn-outline-success">Add New User</button>
 </div>
 <table id="example" class="table nowrap" style="width:100%">
     <thead>
         <tr>
-            <th></th>
             <th>#</th>
             <th>Username</th>
             <th>Email</th>
@@ -26,10 +22,9 @@
                 </tr>  
             ';
         } else { ?>
-            <?php foreach ($read as $row => $values) { ?>
+            <?php $i = 0; foreach ($read as $row => $values) { $i++ ?>
                 <tr>
-                    <td><input type="checkbox" name="checkbox" class="checkbox"></td>
-                    <td><?= $values['ID'] ?></td>
+                    <td><?= $i ?></td>
                     <td><?= $values['username'] ?></td>
                     <td><?= $values['email'] ?></td>
                     <td><?= $values['name'] ?></td>
