@@ -281,12 +281,14 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="subscribe_part_content">
-                    <h2>Get promotions & updates!</h2>
+                    <h2>Get promotions!</h2>
                     <p>Seamlessly empower fully researched growth strategies and interoperable internal or “organic”
                         sources credibly innovate granular internal .</p>
                     <div class="subscribe_form">
-                        <input type="email" placeholder="Enter your mail">
-                        <a href="#" class="btn_1">Subscribe</a>
+                        <form method="post">
+                            <input type="email" placeholder="Enter your mail" required>
+                            <button type="submit" class="btn_1">Subscribe</button>
+                        </form>
                     </div>
                 </div>
             </div>

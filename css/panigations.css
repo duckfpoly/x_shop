@@ -1,0 +1,21 @@
+   
+.paginationn {
+    text-align: right;
+}
+.paginationn span {
+    padding: 10px;
+    background-color: cadetblue;
+    color: #fff;
+    border-radius: 10px;
+
+}
+.paginationn a {
+    color: #000;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.paginationn a:hover {
+    background-color: cadetblue;
+    color: #fff;
+}

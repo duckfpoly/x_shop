@@ -1,7 +1,6 @@
 <?php 
     include 'global.php';
-    
-    require_once 'model/model_process.php';
+
     require_once 'model/model_cate.php';
     require_once 'model/model_product.php';
     require_once 'model/model_comment.php';
@@ -10,6 +9,7 @@
     require_once 'model/model_blog.php';
     require_once 'model/model_cart.php';
     require_once 'model/model_order.php';
+    require_once 'model/model_pagination.php';
 
     $router = new Router();
     class Router {
@@ -31,6 +31,7 @@
             $this->statistical  = new statistical();
             $this->blogs        = new blogs();
             $this->order        = new orders(); 
+            $this->pagination   = new pagination(); 
 
             if(isset($_GET['v']) == true){
                 
@@ -78,7 +79,6 @@
         }
         private function shop(){ 
             $read_cate = $this->cate->read();
-            
             if(isset($_GET['req'])){
                 $req = $_GET['req'];
                 if($req == 'detail'){
@@ -104,10 +104,14 @@
             }
             if(isset($_GET['cate'])){
                 $cate = $_GET['cate'];
-                $read_prd = $this->product->product_cate($cate);
+                $read_prd = $this->product->filter_update($cate)[0];
+                $current_page = $this->product->filter_update($cate)[1];
+                $total_page = $this->product->filter_update($cate)[2];
             }
             else{
-                $read_prd = $this->product->read_all();
+                $read_prd = $this->product->list()[0];
+                $current_page = $this->product->list()[1];
+                $total_page = $this->product->list()[2];
             }
             if(isset($_GET['sort'])){
                 $sort = $_GET['sort'];
@@ -125,10 +129,10 @@
                         $read_prd = $this->product->filter_with_cate($cate,'name_prd','ASC'); 
                     }
                     elseif($sort == 'special'){
-                        $read_prd = $this->product->filter_special(); 
+                        $read_prd = $this->product->filter_with_cate_2($cate,1);
                     }
                     elseif($sort == 'normal'){
-                        $read_prd = $this->product->filter_normal(); 
+                        $read_prd = $this->product->filter_with_cate_2($cate,0); 
                     }
                 }
                 else {
@@ -145,10 +149,10 @@
                         $read_prd = $this->product->filter('name_prd','ASC'); 
                     }
                     elseif($sort == 'special'){
-                        $read_prd = $this->product->filter_special(); 
+                        $read_prd = $this->product-> filter_special(1); 
                     }
                     elseif($sort == 'normal'){
-                        $read_prd = $this->product->filter_normal(); 
+                        $read_prd = $this->product-> filter_special(0); 
                     }
                 }      
             }

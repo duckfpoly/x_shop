@@ -2,7 +2,7 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
-
+    require_once 'model/model_process.php';
     require_once 'vendor/autoload.php'; 
 
     function location($url){
@@ -86,7 +86,6 @@
         $mailer->Body = $body;
         $mailer->send();
     }
-
     function cut_email($email){
         $string = $email;
         $return = strrev($string);
@@ -104,5 +103,66 @@
             location('home');
         }
     }
-    
+    // function page($id,$tbl){
+    //     $process = new process();
+    //     $sql = "SELECT count($id) as total from $tbl";
+    //     $row = $process->query_one($sql);
+    //     $total_records = $row['total'];
+    //     $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+    //     $limit = 10;
+    //     $total_page = ceil($total_records / $limit);
+    //     if ($current_page > $total_page){
+    //         $current_page = $total_page;
+    //     }
+    //     else if ($current_page < 1){
+    //         $current_page = 1;
+    //     }
+    //     $start = ($current_page - 1) * $limit;
+    //     $data_pani = "SELECT * FROM $tbl LIMIT $start, $limit";
+    //     $row = $process->query($data_pani);
+    //     $arr = [$row,$current_page,$total_page];
+    //     return $arr;
+    // }   
+    // function filter_page($id,$tbl){
+    //     $process = new process();
+    //     $sql = "SELECT count(id_prd) as total from tbl_products 
+    //                 INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+    //                 $query
+    //         ";
+    //         $row = $process->query_one($sql);
+    //         $total_records = $row['total'];
+    //         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+    //         $limit = 10;
+    //         $total_page = ceil($total_records / $limit);
+    //         if ($current_page > $total_page){
+    //             $current_page = $total_page;
+    //         }
+    //         else if ($current_page < 1){
+    //             $current_page = 1;
+    //         }
+    //         $start = ($current_page - 1) * $limit;
+    //         $data_pani = "SELECT * FROM tbl_products 
+    //                         INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate 
+    //                         $query
+    //                         $orderr 
+    //                         LIMIT $start, $limit ";
+    //         $row = $process->query($data_pani);
+    //         $arr = [$row,$current_page,$total_page];
+    //         return $arr;
+    // }     
+    function select_page($current_page,$total_page){
+        if ($current_page > 1 && $total_page > 1) {
+            echo '<a href="shop?page=' . ($current_page - 1) . '"><</a>';
+        }
+        for ($i = 1; $i <= $total_page; $i++) {
+            if ($i == $current_page) {
+                echo '<span>' . $i . '</span> ';
+            } else {
+                echo '<a href="shop?page=' . $i . '">' . $i . '</a> ';
+            }
+        }
+        if ($current_page < $total_page && $total_page > 1) {
+            echo '<a href="shop?page=' . ($current_page + 1) . '">></a> ';
+        }
+    }
 ?>

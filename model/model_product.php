@@ -7,7 +7,7 @@
             return $read;
         }
         public function read_all(){
-            $sql = "SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate ORDER BY RAND()";
+            $sql = "SELECT * FROM `tbl_products` INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate " ;
             $read = $this->query($sql);
             return $read;
         }
@@ -31,15 +31,9 @@
             }
         }
         public function update($name,$price,$image,$giam_gia,$dac_biet,$description,$quantity,$id_cate,$id){
-            // if(empty($name) || empty($price) || empty($quantity)){ 
-            //     $alert = "Please enter your all fields to update products !";
-            //     return $alert;
-            // }
-            // else {
-                $sql = "UPDATE `tbl_products` SET `name_prd` = ?,`price` = ?,`image` = ?,`giam_gia` = ?,`dac_biet` = ?,`description` = ?,`so_luong` = ?,`ID_Cate` = ? WHERE id_prd = ? ";
-                $update_product = $this->query_sql($sql,$name,$price,$image,$giam_gia,$dac_biet,$description,$quantity,$id_cate,$id);
-                return $update_product;
-            // }
+            $sql = "UPDATE `tbl_products` SET `name_prd` = ?,`price` = ?,`image` = ?,`giam_gia` = ?,`dac_biet` = ?,`description` = ?,`so_luong` = ?,`ID_Cate` = ? WHERE id_prd = ? ";
+            $update_product = $this->query_sql($sql,$name,$price,$image,$giam_gia,$dac_biet,$description,$quantity,$id_cate,$id);
+            return $update_product;
         }
         public function delete($id){ 
             if(empty($id)){
@@ -103,19 +97,6 @@
                 return $detail;
             }
         }
-        public function product_cate($name){
-            if(empty($name)){
-                $alert = "Please enter name cate !";
-                return $alert;
-            }
-            else {
-                $sql = "SELECT * FROM `tbl_products`
-                INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
-                WHERE `tbl_categories`.name_cate LIKE '%$name%'";
-                $detail = $this->query($sql);
-                return $detail;
-            }
-        }
         public function searchs($key){
             if(empty($key)){
                 $alert = "Please enter search key !";
@@ -146,6 +127,14 @@
             $read = $this->query($sql);
             return $read;
         }
+        public function filter_with_cate_2($key,$value){
+            $sql = "SELECT * FROM `tbl_products`
+            INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
+            WHERE `tbl_categories`.name_cate LIKE '%$key%'
+            AND `tbl_products`.dac_biet = $value";
+            $read = $this->query($sql);
+            return $read;
+        }
         public function filter_price_range_product_with_cate_asc($key,$min_price,$max_price){
             $sql = "SELECT * FROM `tbl_products`
             INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
@@ -155,18 +144,25 @@
             $read = $this->query($sql);
             return $read;
         }
-        public function filter_special(){
-            $sql = "SELECT * FROM `tbl_products` WHERE dac_biet = 1";
+        public function filter_special($value){
+            $sql = "SELECT * FROM `tbl_products` WHERE dac_biet = $value";
             $read = $this->query($sql);
             return $read;
         }
-        public function filter_normal(){
-            $sql = "SELECT * FROM `tbl_products` WHERE dac_biet = 0";
-            $read = $this->query($sql);
-            return $read;
+        public function list(){
+            $page = new pagination();
+            $pagination_normal = $page->pagination_normal('id_prd','tbl_products');
+            return $pagination_normal;
         }
-        public function panigation(){
-            
+        public function filter_update($key){
+            $page = new pagination();
+            $id         = 'id_prd';
+            $tbl        = 'tbl_products';
+            $tbl_2      = 'tbl_categories';
+            $record     = 'name_cate';
+            $inner_join = 'INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate';
+            $pagination_normal = $page->pagination_with_filter($id,$tbl,$tbl_2,$record,$inner_join,$key);
+            return $pagination_normal;
         }
     }
 ?>

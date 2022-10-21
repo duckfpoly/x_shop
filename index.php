@@ -25,6 +25,7 @@ Session::init();
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/preloaders.css">
     <link rel="stylesheet" href="css/mains.css">
+    <link rel="stylesheet" href="css/panigations.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script> -->

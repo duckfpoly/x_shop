@@ -1,31 +1,4 @@
 AOS.init();
-// const view = new URLSearchParams(window.location);
-// var string = location.href
-//     // substring = "home";
-// if(string.includes("shop")){
-//   console.log(true);
-//   $('#shop').addClass('active fw-bold');  
-// }
-
-// if(view){
-//     if(view == 'shop'){
-//     }
-//     else if (view == 'about'){
-//         $('#about').addClass('active fw-bold');  
-//     }
-//     else if (view == 'contact'){
-//         $('#contact').addClass('active fw-bold');  
-//     }
-//     else if (view == 'feedback'){
-//         $('#feedback').addClass('active fw-bold');  
-//     }
-//     else if (view == 'blog'){
-//         $('#blog').addClass('active fw-bold');  
-//     }
-// }
-// else {
-//     $('#home').addClass('active fw-bold');  
-// }
 
 var btn = $('#btn-back-to-top');
 $(window).scroll(function() {
@@ -160,8 +133,6 @@ inputNumber($('.input-number'));
  }); 
 }(jQuery));
 
-
-
 $(document).ready(function () {
   $('#close_box_update').click(function () { close_model_update()                                                      });
   $('#overlay').click(function ()          { close_model_update()                                                      });
@@ -199,8 +170,6 @@ $("#box_modal_update").css({
     'animation': 'close_box_modal_update 0.7s',
 });
 }
-
-
 
 // // Filter category
 // $(document).ready(function() {
@@ -267,7 +236,6 @@ $("#box_modal_update").css({
 //   }
 // }
 
-
 $(document).ready(function createItem() {
   $("#addcart").click(function (e) {
 
@@ -297,3 +265,34 @@ $(document).ready(function createItem() {
   });
 });
 
+
+$(document).ready(function createItem() {
+  $("#buy_now").click(function (e) {
+
+      var addcart = $("#addcart").val();
+
+      var id_prd = $("#id_prd").val();
+      var name_prd = $("#name_prd").val();
+      var price_prd = $("#price_prd").val();
+      var image_prd = $("#image_prd").val();
+      var quantity_prd = $("#quantity_prd").val();
+
+      var dataString =
+          'addcart=' + addcart +
+          '&id_prd=' + id_prd +
+          '&name_prd=' + name_prd +
+          '&price_prd=' + price_prd +
+          '&image_prd=' + image_prd +
+          '&quantity_prd=' + quantity_prd;
+          
+      $.ajax({
+          type: "POST",
+          url: 'cart',
+          data: dataString,
+          success: function () {
+            //   alert('Thêm vào giỏ hàng thành công');
+            location.href = "checkout";
+          }
+      });
+  });
+});

@@ -93,11 +93,11 @@
                                 <button type="submit" name="addcart" id="addcart" value="addcart" class="btn btn-success">Thêm vào giỏ hàng</button>&emsp;
                                 <button id="heart" class="btn border border-danger p-1 rounded text-danger"><i class="fa-solid fa-heart"></i></button>
                             </div>
-                        </form>
-                    </div>
-                    <div>
-                        <button onclick="" class="btn btn-danger w-100">ĐẶT MUA NGAY<br> <small>Giao hàng tận nơi, nhanh chóng</small></button>
-                    </div>
+                        </div>
+                        <div>
+                            <button type="button" id="buy_now" class="btn btn-danger w-100">ĐẶT MUA NGAY<br> <small>Giao hàng tận nơi, nhanh chóng</small></button>
+                        </div>
+                    </form>
                 <?php } else { ?>
                     <div class="border border-danger rounded p-3">
                         <h5>Đăng ký nhận thông tin khi có hàng</h5>
@@ -180,7 +180,7 @@
         </div>
     </div>
     <?php if (empty(Session::get('ID'))) { ?>
-        <h4>Bạn cần đăng nhập để thực hiện bình luận ! <a href="?v=sign_in">Đăng nhập ngay</a></h4>
+        <h4>Bạn cần đăng nhập để thực hiện bình luận ! <a href="sign_in">Đăng nhập ngay</a></h4>
     <?php } else { ?>
         <div>
             <h4>Comment</h4>
@@ -291,4 +291,9 @@
     // product the same
     load_more(".prd_same", "#loadMoreother", "#loadLessother", 4);
     load_less(".prd_same", "#loadLessother", "#loadMoreother", 4);
+
+    
+
+
+
 </script>
