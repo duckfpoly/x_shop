@@ -1,5 +1,5 @@
 <?php if (!empty(Session::get('ID'))) {
-    echo '<script>window.location="?";</script>';
+    echo '<script>window.location="home";</script>';
 } else { ?>
     <section class="login_part" style="margin-top: 100px;">
         <div class="container">
@@ -18,7 +18,7 @@
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
                             <h3 class="mb-4">The X Store ! <br> Reset password </h3>
-                            <h5 class="text-danger text-center mb-4"><br><?= isset($user_login) ? $user_login : "" ?></h5>
+                            <h5 class="text-danger text-center mb-4"><br><?= isset($checkemail) ? $checkemail : "" ?></h5>
                             <form class="row contact_form" id="form-1" method="post">
                                 <div class="col-md-12 form-group mb-3">
                                     <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com">

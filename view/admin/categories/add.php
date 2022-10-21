@@ -2,11 +2,7 @@
     <div class="d-flex justify-content-center">
         <div class="col-6">
             <div class="form-group mb-3">
-                <label for="" class="form-label">ID</label>
-                <input type="text" readonly class="form-control" placeholder="Auto">
-            </div>
-            <div class="form-group mb-3">
-                <label for="" class="form-label">Tên danh mục</label>
+                <label for="name_cate" class="form-label">Tên danh mục</label>
                 <input type="text" name="name" id="name_cate" class="form-control">
                 <div class="form-message text-danger mt-2"></div>
             </div>

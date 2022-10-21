@@ -34,12 +34,7 @@
         elseif($act == 'delete'){
             $id = (int)$_GET['id'];
             if($id){
-                alert(
-                    $delete = $cate->delete($id),
-                    'Delete category successfully !',
-                    'Has error in too processor !',
-                    'categories'
-                );
+                $delete = $cate->delete($id);
             }
         }
         else {

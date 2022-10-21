@@ -15,7 +15,7 @@
             <form method="post" id="forms" >
                 <div class="d-flex flex-wrap justify-content-between align-items-start" id="main_content">
                     <div class="col-lg-3 col-md-12 col-sm-12">
-                        <h3>Thông tin người nhận</h3> | <small>Đã có tài khoản ? <a href="sign_in">Đăng nhập ngay</a></small> |
+                        <h3>Thông tin người nhận</h3> <?= empty(Session::get('ID')) ? "| <small>Đã có tài khoản ? <a href='sign_in'>Đăng nhập ngay</a></small> |" : "" ?>  
                         <div class="col-md-12 form-group mb-4 mt-3">
                             <label for="name" class="form-label">Họ tên</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?= !empty(Session::get('ID')) ?  Session::get('name') : "" ?>" required />
@@ -177,8 +177,10 @@
                                 </tbody>
                             </table>
                             <div class="cupon_areaa d-flex">
-                                <input type="text" class="form-control w-50" placeholder="Nhập mã giảm giá ..." id="input_coupon" value="" />
-                                <button type="button" class="btn btn-outline-secondary" id="apply_id_coupon" style="margin-left: 20px;">Apply</button>
+                                <form>
+                                    <input type="text" class="form-control w-50" placeholder="Nhập mã giảm giá ..." id="input_coupon" required/>
+                                    <button type="button" class="btn btn-outline-secondary" id="apply_id_coupon" style="margin-left: 20px;">Apply</button>
+                                </form>
                             </div>
                             <hr>
                             <ul class="list list_2">

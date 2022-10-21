@@ -18,7 +18,7 @@
                                 <div class="form-message text-danger mt-1"><br></div>
                             </div>
                             <div class="col-md-12 form-group mb-4">
-                                <button type="submit" name="reset_pass" class="btn_3">Submit</button>
+                                <button type="submit" name="reset_pass" id="reset_pass" class="btn_3">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -44,7 +44,7 @@
                 Validator.minLength('#new_password', 6),
                 Validator.minLength('#re_new_password', 6),
                 Validator.isConfirmed('#re_new_password', function() {
-                    return document.querySelector('#form_pass #new_password').value;
+                    return document.querySelector('#form-1 #new_password').value;
                 }, 'Mật khẩu nhập lại không chính xác')
             ]
         })

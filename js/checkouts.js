@@ -12,7 +12,7 @@ function select_province(){
         headers: { token: token }
         }).then((res) => {
             const province = res.data.data
-            $("#province").html(`<option selected disabled >Province, City</option>`);
+            $("#province").html(`<option selected disabled >Tỉnh, Thành phố</option>`);
             $.each(province, function( index, values ) {
                 var data_province = `<option value="${values.ProvinceID}">${values.ProvinceName}</option>`
                 $("#province").append(data_province);
@@ -20,8 +20,6 @@ function select_province(){
             $('#province').on('change', function() { 
                 $('#district').prop('selectedIndex',0);
                 $('#ward').prop('selectedIndex',0);
-                // $('#district option').prop('selected', function () { return this.defaultSelected; });
-                // $('#ward option').prop('selected', function () { return this.defaultSelected; });
                 $('#district').removeClass('pe-none bg-light');
                 select_district();
             });
@@ -34,7 +32,7 @@ function select_district() {
         params : { "province_id" : province_id } 
         }).then((res) => {
             const district = res.data.data
-            $("#district").html(` <option selected disabled >District, Town</option> `);
+            $("#district").html(` <option selected disabled >Quận, Huyện, Thị xã</option> `);
             $.each(district, function( index, values ) {
                 var data_district = `<option value="${values.DistrictID}">${values.DistrictName}</option>`
                 $("#district").append(data_district);
@@ -54,7 +52,7 @@ function select_ward() {
         params : { "district_id": district_id } 
         }).then((res) => {
             const ward = res.data.data
-            $("#ward").html(`<option selected disabled >Ward</option>`);
+            $("#ward").html(`<option selected disabled >Xã, phường, thị trấn</option>`);
             $.each(ward, function( index, values ) {
                 var data_ward = `<option value="${values.WardCode}">${values.WardName}</option>`
                 $("#ward").append(data_ward);
@@ -90,68 +88,6 @@ function fee() {
             location.reload();
         })
 }
-const coupon_code = [
-    {
-        id:1,
-        code:"coupon",
-        coupon_percent: 60
-    },
-    {
-        id:2,
-        code:"coupon2",
-        coupon_price: 2000000,
-    },
-    {
-        id:6,
-        code:"supercoupon",
-        coupon_final: 100,
-    }
-]
-$( "#apply_id_coupon" ).click(function() {
-    $.each(coupon_code, function( index, values ) {
-        if (values.code.includes($('#input_coupon').val())) {
-            var coupon_discount = values.coupon_price
-            var coupon_percent = values.coupon_percent
-            var coupon_super = values.coupon_final
-            if(coupon_discount) {
-                // giảm theo giá
-                var coupon_price = new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(coupon_discount)
-                $('#coupon').html(`-&nbsp;<del>${coupon_price}</del>`);
-                var total_order = (ship + subtotal) - coupon_discount ;
-                $('#total_orders').val(total_order);
-                $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
-            }
-            if(coupon_percent){
-                // giảm theo phần trăm
-                $('#coupon').html(`-&nbsp;<del>${coupon_percent}%</del>`);
-                var total_order = ((ship + subtotal) * coupon_percent) / 100 ;
-                $('#total_orders').val(total_order)
-                $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
-            }
-            if(coupon_super){
-                // giảm theo phần trăm
-                $('#coupon').html(`-&nbsp;<del>${coupon_super}%</del>`);
-                var total_order = (ship + subtotal) - ((ship + subtotal) * coupon_super / 100)
-                $('#total_orders').val(total_order);
-                $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
-            }
-        }
-    });
-});
-
-var truck = null;
-$("input[name='truck']").click(function() {
-    truck = this.value;
-    console.log(truck);
-    if(truck == 0) {
-        let ship = 25000;
-        $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
-    }
-    else if(truck == 1) {
-        let ship = 50000;
-        $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
-    }
-});
 // tổng tiền giỏ hàng
 var subtotal = Number($('#subtotal').text());
 $('#subtotal').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(subtotal));
@@ -166,11 +102,77 @@ var total_order = ship + coupon + subtotal;
 $('#total_orders').val(total_order);
 $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
 
-
-
-
-
- 
+var truck = null;
+$("input[name='truck']").click(function() {
+    truck = this.value;
+    if(truck == 0) {
+        ship = 25000;
+        $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
+        var total_order = ship + subtotal + coupon;
+        $('#total_orders').val(total_order);
+        $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
+    }
+    else if(truck == 1) {
+        ship = 50000;
+        $('#shipping').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(ship));
+        var total_order = ship + subtotal + coupon;
+        $('#total_orders').val(total_order);
+        $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
+    }
+});
+const coupon_code = [
+    {
+        id:1,
+        code:"coupon",
+        coupon_percent: 60
+    },
+    {
+        id:2,
+        code:"coupon2",
+        coupon_price: 2000000,
+    },
+    {
+        id:3,
+        code:"supercoupon",
+        coupon_final: 100,
+    }
+]
+$( "#apply_id_coupon" ).click(function() {
+    if($('#input_coupon').val('')){
+        alert('Vui lòng nhập mã giảm giá'); 
+    }
+    else {
+        $.each(coupon_code, function( index, values ) {
+            if (values.code.includes($('#input_coupon').val())) {
+                var coupon_discount = values.coupon_price
+                var coupon_percent = values.coupon_percent
+                var coupon_super = values.coupon_final
+                if(coupon_discount) {
+                    // giảm theo giá
+                    var coupon_price = new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(coupon_discount)
+                    $('#coupon').html(`-&nbsp;<del>${coupon_price}</del>`);
+                    var total_order = (ship + subtotal) - coupon_discount ;
+                    $('#total_orders').val(total_order);
+                    $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
+                }
+                if(coupon_percent){
+                    // giảm theo phần trăm
+                    $('#coupon').html(`-&nbsp;<del>${coupon_percent}%</del>`);
+                    var total_order = ((ship + subtotal) * coupon_percent) / 100 ;
+                    $('#total_orders').val(total_order)
+                    $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
+                }
+                if(coupon_super){
+                    // voucher order 0đ
+                    $('#coupon').html(`-&nbsp;<del>${coupon_super}%</del>`);
+                    var total_order = (ship + subtotal) - ((ship + subtotal) * coupon_super / 100)
+                    $('#total_orders').val(total_order);
+                    $('#total_order').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_order));
+                }
+            }
+        });
+    }
+});
 var pay_option = null;
 $("input[name='pay_option']").click(function() {
     pay_option = this.value;

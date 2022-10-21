@@ -53,6 +53,5 @@
                 }
             }
         }
-        // echo '<script language="javascript">window.location="?v=cart";</script>';
     }
 ?>

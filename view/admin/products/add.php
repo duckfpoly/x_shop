@@ -1,11 +1,6 @@
 <form method="post" id="form_prd" enctype="multipart/form-data">
     <div class="row d-flex flex-wrap">
         <div class="col-4">
-            <!-- <div class="form-group mb-3">
-                <label for="" class="form-label">Mã sản phẩm</label>
-                <input type="text" name="id_product" id="id_product" class="form-control" readonly placeholder="Auto">
-                <div class="form-message text-danger mt-2"></div>
-            </div> -->
             <div class="form-group mb-3">
                 <label for="" class="form-label">Giảm giá (%)</label>
                 <input type="text" name="giam_gia" id="giam_gia" class="form-control" value="0">

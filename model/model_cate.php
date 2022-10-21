@@ -14,7 +14,7 @@
             else {
                 $sql = "INSERT INTO `tbl_categories` SET `name_cate` = ?";
                 $create_cate = $this->query_sql($sql,$name);
-                return $create_cate;
+                // return $create_cate;
             }
         }
         public function update($name,$id){

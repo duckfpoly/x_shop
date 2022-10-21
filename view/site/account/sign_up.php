@@ -1,4 +1,3 @@
-<!--================login_part Area =================-->
 <section class="login_part  ">
     <div class="container">
         <div class="row align-items-center">

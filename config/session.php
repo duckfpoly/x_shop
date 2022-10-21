@@ -20,12 +20,12 @@ class Session {
             header("Location: login.php");
         }
         elseif(self::get('vaitro') !== 1){
-            echo ' <script language="javascript"> location.href = "./"; </script>';
+            echo ' <script language="javascript"> location.href = "home"; </script>';
         }
     }
     public static function destroy(){
         session_destroy();
-        echo ' <script language="javascript"> location.href = "?"; </script>';
+        echo ' <script language="javascript"> location.href = "home"; </script>';
     }
     public static function unset($key){
         unset($_SESSION[$key]);

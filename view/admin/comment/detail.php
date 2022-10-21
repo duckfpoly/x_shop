@@ -4,7 +4,6 @@
 <table class="table" id="example">
     <thead>
         <tr>
-            <th></th>
             <th>Nội dung bình luận</th>
             <th>Thời gian bình luận</th>
             <th>Người bình luận</th>
@@ -16,11 +15,10 @@
             foreach($detail as $key => $value){
         ?>
         <tr>
-            <td><input type="checkbox" class="checkbox" name="" id=""></td>
             <td><?= $value['content'] ?></td>
             <td><?= $value['time'] ?></td>
             <td><?= $value['username'] ?></td>
-            <td><a href="<?= $url ?>&act=delete&id=<?= $value['id_cmt'] ?>" class="btn btn-danger">Del</a></td>
+            <td><a onclick="return confirm('Bạn chắc chắn muốn xóa cmt này ?')" href="<?= $url ?>&act=delete&id=<?= $value['id_cmt'] ?>" class="btn btn-danger">Del</a></td>
         </tr>
         <?php } ?>
     </tbody>
