@@ -72,10 +72,15 @@
             location('admin.php');
         }
         private function home(){
-            $read_prd = $this->product->read();
-            $top_view = $this->product->top_product();
-            $name_cate   = $this->cate->read();
+            $read_prd    = $this->product->read();
+            $top_view    = $this->product->top_product();
             include('view/site/home.php');
+            $name_cate   = $this->cate->read();
+            foreach ($name_cate as $key => $value) {
+                $prd = $this->product->products_with_cate($value['id_cate']);
+                include('view/site/list_prd.php');
+            }
+
         }
         private function shop(){ 
             $read_cate = $this->cate->read();

@@ -193,7 +193,7 @@
     </div>
 </section>
 <script>
-    const lenght = 10;
+    const lenght = 5;
     load_more(".product-item", "#loadMore", "#loadLess", lenght);
     load_less_scroll(".product-item", "#loadLess", "#loadMore", lenght, 440);
     const cate = new URLSearchParams(window.location.search).get('cate');
