@@ -12,7 +12,7 @@
 <section class="product_list ">
     <div class="containerr w-100 p-3" >
         <div class="row">
-            <div class="col-lg-2 col-md-12 col-12" style="margin-top: 100px;"> 
+            <div class="col-lg-2 col-md-12 col-sm-12" style="margin-top: 100px;"> 
                 <div class="product_sidebar">
                     <div class="single_sedebar">
                         <form method="post">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-10 col-md-12 col-12">
+            <div class="col-lg-10 col-md-12 col-sm-12">
                 <?php if (isset($alert) == true) { ?>
                     <div class="mb-5">
                         <img src="https://shop-media.vgsshop.vn/pub/media/khoa-banner-landing-page/PAGE_404-01_1.png" alt="">
@@ -89,7 +89,7 @@
                             <?php foreach ($read_prd as $items => $values) {
                                 $data = total($values['price'], $values['giam_gia']);
                             ?>
-                                <div class="col-lg-2 col-md-3 col-sm-6 product-item item-child animate__animated m-3">
+                                <div class="col-lg-2 col-md-3 col-sm-6 product-item item-child animate__animated" id="product-item">
                                     <div class="single_product_item">
                                         <div class="single_product_item_thumb">
                                             <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
@@ -225,3 +225,6 @@
         }
     }
 </script>
+<style>
+    
+</style>

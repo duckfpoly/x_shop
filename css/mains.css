@@ -8617,6 +8617,9 @@ h6 {
 #acc {
   margin-left: 50px;
 }
+#product-item {
+  margin: 30px;
+}
 @media (max-width: 877px) {
   #header_account {
     display: block !important;
@@ -8629,6 +8632,14 @@ h6 {
   }
 }
 
+#product-item {
+  margin: 20px;
+}
+@media (max-width: 877px) {
+  #product-item {
+      margin: 0px;
+  }
+}
 
 .form-message { 
   width: 100%;
