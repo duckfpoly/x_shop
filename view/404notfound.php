@@ -1,3 +1,6 @@
+<div class="text-center mb-5 mt-5">
+    <h1>Nội dung không tồn tại !</h1>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 mt-5 mb-5">

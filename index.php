@@ -88,6 +88,7 @@ Session::init();
     <script src="js/validate.js"></script>
     <script src="js/checkouts.js"></script>
     <script src="js/indexx.js"></script>
+    <script src="js/comment.js"></script>
 </body>
 
 </html>

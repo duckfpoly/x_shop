@@ -2,7 +2,7 @@
     <div class="card-header bg-transparent">
         <h3 class="fw-bold"><?= $value['name_cate'] ?></h3>
     </div>
-    <div class="card-body d-flex justify-content-around">
+    <div class="card-body d-flex justify-content-around flex-wrap">
         <?php foreach ($prd as $key => $data) { 
                 $total = total($data['price'], $data['giam_gia']);
         ?>
