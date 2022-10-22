@@ -144,36 +144,35 @@
     </div>
 </div>
 <div class=" container comments-area w-100" style="border: none;">
-    <h4><?= $count ?> Review for <?= $detail['name_prd'] ?></h4>
+    <h4><span id="count_cmt"><?= $count ?></span> Review for <?= $detail['name_prd'] ?></h4>
     <div>
+        <div class="comment-listt" id="cmt_list">
+            
+        </div>
         <?php if (empty($list_cmt)) {
-            echo '
-            <div class="comment-list fw-bold">No review !</div>
-        ';
-        } else {
-            foreach ($list_cmt as $cmt) { ?>
-                <div class="comment-list">
-                    <div class="single-comment">
-                        <div class="user d-flex w-100">
-                            <div class="thumb">
-                                <img src="assets/uploads/admin/user/<?= $cmt['image'] ?>" alt="">
-                            </div>
-                            <div class="desc">
-                                <p class="comment"> <?= isset($alert) ? $alert : $cmt['content'] ?> </p>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <h5>
-                                            <a href="#"><?= $cmt['name'] ?></a>
-                                        </h5>
-                                        <p class="date"><?= $cmt['time'] ?></p>
-                                    </div>
+            echo ' <div class="comment-list fw-bold" id="no_review">No review !</div> ';
+        } else { foreach ($list_cmt as $cmt) { ?>
+            <div class="comment-list">
+                <div class="single-comment">
+                    <div class="user d-flex w-100">
+                        <div class="thumb">
+                            <img src="assets/uploads/admin/user/<?= $cmt['image'] ?>" alt="">
+                        </div>
+                        <div class="desc">
+                            <p class="comment"> <?= isset($alert) ? $alert : $cmt['content'] ?> </p>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <h5>
+                                        <a href="#"><?= $cmt['name'] ?></a>
+                                    </h5>
+                                    <p class="date"><?= $cmt['time'] ?></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-        <?php }
-        } ?>
+            </div>
+        <?php } } ?>
         <div class="text-center mb-4">
             <a href="#" class="btn animate__animated animate__fadeInUp" id="loadMore">Load More</a>
             <a href="#" class="btn d-none animate__animated animate__fadeInUp" id="loadLess">Load Less</a>
@@ -184,10 +183,13 @@
     <?php } else { ?>
         <div>
             <h4>Comment</h4>
-            <form class="form-contact comment_form w-100 d-flex" id="commentForm" method="post">
+            <form class="form-contact comment_form w-100 d-flex" id="commentForm" onsubmit="return false">
+                <input type="hidden" value="<?= Session::get('name') ?>"    name="name" id="name">
+                <input type="hidden" value="<?= Session::get('image') ?>"   name="image" id="image">
+                <input type="hidden" value="<?= Session::get('id') ?>"      name="id" id="id">
                 <img src="assets/uploads/admin/user/<?= Session::get('image') ?>" alt="" width="50px" style="border-radius: 50%; margin-right:20px;">
                 <input class="form-control border border-dark" name="comment" id="comment" type="text" placeholder="Viết bình luận ">
-                <button class="btn btn-outline-secondary" name="cmt" style="margin-left: 20px;" type="submit">Send</button>
+                <input class="btn btn-outline-secondary" onclick="save()" id="send_cmt" name="send_cmt" style="margin-left: 20px;" type="submit" value="Send">
             </form>
         </div>
     <?php } ?>
@@ -284,16 +286,3 @@
         </div>
     </div>
 </section>
-<script>
-    // cmt
-    load_more(".comment-list", "#loadMore", "#loadLess", 2);
-    load_less(".comment-list", "#loadLess", "#loadMore", 2);
-    // product the same
-    load_more(".prd_same", "#loadMoreother", "#loadLessother", 4);
-    load_less(".prd_same", "#loadLessother", "#loadMoreother", 4);
-
-    
-
-
-
-</script>

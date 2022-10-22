@@ -61,8 +61,10 @@
                 elseif($v == "confirm_order")   {   $this->confirm_order();     }
                 elseif($v == "not_found")       {   $this->not_found();         }
 
-                elseif($v == "admin")       {   $this->admin();         }
-
+                elseif($v == "admin")           {   $this->admin();         }
+                else {
+                    $this->not_found();
+                }
             }
             else { 
                 $this->home(); 
@@ -80,7 +82,7 @@
                 $prd = $this->product->products_with_cate($value['id_cate']);
                 include('view/site/list_prd.php');
             }
-
+            include('view/site/layout/newsletter.php');
         }
         private function shop(){ 
             $read_cate = $this->cate->read();
@@ -89,13 +91,13 @@
                 if($req == 'detail'){
                     $id = (int)$_GET['id'];
                     $up_view = $this->product->tang_view($id);
-                    if(isset($_POST['cmt'])){
+                    if(isset($_POST['send_cmt'])){
                         $id_product = $id;
                         $id_user = Session::get('ID');
                         $comment_time = date("Y-m-d H:i:s");
                         $content =  $_POST['comment'];
                         $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
-                        location('shop?req=detail&id=' . $id_product . '');
+                        // location('shop?req=detail&id=' . $id_product . '');
                     }
                     else {
                         $detail = $this->product->detail($id);
@@ -368,11 +370,13 @@
                 if(empty($key)){
                     location('home');
                 }
-                $search = $this->product->searchs($key);
-                include('view/site/search.php');
+                else {
+                    $search = $this->product->searchs($key);
+                    include('view/site/search.php');
+                }
             }
             else {
-                location('search');
+                location('home');
             }
         }
         private function cart(){

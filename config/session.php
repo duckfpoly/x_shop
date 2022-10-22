@@ -16,16 +16,15 @@ class Session {
     public static function checkSession(){
         self::init();
         if (self::get("user_login") == false) {
-            self::destroy();
-            header("Location: login.php");
+            location('login.php');
         }
         elseif(self::get('vaitro') !== 1){
-            echo ' <script language="javascript"> location.href = "home"; </script>';
+            location('home');
         }
     }
     public static function destroy(){
         session_destroy();
-        echo ' <script language="javascript"> location.href = "home"; </script>';
+        // location('home');
     }
     public static function unset($key){
         unset($_SESSION[$key]);
