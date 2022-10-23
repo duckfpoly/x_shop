@@ -33,7 +33,7 @@
                                     </label>
                                 </div>
                                 <button type="submit" name="sign_in" class="btn_3">Log in</button>
-                                <a class="lost_pass" href="?v=forgot_pass">forget password?</a>
+                                <a class="lost_pass" href="forgot_pass">forget password?</a>
                             </div>
                             <hr class="my-4">
                             <div class="d-grid mb-2">

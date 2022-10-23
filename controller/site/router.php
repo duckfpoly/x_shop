@@ -12,6 +12,7 @@
     require_once 'model/model_pagination.php';
 
     $router = new Router();
+
     class Router {
         public function __construct(){
             $this->url          = $_SERVER['REQUEST_URI'];
@@ -42,6 +43,7 @@
                 elseif($v == "about")           {   $this->about();             }
                 elseif($v == "contact")         {   $this->contact();           }
                 elseif($v == "feedback")        {   $this->feedback();          }
+                elseif($v == "search")          {   $this->search();            }
 
                 elseif($v == "profiles")        {   $this->profiles();          }
                 elseif($v == "update_info")     {   $this->update_info();       }
@@ -55,13 +57,15 @@
                 elseif($v == "blog_detail")     {   $this->blog_detail();       }
                 elseif($v == "product_detail")  {   $this->product_detail();    }
 
-                elseif($v == "search")          {   $this->search();            }
                 elseif($v == "cart")            {   $this->cart();              }
                 elseif($v == "checkout")        {   $this->checkout();          }
                 elseif($v == "confirm_order")   {   $this->confirm_order();     }
+                elseif($v == "check_order")     {   $this->check_order();       }
+                
                 elseif($v == "not_found")       {   $this->not_found();         }
 
-                elseif($v == "admin")           {   $this->admin();         }
+                elseif($v == "admin")           {   $this->admin();             }
+                
                 else {
                     $this->not_found();
                 }
@@ -70,7 +74,7 @@
                 $this->home(); 
             }
         }
-        public function admin(){
+        private function admin(){
             location('admin.php');
         }
         private function home(){
@@ -97,7 +101,6 @@
                         $comment_time = date("Y-m-d H:i:s");
                         $content =  $_POST['comment'];
                         $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
-                        // location('shop?req=detail&id=' . $id_product . '');
                     }
                     else {
                         $detail = $this->product->detail($id);
@@ -331,15 +334,7 @@
             include 'view/site/account/sign_up.php'; 
         }
         private function sign_out(){ 
-            Session::unset('user_login');
-            Session::unset('ID');
-            Session::unset('username');
-            Session::unset('name');
-            Session::unset('email');
-            Session::unset('password');
-            Session::unset('image');
-            Session::unset('active');
-            Session::unset('vaitro');
+            $this->user->sign_out();
             echo ' <script language="javascript"> history.back(); </script>';
         }
         private function blog_detail(){ 
@@ -446,6 +441,18 @@
         }
         private function confirm_order(){
             include('view/site/confirm_order.php');
+        }
+        private function check_order(){
+            if(isset($_POST['key'])){
+                $key = $_POST['key'];
+                if(empty($key)){
+                    location('check_order');
+                }
+                else {
+                    $search = $this->order->list_orders($key);
+                }
+            }
+            include('view/site/check_order.php');
         }
         private function not_found(){
             include('view/404notfound.php');

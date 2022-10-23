@@ -39,10 +39,10 @@
             }
         }
         else {
-            echo '<script language="javascript">window.location="home";</script>';
+            location('home');
         }
     }
-    function update_product_cart($id_prd,$qty){
+    function update_product_cart($qty){
         foreach($qty as $key => $qty) { 
             foreach($_SESSION['cart'] as $cart => $values ) {
                 if($values['id_prd'] == $key && $qty >= 1){

@@ -17,7 +17,7 @@ function save() {
         url: url,
         data: dataString,
         success: function () {
-            // alert('Cmt success !');
+            document.getElementById('stt_cmt').innerHTML = 'Đã đăng';
         }
     });
     var item = {
@@ -53,7 +53,7 @@ function show() {
                                     <h5>
                                         <a href="#">${list[i].name}</a>
                                     </h5>
-                                    <p class="date">${list[i].date}</p>
+                                    <p class="date">${list[i].date}</p> <small id="stt_cmt">Đang đăng</small>
                                 </div>
                             </div>
                         </div>

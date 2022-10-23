@@ -5,7 +5,7 @@
     <?php
         if ($act == 'create') {
             include('view/admin/users/add.php');
-            if (isset($_POST['add_user'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
                 $email = $_POST['email'];
@@ -13,7 +13,7 @@
                 $name = $_POST['name'];
                 $image = $_FILES['image']['name'];
                 $role = $_POST['role'];
-                $uploads = save_file("image", "$IMAGE_DIR/admin/user/");
+                $uploads = save_file("image", "assets/uploads/admin/user/");
                 alert(
                     $create = $user->create($username, $name, $email, $password, $image, $active, $role),
                     'Add User successfully !',

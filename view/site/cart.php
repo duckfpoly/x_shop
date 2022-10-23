@@ -59,7 +59,7 @@
                                 <td>
                                     <input type="hidden" name="id_product" value="<?= $values['id_prd'] ?>">
                                     <button class="btn btn-primary" type="submit" name="update_prd_cart"><i class="fa-solid fa-arrows-rotate"></i></button>
-                                    <button class="btn btn-danger" onclick="return confirm('You want to delete the product ?')" type="submit" name="delete_prd_cart"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn btn-danger" onclick="return confirm('Bạn muốn xóa ?')" type="submit" name="delete_prd_cart"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         </form>
