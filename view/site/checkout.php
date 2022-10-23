@@ -178,7 +178,7 @@
                             </table>
                             <div class="cupon_areaa d-flex">
                                 <form>
-                                    <input type="text" class="form-control w-50" placeholder="Nhập mã giảm giá ..." id="input_coupon" required/>
+                                    <input type="text" class="form-control w-50" placeholder="Nhập mã giảm giá ..." id="input_coupon"/>
                                     <button type="button" class="btn btn-outline-secondary" id="apply_id_coupon" style="margin-left: 20px;">Apply</button>
                                 </form>
                             </div>
@@ -233,8 +233,8 @@
         </div>
 <?php
     } else {
-        echo '<script language="javascript"> alert("Mua hàng đi nào ! Đã thêm gì đâu mà thanh toán =))"); window.location="?v=shop";</script>';
+        echo '<script language="javascript"> alert("Mua hàng đi nào ! Đã thêm gì đâu mà thanh toán =))"); window.location="shop";</script>';
     }
 } else {
-    echo '<script language="javascript">window.location="?";</script>';
+    echo '<script language="javascript">window.location="home";</script>';
 } ?>

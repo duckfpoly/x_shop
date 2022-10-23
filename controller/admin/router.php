@@ -1,8 +1,8 @@
 <?php
 
-    isset($_GET['module']) ? $module = $_GET['module'] : $module = '';
-    isset($_GET['act']) ? $act = $_GET['act'] : $act = '';
-    isset($_GET['act']) ? $text = strtoupper("- ".$_GET['act']) : $text = '';
+    isset($_GET['module'])  ? $module = $_GET['module']             : $module = '';
+    isset($_GET['act'])     ? $act = $_GET['act']                   : $act = '';
+    isset($_GET['act'])     ? $text = strtoupper("- ".$_GET['act']) : $text = '';
 
     require_once 'model/model_process.php';
     
@@ -38,16 +38,8 @@
         include('components/orders.php');
     }
     elseif($module == "sign_out"){
-        Session::unset('user_login');
-        Session::unset('ID');
-        Session::unset('username');
-        Session::unset('name');
-        Session::unset('email');
-        Session::unset('password');
-        Session::unset('image');
-        Session::unset('active');
-        Session::unset('vaitro');
-        echo ' <script language="javascript"> location.href = "login.php"; </script>';
+        $user->sign_out();
+        location('login.php');
     }
     else {
         include('view/admin/dashboard.php');

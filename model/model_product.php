@@ -11,7 +11,7 @@
             $read = $this->query($sql);
             return $read;
         }
-        public function create($name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$id_cate){
+        public function create($name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$quantity,$id_cate){
             if(empty($name) || empty($price) || empty($image) || empty($ngay_nhap) || empty($description) || empty($id_cate)){ 
                 $alert = "Please enter your all fields to create a new products !";
                 return $alert;
@@ -25,8 +25,9 @@
                 `ngay_nhap`     = ?,
                 `dac_biet`      = ?,
                 `description`   = ?,
+                `so_luong`      = ?,
                 `id_cate`       = ?";
-                $create_product = $this->query_sql($sql,$name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$id_cate);
+                $create_product = $this->query_sql($sql,$name,$price,$image,$giam_gia,$ngay_nhap,$dac_biet,$description,$quantity,$id_cate);
                 return $create_product;
             }
         }

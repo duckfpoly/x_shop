@@ -286,3 +286,16 @@
         </div>
     </div>
 </section>
+
+<script>
+     // cmt
+ load_more(".comment-list", "#loadMore", "#loadLess", 2);
+ load_less(".comment-list", "#loadLess", "#loadMore", 2);
+
+//  load_more(".comment-listt", "#loadMore", "#loadLess", 2);
+//  load_less(".comment-listt", "#loadLess", "#loadMore", 2);
+
+ // product the same
+ load_more(".prd_same", "#loadMoreother", "#loadLessother", 4);
+ load_less(".prd_same", "#loadLessother", "#loadMoreother", 4);
+</script>

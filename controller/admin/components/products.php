@@ -4,19 +4,19 @@
 <div>
     <?php 
         if($act == 'create'){
-            if(isset($_POST['add_product'])){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $name = $_POST['name'];
                 $price = $_POST['price'];
                 $image = $_FILES['image']['name'];
                 $giam_gia = $_POST['giam_gia'];
+                $quantity = $_POST['quantity'];
                 $ngay_nhap = date("Y-m-d H:i:s");
-
                 $dac_biet = $_POST['special'];
                 $description = $_POST['description'];
                 $id_cate = $_POST['id_cate'];
-                $uploads = save_file("image", "$IMAGE_DIR/admin/products/");
+                $uploads = save_file("image", "assets/uploads/admin/products/");
                 alert(
-                    $create = $product->create($name, $price, $image, $giam_gia, $ngay_nhap, $dac_biet, $description, $id_cate),
+                    $create = $product->create($name, $price, $image, $giam_gia, $ngay_nhap, $dac_biet, $description,$quantity,$id_cate),
                     'Add products successfully !',
                     'Has error in too processor !',
                     'products'

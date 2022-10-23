@@ -11,7 +11,7 @@ Session::init();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>X SHOP</title>
+    <title>X SHOP <?= isset($_GET['v']) == true ? " - ". strtoupper($_GET['v']) : "" ?></title>
     <link rel="icon" href="https://www.pngitem.com/pimgs/m/457-4579707_x-letter-logo-hd-png-download.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
@@ -44,10 +44,6 @@ Session::init();
             <div class="animation-preloader">
                 <div class="spinner"></div>
                 <div class="txt-loading">
-                    <!-- <span data-text-preloader="T" class="letters-loading">T</span> -->
-                    <!-- <span data-text-preloader="H" class="letters-loading">H</span> -->
-                    <!-- <span data-text-preloader="E" class="letters-loading">E</span> -->
-                    <!-- <span data-text-preloader="&nbsp;" class="letters-loading">&nbsp;</span> -->
                     <span data-text-preloader="X" class="letters-loading">X</span>
                     <span data-text-preloader="&nbsp;" class="letters-loading">&nbsp;</span>
                     <span data-text-preloader="S" class="letters-loading">S</span>

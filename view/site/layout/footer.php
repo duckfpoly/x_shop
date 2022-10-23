@@ -9,12 +9,11 @@
                             <a href="?"><img src="assets/logo_3.png" alt="#"></a>
                         </div>
                         <div class="footer_menu_item">
-                            <a href="?">Home</a>
-                            <a href="?v=shop">Shop</a>
-                            <a href="?v=about">About</a>
-                            <!-- <a href="#">Pages</a> -->
-                            <a href="?v=blog">Blog</a>
-                            <a href="?v=contact">Contact</a>
+                            <a href="home">Home</a>
+                            <a href="shop">Shop</a>
+                            <a href="about">About</a>
+                            <a href="blog">Blog</a>
+                            <a href="contact">Contact</a>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,6 @@
 <?php
     $user = new user();
     class user extends process{
-        // public function __construct(){
-        //     $this = new process();
-        // }
         public function read(){
             $sql = "SELECT * FROM `tbl_user`";
             $read = $this->query($sql);
@@ -199,6 +196,17 @@
                     }
                 }
             }
+        }
+        public function sign_out(){
+            Session::unset('user_login');
+            Session::unset('ID');
+            Session::unset('username');
+            Session::unset('name');
+            Session::unset('email');
+            Session::unset('password');
+            Session::unset('image');
+            Session::unset('active');
+            Session::unset('vaitro');
         }
         public function change_password($old_password,$new_password,$id){
             if(empty($old_password) || empty($new_password) || empty($id)){ 

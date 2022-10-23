@@ -50,6 +50,11 @@
                 </select>
                 <div class="form-message text-danger mt-2"></div>
             </div>
+            <div class="form-group mb-3">
+                <label for="" class="form-label">Số lượng</label>
+                <input type="text" name="quantity" id="quantity" class="form-control">
+                <div class="form-message text-danger mt-2"></div>
+            </div>
         </div>
         <div class="col-12">
             <label for="" class="form-label">Mô tả</label>
@@ -75,7 +80,7 @@
                 Validator.isRequired('#image', 'Vui lòng thêm ảnh sản phẩm'),
                 Validator.isRequired('#price', 'Vui lòng nhập giá tiền'),
                 Validator.isRequired('#id_cate', 'Vui lòng chọn danh mục'),
-                // Validator.isRequired('#special', 'Vui lòng chọn loại hàng'),
+                Validator.isRequired('#quantity', 'Vui lòng nhập số lượng'),
             ],
         });
     });
