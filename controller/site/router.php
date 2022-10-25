@@ -390,11 +390,20 @@
                 location('cart');
             }
             if(isset($_POST['update_prd_cart'])){
-                $id_prd                 = isset($_POST['id_product'])   ? $_POST['id_product']  : "" ;
-                $qty                    = isset($_POST['qty'])          ? $_POST['qty']         : "" ;
-                $update_product_cart    = update_product_cart($id_prd,$qty);
+                $amout                  = isset($_POST['qty'])          ? $_POST['qty']         : "" ;
+                $update_product_cart    = update_product_cart($amout);
                 location('cart');
             }
+
+            if(isset($_POST['update_qty_cart'])){
+                $key        = $_POST['id_product'];
+                $quantity   = $_POST['quantity'];
+                $keys       = [$key];
+                $values     = [$quantity];
+                $qty        = array_combine($keys, $values);
+                $update_qty_cart  = update_product_cart($qty);
+            }
+
             include('view/site/cart.php');
         }
         private function checkout(){
@@ -449,12 +458,19 @@
                     location('check_order');
                 }
                 else {
-                    $search = $this->order->list_orders($key);
+                    $orders         = $this->order->orders($key);
+                    $order_details  = $this->order->order_details($key);
+                    $customer       = $this->order->customer($key);
+                    include('view/site/check_order.php');
                 }
             }
-            include('view/site/check_order.php');
+            else{
+                include('view/site/check_order.php');
+            }
         }
         private function not_found(){
             include('view/404notfound.php');
         }
     }
+
+?>

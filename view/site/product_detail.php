@@ -83,14 +83,17 @@
                 <?php if ($detail['so_luong'] > 0) { ?>
                     <div>
                         <label class="mb-2">Số lượng:</label>&emsp;
-                        <form method="post">
-                            <input type="hidden" name="id_prd" id="id_prd" value="<?= $detail['id_prd'] ?>">
-                            <input type="hidden" name="name_prd" id="name_prd" value="<?= $detail['name_prd'] ?>">
-                            <input type="hidden" name="price_prd" id="price_prd" value="<?= $data ?>">
-                            <input type="hidden" name="image_prd" id="image_prd" value="<?= $detail['image'] ?>">
-                            <div class="d-flex align-items-center mb-3">
-                                <input type="number" name="quantity_prd" id="quantity_prd" min="1" value="1" class="form-control w-25">&emsp;
-                                <button type="submit" name="addcart" id="addcart" value="addcart" class="btn btn-success">Thêm vào giỏ hàng</button>&emsp;
+                        <form onsubmit="return false">
+                            
+                            <input type="hidden" name="id_prd"      class="id_prd"              id="id_prd"       value="<?= $detail['id_prd'] ?>">
+                            <input type="hidden" name="name_prd"    class="content-product-h3"  id="name_prd"     value="<?= $detail['name_prd'] ?>">
+                            <input type="hidden" name="price_prd"   class="price"               id="price_prd"    value="<?= $data ?>">
+                            <input type="hidden" name="image_prd"   class="img-prd"             id="image_prd"    value="<?= $detail['image'] ?>">
+
+                            <div class="d-flex align-items-center mb-3" >
+                                <input type="number" name="quantity_prd" id="quantity_prd" min="1" value="1" class="form-control w-25 quantity_prd">&emsp;
+                                <!-- <button type="submit" onclick="add_cart()" name="addcart" id="addcart" value="addcart" class="btn btn-success">Thêm vào giỏ hàng</button>&emsp; -->
+                                <button type="button" name="addcart" id="addcart" value="addcart" class="btn btn-success addcart">Thêm vào giỏ hàng</button>&emsp;
                                 <button id="heart" class="btn border border-danger p-1 rounded text-danger"><i class="fa-solid fa-heart"></i></button>
                             </div>
                         </div>
@@ -101,7 +104,7 @@
                 <?php } else { ?>
                     <div class="border border-danger rounded p-3">
                         <h5>Đăng ký nhận thông tin khi có hàng</h5>
-                        <form action="" method="post">
+                        <form method="post">
                             <input type="text" name="name" class="form-control mb-3 mt-3" placeholder="Họ tên (bắt buộc)" required>
                             <input type="text" name="phone" class="form-control mb-3" placeholder="Số điện thoại (bắt buộc)" required>
                             <input type="email" name="email" class="form-control mb-3" placeholder="Email">

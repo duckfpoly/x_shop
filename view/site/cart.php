@@ -29,7 +29,7 @@
                             <th scope="col">Thành tiền</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="qty_item">
                     <?php 
                         $i = 1;
                         $cart = $_SESSION['cart'];
@@ -38,7 +38,7 @@
                             $subtotal = $values['price_prd'] * $values['quantity_prd'];
                             $total += $subtotal;
                     ?>
-                        <form action="" method="post">
+                        <form action="" method="post" id="form_item_cart" id="cart-item-<?= $values['id_prd'] ?>" >
                             <tr>
                                 <td><?= $i++ ?></td>
                                 <td>
@@ -51,20 +51,19 @@
                                     <h5><?= number_format($values['price_prd'], 0, '', ',') ?>₫</h5>
                                 </td>
                                 <td>
-                                <input type="number" min="1" class="form-control w-25" name="qty[<?= $values['id_prd'] ?>]" value="<?= $values['quantity_prd'] ?>">
+                                    <input onchange="change_qty(this)" data-item="<?= $values['id_prd'] ?>" id="alice" type="number" min="1" class="form-control w-25" name="qty[<?= $values['id_prd'] ?>]" value="<?= $values['quantity_prd'] ?>">
                                 </td>
                                 <td>
                                     <h5><?= number_format($subtotal, 0, '', ',') ?>₫</h5>
                                 </td>
                                 <td>
-                                    <input type="hidden" name="id_product" value="<?= $values['id_prd'] ?>">
-                                    <button class="btn btn-primary" type="submit" name="update_prd_cart"><i class="fa-solid fa-arrows-rotate"></i></button>
-                                    <button class="btn btn-danger" onclick="return confirm('Bạn muốn xóa ?')" type="submit" name="delete_prd_cart"><i class="fa-solid fa-trash"></i></button>
+                                    <input type="hidden" id="id_product" name="id_product" value="<?= $values['id_prd'] ?>">
+                                    <!-- <button class="btn btn-primary" type="submit" name="update_prd_cart"><i class="fa-solid fa-arrows-rotate"></i></button> -->
+                                    <button class="btn btn-danger" type="button" id="del_item_cart" name="delete_prd_cart"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         </form>
                     <?php } ?>
-                       
                     </tbody>
                     <tfoot>
                         <tr>
@@ -106,6 +105,49 @@
         <div class="text-center mt-5">
             <a href="?v=shop" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left"></i> Return Shopping</a>
         </div>
-
     '; 
 }?>
+
+<script>
+    var id_product = ''
+    let change_qty = element => {
+        element.setAttribute("disabled", true);
+        id_product = element.getAttribute('data-item');
+        var update_qty_cart  = 'update_qty_cart';
+        var qty              = Number(element.value)
+        var dataString =
+        'update_qty_cart='    + update_qty_cart +
+        '&id_product='        + id_product +
+        '&quantity='          + qty;
+        $.ajax({
+            type: "POST",
+            url: 'cart',
+            data: dataString,
+            success: function () {
+                element.removeAttribute("disabled");
+            }
+        });
+    }
+    $(document).ready(function delete_cart() {
+        $("#del_item_cart").click(function (e) {
+            let text = "Bạn muốn xóa sản phẩm này ?";
+            if (confirm(text) == true) {
+                var delete_prd_cart = $("#del_item_cart").val();
+                var id_prd = $("#id_product").val();
+                var dataString =
+                    'delete_prd_cart=' + delete_prd_cart +
+                    '&id_product=' + id_prd;
+                $.ajax({
+                    type: "POST",
+                    url: 'cart',
+                    data: dataString,
+                    success: function () {
+                        showSuccessToast('SUCCESS', 'Xóa thành công', 'success');
+                        location.href = 'cart';
+                    }
+                });
+            } else {
+            }
+        });
+    });
+</script>

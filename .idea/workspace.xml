@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="473452b8-b177-4271-a5a2-01d04ceffd08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/site/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/site/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/site/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/site/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/site/shop.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/site/shop.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/xshop_update.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/xshop_update.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/site/router.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/site/router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/indexx.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/indexx.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/model_comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/model_comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/model_order.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/model_order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/site/account/profiles.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/site/account/profiles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/site/check_order.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/site/check_order.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +33,24 @@
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/google/apiclient" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/vendor/google/apiclient-services" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
     </include_path>
   </component>
   <component name="ProjectId" id="2FOC1oLpD9CSMN3cSu70OP91gPD" />
@@ -35,14 +59,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/backup/htdocs/handle_api",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,6 +82,9 @@
       <workItem from="1665392867773" duration="483000" />
       <workItem from="1665408952319" duration="9000" />
       <workItem from="1666073190937" duration="594000" />
+      <workItem from="1666501103450" duration="447000" />
+      <workItem from="1666501567983" duration="794000" />
+      <workItem from="1666519648899" duration="27000" />
     </task>
     <servers />
   </component>

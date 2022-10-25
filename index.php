@@ -14,6 +14,7 @@ Session::init();
     <title>X SHOP <?= isset($_GET['v']) == true ? " - ". strtoupper($_GET['v']) : "" ?></title>
     <link rel="icon" href="https://www.pngitem.com/pimgs/m/457-4579707_x-letter-logo-hd-png-download.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -26,6 +27,8 @@ Session::init();
     <link rel="stylesheet" href="css/preloaders.css">
     <link rel="stylesheet" href="css/mains.css">
     <link rel="stylesheet" href="css/panigations.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/cart.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script> -->
@@ -39,6 +42,7 @@ Session::init();
 </head>
 
 <body>
+    <div id="toastt"></div>
     <div id="preloader">
         <div id="ctn-preloader" class="ctn-preloader">
             <div class="animation-preloader">
@@ -67,6 +71,7 @@ Session::init();
     </div>
     <div id="app">
         <div id="overlay"></div>
+        <?php include 'view/site/side_cart.php' ?>
         <a class="btn d-none animate__animated animate__fadeInUp" id="btn-back-to-top"><i class="fa-solid fa-circle-arrow-up"></i></a>
         <?php include 'view/site/layout/header.php' ?>
         <main><?php include 'controller/site/router.php' ?></main>
@@ -80,11 +85,13 @@ Session::init();
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/toast.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/validate.js"></script>
     <script src="js/checkouts.js"></script>
-    <script src="js/indexx.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/comment.js"></script>
+    <script src="js/cart_2.js"></script>
 </body>
 
 </html>
