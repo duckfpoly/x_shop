@@ -1,6 +1,6 @@
 <?php
 if (empty(Session::get('ID'))) {
-    echo ' <script language="javascript"> location.href = "?"; </script>';
+    echo ' <script language="javascript"> location.href = "home"; </script>';
 } else { ?>
     <!-- breadcrumb part start-->
     <section class="breadcrumb_part mb-5">
@@ -25,8 +25,8 @@ if (empty(Session::get('ID'))) {
                     </div>
                     <ul class="list-group list-group-flush">
                         <!-- <a href="" class="list-group-item">Changed Password</a> -->
-                        <a href="?v=update_info" id="update" class="list-group-item">Update Infomation</a>
-                        <a href="?v=changed_pass" id="update_pass" class="list-group-item">Changed Password</a>
+                        <a href="update_info" id="update" class="list-group-item">Update Infomation</a>
+                        <a href="changed_pass" id="update_pass" class="list-group-item">Changed Password</a>
                         <a href="" class="list-group-item text-danger">Delete Account</a>
                     </ul>
                 </div>

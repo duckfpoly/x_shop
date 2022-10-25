@@ -80,69 +80,17 @@
                         <div id="spc" style="padding-left: 15px;">
                             <a href="cart" id="cart-lg">
                                 <div class="dropdown show ">
-                                    <a class="dropdown-toggle" data-bs-display="static" class="position-relative" data-toggle="dropdown" aria-expanded="false">
+                                    <a href="cart" class="dropdown-toggle" data-bs-display="static" class="position-relative" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-cart-shopping"></i>
                                         <span 
                                             class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" 
                                             style="z-index: 10; top:-3px;" 
-                                            id="count_cart">
+                                            id="count_cart-2">
                                             <?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : "0" ?>
                                         </span>
                                     </a>
                                     <div class="dropdown-menu bg-light" style="position: absolute; right: 0px;">
-                                        <?php if(isset($_SESSION['cart'])){ if(count($_SESSION['cart']) > 0 ){  $total = 0; ?>
-                                        <div class="card" style="border:none">
-                                            <div class="card-header fw-bold" >
-                                                Giỏ hàng
-                                            </div>
-                                        </div>
-                                        <div class="card-body overflow-auto" style="width: 450px; max-height: 242px;">
-                                            <table class="table">
-                                                <?php foreach($_SESSION['cart'] as $key => $values){
-                                                        $subtotal = $values['price_prd'] * $values['quantity_prd']; $total += $subtotal;    
-                                                ?>
-                                                <form class="w-100">
-                                                    <input type="hidden" id="id_product" value="<?= $values['id_prd'] ?>">
-                                                    <tr>
-                                                        <td>
-                                                            <img class="rounded" style="width: 80px; height: 80px" src="assets/uploads/admin/products/<?= $values['image_prd'] ?>" alt="" />
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex justify-content-between mb-2">
-                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;"><?= $values['name_prd'] ?></span>
-                                                            </div>
-                                                            <?= number_format($subtotal, 0, '', ',') ?>₫
-                                                        </td>
-                                                        <td>
-                                                            <span>x<?= $values['quantity_prd'] ?></span><br>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-danger" type="button" id="delete_prd_cart" name="delete_prd_cart" value="delete_prd_cart"><i class="fa-solid fa-trash"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                </form>
-                                                <?php } ?>
-                                            </table>
-                                        </div>
-                                        <div class="card-footer bg-transparent d-flex justify-content-end">
-                                            <a href="cart" class="btn btn-outline-success">Xem giỏ hàng</a>&emsp;
-                                            <a href="checkout" class="btn btn-outline-primary">Thanh toán ngay</a>
-                                        </div>
-                                        <?php } 
-                                        else {
-                                            echo '
-                                                <div class="m-5" style="width:200px; height:200px">
-                                                    <img src="https://bizweb.dktcdn.net/100/438/328/themes/836630/assets/empty-cart.png?1636877535162" alt="">
-                                                </div>
-                                            ';
-                                        }
-                                        } else {
-                                            echo '
-                                                <div class="m-5" style="width:200px; height:200px">
-                                                    <img src="https://bizweb.dktcdn.net/100/438/328/themes/836630/assets/empty-cart.png?1636877535162" alt="">
-                                                </div>
-                                            ';
-                                        } ?>
+                                        <button id="show_cart" class="btn w-100">Xem giỏ hàng</button>    
                                     </div>
                                 </div>
                             </a>
@@ -189,25 +137,3 @@
         </div>
     </div>
 </header>
-
-<script>
-    $(document).ready(function createItem() {
-    $("#delete_prd_cart").click(function (e) {
-        var delete_prd_cart = $("#delete_prd_cart").val();
-        var id_prd = $("#id_product").val();
-        var dataString =
-            'delete_prd_cart=' + delete_prd_cart +
-            '&id_product=' + id_prd;
-        $.ajax({
-            type: "POST",
-            url: 'cart',
-            data: dataString,
-            success: function () {
-                alert('Xóa thành công !');
-                location.reload();
-            }
-        });
-    });
-});
-
-</script>

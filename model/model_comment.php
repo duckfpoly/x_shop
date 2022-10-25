@@ -58,8 +58,8 @@
                 `tbl_user`.name,
                 `tbl_user`.image,
                 `tbl_user`.username,
-                `tbl_products`.name_prd,
                 `tbl_products`.id_prd,
+                `tbl_products`.name_prd,
                 `tbl_comments`.*
                 FROM `tbl_comments`
                 INNER JOIN `tbl_products` ON `tbl_products`.id_prd = `tbl_comments`.ID_Product

@@ -8660,7 +8660,7 @@ h6 {
   right: 0;
   bottom: 0;
   background-color: #000;
-  z-index: 10000000;
+  z-index: 9999;
   opacity: 20%;
 }
 .modal.fade .modal-dialog.modal-dialog-zoom {

@@ -28,6 +28,17 @@ else {
 $(document).ready(function() {
     $('#example').DataTable();
 });
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+});
+$('#example').DataTable( {
+    responsive: true
+});
 function selects() {
     var ele = document.getElementsByClassName('checkbox');
     for (var i = 0; i < ele.length; i++) {

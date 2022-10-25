@@ -9,7 +9,7 @@
             </form>
         </div>
         <div class="mt-5">
-            <?php if (isset($search)) { ?>
+            <?php if (isset($orders)) { ?>
                 <table class="table">
                     <thead>
                         <tr>
@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($search as $key => $values) { ?>
+                        <?php foreach ($orders as $key => $values) { ?>
                             <tr>
                                 <td><?= $values['order_code'] ?></td>
                                 <td><?= $values['order_date'] ?></td>
@@ -48,7 +48,8 @@
                                             <div class="col-lg-12 col-xl-8">
                                                 <div style="border-radius: 10px;">
                                                     <div class="mb-3">
-                                                        <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;"><?= $values['name'] ?></span>!</h5>
+                                                        <h5 class="text-muted mb-0">Thanks for your Order, 
+                                                        </h5>
                                                     </div>
                                                     <div>
                                                         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -57,20 +58,23 @@
                                                         </div>
                                                         <div class="shadow-0 border mb-4">
                                                             <div class="card-body">
-                                                                <div class="row">
+                                                                <?php foreach ($order_details as $key => $items) { ?>
+                                                                <div class="row m-2">
                                                                     <div class="col-md-2">
-                                                                        <img src="assets/uploads/admin/products/<?= $values['image'] ?>" class="img-fluid" alt="">
+                                                                        <img src="assets/uploads/admin/products/<?= $items['image'] ?>" class="img-fluid" alt="">
                                                                     </div>
                                                                     <div class="col-md-6 text-center d-flex justify-content-center align-items-center">
-                                                                        <p class="text-muted mb-0"><?= $values['name_prd'] ?></p>
+                                                                        <p class="text-muted mb-0"><?= $items['name_prd'] ?></p>
                                                                     </div>
                                                                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                        <p class="text-muted mb-0 small">SL: <?= $values['product_quantity'] ?></p>
+                                                                        <p class="text-muted mb-0 small">SL: <?= $items['product_quantity'] ?></p>
                                                                     </div>
                                                                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                        <p class="text-muted mb-0 small"><?= number_format($values['price'], 0, '', ',');  ?>₫</p>
+                                                                        <p class="text-muted mb-0 small"><?= number_format($items['price'], 0, '', ',');  ?>₫</p>
                                                                     </div>
                                                                 </div>
+                                                                <hr class="" style="background-color: #e0e0e0; opacity: 1;">
+                                                                <?php } ?>
                                                             </div>
                                                         </div>
                                                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -79,15 +83,18 @@
                                                         <div class="d-flex justify-content-between pt-2">
                                                             <p class="text-muted mb-0"><span class="fw-bold">Hình thức thanh toán</span> : <?= $values['order_method'] == 0 ? "Thanh toán khi nhận hàng" : "Giao dịch chuyển khoản"  ?></p>
                                                         </div>
-                                                        <div class="d-flex justify-content-between pt-2">
-                                                            <p class="text-muted mb-0"><span class="fw-bold">Địa chỉ nhận hàng</span> : <?= $values['address_detail']  ?></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between pt-2">
-                                                            <p class="text-muted mb-0"><span class="fw-bold">Người nhận</span> : <?= $values['name']  ?></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between pt-2">
-                                                            <p class="text-muted mb-0"><span class="fw-bold">Số điện thoại</span> : <?= $values['phone']  ?></p>
-                                                        </div>
+                                                        <?php foreach ($customer as $key => $data) { ?>
+                                                            <div class="d-flex justify-content-between pt-2">
+                                                                <p class="text-muted mb-0"><span class="fw-bold">Địa chỉ nhận hàng</span> : <?= $data['address_detail']  ?></p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between pt-2">
+                                                                <p class="text-muted mb-0"><span class="fw-bold">Người nhận</span> : <?= $data['name']  ?></p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between pt-2">
+                                                                <p class="text-muted mb-0"><span class="fw-bold">Số điện thoại</span> : <?= $data['phone']  ?></p>
+                                                            </div>
+                                                        <?php } ?>
+
                                                         <div class="pt-2">
                                                             <p class="text-muted mb-3 fw-bold">Track order</p>
                                                             <div class="col-12">
