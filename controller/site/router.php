@@ -1,5 +1,5 @@
 <?php 
-    include 'global.php';
+    include_once 'global.php';
 
     require_once 'model/model_cate.php';
     require_once 'model/model_product.php';
@@ -97,10 +97,12 @@
                     $up_view = $this->product->tang_view($id);
                     if(isset($_POST['send_cmt'])){
                         $id_product = $id;
-                        $id_user = Session::get('ID');
-                        $comment_time = date("Y-m-d H:i:s");
-                        $content =  $_POST['comment'];
-                        $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
+                        // $id_user = Session::get('ID');
+                        $img_client     = $_POST['image'];
+                        $name_client    = $_POST['name'];
+                        $content        = $_POST['comment'];
+                        $comment_time   = date("Y-m-d H:i:s");
+                        $detail = $this->comment->create($id_product,$img_client,$name_client,$comment_time,$content);
                     }
                     else {
                         $detail = $this->product->detail($id);
@@ -108,7 +110,8 @@
                         $list_cmt = $this->comment->detail($id);
                         $count = $this->comment->count_cmt($id);
                         $data = total($detail['price'],$detail['giam_gia']);
-                        include('view/site/product_detail.php');
+                        // include('view/site/product_detail.php');
+                        include('view/site/prd_detail.php');
                     }
                 }
             }

@@ -17,7 +17,7 @@
         <tr>
             <td><?= $value['content'] ?></td>
             <td><?= $value['time'] ?></td>
-            <td><?= $value['username'] ?></td>
+            <td><?= $value['name_client'] ?></td>
             <td><a onclick="return confirm('Bạn chắc chắn muốn xóa cmt này ?')" href="<?= $url ?>&act=delete&id=<?= $value['id_cmt'] ?>" class="btn btn-danger">Del</a></td>
         </tr>
         <?php } ?>

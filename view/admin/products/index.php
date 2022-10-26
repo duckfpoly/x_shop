@@ -1,7 +1,7 @@
 <div class="mb-3 w-100 text-center">
     <button onclick="location.href='<?= $url ?>&act=create'" class="btn btn-outline-success">Add New Products</button>
 </div>
-<table id="example" class="table table-hover">
+<table id="example" class="table table-hover display nowrap" width="100%" >
     <thead>
         <tr>
             <th></th>

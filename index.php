@@ -1,20 +1,30 @@
 <?php
-$url = $_SERVER['REQUEST_URI'];
-$host = $_SERVER['HTTP_HOST'];
-include_once 'config/session.php';
-Session::init();
-
+    $url = $_SERVER['REQUEST_URI'];
+    $host = $_SERVER['HTTP_HOST'];
+    include_once 'global.php';
+    include_once 'model/model_product.php';
+    include_once 'config/session.php';
+    Session::init();
 ?>
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>X SHOP <?= isset($_GET['v']) == true ? " - ". strtoupper($_GET['v']) : "" ?></title>
+    <title>
+        <?php
+            if(isset($_GET['id'])){
+                $name_product = $product->detail($_GET['id']);
+                echo $name_product['name_prd'];
+            } 
+            else {
+                echo isset($_GET['v']) == true ? strtoupper($_GET['v']) : "X SHOP " ;
+            }
+        ?>
+    </title>
     <link rel="icon" href="https://www.pngitem.com/pimgs/m/457-4579707_x-letter-logo-hd-png-download.png">
+    <link rel="stylesheet" href="css/cart.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -28,19 +38,14 @@ Session::init();
     <link rel="stylesheet" href="css/mains.css">
     <link rel="stylesheet" href="css/panigations.css">
     <link rel="stylesheet" href="css/toast.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/prd_detail.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="js/content_load.js"></script>
 </head>
-
 <body>
     <div id="toastt"></div>
     <div id="preloader">
@@ -90,8 +95,8 @@ Session::init();
     <script src="js/validate.js"></script>
     <script src="js/checkouts.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/comment.js"></script>
+    <script src="js/cmt.js"></script>
     <script src="js/cart_2.js"></script>
+    <script src="js/prd_detail.js"></script>
 </body>
-
 </html>

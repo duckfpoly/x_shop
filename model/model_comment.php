@@ -21,20 +21,21 @@
             $read = $this->query($sql);
             return $read;
         }
-        public function create($id_product,$id_user,$time,$content_cmt){
-            if(empty($id_product)  || empty($id_user) || empty($time) || empty($content_cmt)){ 
+        public function create($id_product,$img_client,$name_client,$time,$content_cmt){
+            if(empty($id_product)  || empty($img_client) || empty($name_client) || empty($time) || empty($content_cmt)){ 
                 $alert = "Please enter your fields to create a new comment !";
                 return $alert;
             }
             else {
                 $sql = "INSERT INTO `tbl_comments` SET 
-                `ID_Product` = ?,
-                `ID_User` = ?,
-                `time` = ?,
-                `content` = ?
+                `ID_Product`    = ?,
+                `image_client`  = ?,
+                `name_client`   = ?,
+                `time`          = ?,
+                `content`       = ? 
                 ";
-                $create_cate = $this->query_sql($sql,$id_product,$id_user,$time,$content_cmt);
-                return $create_cate;
+                $create_cmt = $this->query_sql($sql,$id_product,$img_client,$name_client,$time,$content_cmt);
+                return $create_cmt;
             }
         }
         public function delete($id){ 
@@ -50,20 +51,16 @@
         }
         public function detail($id){
             if(empty($id)){
-                $alert = "Please enter ID Products !";
+                $alert = "Please enter ID Comments !";
                 return $alert;
             }
             else {
                 $sql = "SELECT 
-                `tbl_user`.name,
-                `tbl_user`.image,
-                `tbl_user`.username,
                 `tbl_products`.id_prd,
                 `tbl_products`.name_prd,
                 `tbl_comments`.*
                 FROM `tbl_comments`
                 INNER JOIN `tbl_products` ON `tbl_products`.id_prd = `tbl_comments`.ID_Product
-                INNER JOIN `tbl_user` ON `tbl_user`.ID = `tbl_comments`.ID_User 
                 WHERE tbl_comments.ID_Product = ?
                 ORDER BY `tbl_comments`.id_cmt DESC
                 ";

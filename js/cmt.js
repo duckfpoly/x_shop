@@ -4,20 +4,29 @@ var curMonth = curDate.getMonth() + 1;
 var curYear = curDate.getFullYear();
 var data = [];
 function save() {
-    var name = document.getElementById('name').value
-    var image = document.getElementById('image').value
+
+    // $img_client = $_POST['image'];
+    // $name_client = $_POST['name'];
+    // $content =  $_POST['comment'];
+    // $comment_time = date("Y-m-d H:i:s");
+
+    var image   = document.getElementById('image').value
+    var name    = document.getElementById('name').value
     var content = document.getElementById('comment').value
     var date = curYear + "-" + curMonth + "-" + curDay
+    
     var send_cmt = 'send_cmt';
     var dataString =
         'send_cmt=' + send_cmt +
+        '&image='   + image +
+        '&name='    + name +
         '&comment=' + content;
     $.ajax({
         type: "POST",
         url: url,
         data: dataString,
         success: function () {
-            document.getElementById('stt_cmt').innerHTML = 'Đã đăng';
+            document.getElementById('stt_cmt').innerText = 'Đã đăng';
         }
     });
     var item = {
@@ -51,9 +60,12 @@ function show() {
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <h5>
-                                        <a href="#">${list[i].name}</a>
+                                        ${list[i].name}
                                     </h5>
-                                    <p class="date">${list[i].date}</p> <small id="stt_cmt">Đang đăng</small>
+                                    <p class="date">${list[i].date}</p>&emsp;&emsp;
+                                    <small id="stt_cmt">
+                                        Đang đăng
+                                    </small>
                                 </div>
                             </div>
                         </div>

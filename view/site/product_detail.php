@@ -159,14 +159,14 @@
                 <div class="single-comment">
                     <div class="user d-flex w-100">
                         <div class="thumb">
-                            <img src="assets/uploads/admin/user/<?= $cmt['image'] ?>" alt="">
+                            <img src="assets/uploads/admin/user/<?= $cmt['image_client'] ?>" alt="">
                         </div>
                         <div class="desc">
                             <p class="comment"> <?= isset($alert) ? $alert : $cmt['content'] ?> </p>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <h5>
-                                        <a href="#"><?= $cmt['name'] ?></a>
+                                        <?= $cmt['name_client'] ?>
                                     </h5>
                                     <p class="date"><?= $cmt['time'] ?></p>
                                 </div>
@@ -182,7 +182,15 @@
         </div>
     </div>
     <?php if (empty(Session::get('ID'))) { ?>
-        <h4>Bạn cần đăng nhập để thực hiện bình luận ! <a href="sign_in">Đăng nhập ngay</a></h4>
+        <div>
+            <h4>Comment</h4>
+            <form class="w-100 " onsubmit="return false">
+                <input type="hidden" value="user.png"   name="image" id="image">
+                <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Họ tên ">
+                <textarea cols="10" rows="5" class="form-control mb-3" name="comment" id="comment" type="text" placeholder="Viết bình luận "></textarea>
+                <input class="btn btn-outline-primary w-25" onclick="save()" id="send_cmt" name="send_cmt" type="submit" value="Send">
+            </form>
+        </div>
     <?php } else { ?>
         <div>
             <h4>Comment</h4>
