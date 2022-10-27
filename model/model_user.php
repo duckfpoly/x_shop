@@ -165,7 +165,7 @@
                     ';         
                     $output .= '<p>Thanks,</p>';
                     $output .= '<p>ADMIN X SHOP</p>';
-                    send_mail($email,$output);
+                    send_mail($email,$output,"SIGN UP ACCOUNT");
                     echo ' <script language="javascript"> alert("Đăng ký thành công ! Thông tin tài khoản đã được gửi vào mail của bạn."); location.href="sign_in";</script>';
                 }
             }
@@ -266,7 +266,7 @@
                             tài khoản của bạn và thay đổi mật khẩu bảo mật của bạn như ai đó có thể đã đoán ra.</p>';
                     $output .= '<p>Thanks,</p>';
                     $output .= '<p>ADMIN TEAM X STORE</p>';
-                    send_mail($email,$output);
+                    send_mail($email,$output,"RESET PASSWORD");
                     echo '<script language="javascript">alert("Một email đã được gửi với hướng dẫn về cách đặt lại mật khẩu của bạn."); window.location="https://mail.google.com/";</script>';
                 }
             }

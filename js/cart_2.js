@@ -173,15 +173,15 @@ $('#show_cart').click(function () {
 show_cart();
 });
 function show_cart(){
-    $("#view_cart").css({
-        'display': 'block'
-    });
     var box_modal = function () {
     $("#view_cart").css({
         'animation': '',
     });
     $("#view_cart").addClass('animate__fadeInRight');
     };
+    $("#view_cart").css({
+        'display': 'block'
+    });
     setTimeout(box_modal, 1);
     $("#overlay").css({
         'display': 'block'

@@ -76,7 +76,7 @@
     </div>
     <div id="app">
         <div id="overlay"></div>
-        <?php include 'view/site/side_cart.php' ?>
+        <?php include 'view/site/cart/side_cart.php' ?>
         <a class="btn d-none animate__animated animate__fadeInUp" id="btn-back-to-top"><i class="fa-solid fa-circle-arrow-up"></i></a>
         <?php include 'view/site/layout/header.php' ?>
         <main><?php include 'controller/site/router.php' ?></main>

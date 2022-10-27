@@ -16,7 +16,8 @@
                             <th>Mã đơn hàng</th>
                             <th>Ngày đặt</th>
                             <th>Tổng tiền</th>
-                            <th>Trạng thái</th>
+                            <th>Trạng thái thanh toán</th>
+                            <th>Trạng thái đơn hàng</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -27,6 +28,7 @@
                                 <td><?= $values['order_date'] ?></td>
                                 <td><?= number_format($values['total'], 0, '', ',');  ?>₫</td>
                                 <td><?= $values['order_status'] == 0 ? "Chưa thanh toán" : "Đã thanh toán" ?></td>
+                                <td>Chờ lấy hàng</td>
                                 <td><button data-toggle="modal" data-target=".bd-example-modal-lg" class="btn">Chi tiết</button></td>
                             </tr>
                         <?php } ?>
@@ -58,7 +60,9 @@
                                                         </div>
                                                         <div class="shadow-0 border mb-4">
                                                             <div class="card-body">
-                                                                <?php foreach ($order_details as $key => $items) { ?>
+                                                                <?php foreach ($order_details as $key => $items) { 
+                                                                    $total_item = $items['product_quantity'] * $items['price'];
+                                                                ?>
                                                                 <div class="row m-2">
                                                                     <div class="col-md-2">
                                                                         <img src="assets/uploads/admin/products/<?= $items['image'] ?>" class="img-fluid" alt="">
@@ -70,7 +74,7 @@
                                                                         <p class="text-muted mb-0 small">SL: <?= $items['product_quantity'] ?></p>
                                                                     </div>
                                                                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                                        <p class="text-muted mb-0 small"><?= number_format($items['price'], 0, '', ',');  ?>₫</p>
+                                                                        <p class="text-muted mb-0 small"><?= number_format($total_item, 0, '', ',');  ?>₫</p>
                                                                     </div>
                                                                 </div>
                                                                 <hr class="" style="background-color: #e0e0e0; opacity: 1;">
@@ -91,10 +95,9 @@
                                                                 <p class="text-muted mb-0"><span class="fw-bold">Người nhận</span> : <?= $data['name']  ?></p>
                                                             </div>
                                                             <div class="d-flex justify-content-between pt-2">
-                                                                <p class="text-muted mb-0"><span class="fw-bold">Số điện thoại</span> : <?= $data['phone']  ?></p>
+                                                                <p class="text-muted mb-0"><span class="fw-bold">Số điện thoại</span> : xxxxxxx<?= substr($data['phone'], 7)  ?></p>
                                                             </div>
                                                         <?php } ?>
-
                                                         <div class="pt-2">
                                                             <p class="text-muted mb-3 fw-bold">Track order</p>
                                                             <div class="col-12">
