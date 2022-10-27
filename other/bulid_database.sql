@@ -40,6 +40,41 @@ CREATE TABLE tbl_user (
     vaitro TINYINT 0
 )
 
+
+CREATE TABLE tbl_comments ( 
+    id_cmt INT NULL AUTO_INCREMENT,
+    ID_Product INT NULL,
+    image_client VARCHAR(255) NULL,
+    name_client VARCHAR(255) NULL,
+    time DATE NULL,
+    content TEXT NULL
+)
+SELECT 
+    `tbl_products`.id_prd,
+    `tbl_products`.name_prd,
+    `tbl_comments`.*
+    FROM `tbl_comments`
+    INNER JOIN `tbl_products` ON `tbl_products`.id_prd = `tbl_comments`.ID_Product
+    WHERE tbl_comments.ID_Product = ?
+    ORDER BY `tbl_comments`.id_cmt DESC
+
+ `ID_Product` = ?,
+`ID_User` = ?,
+`time` = ?,
+`content` = ?
+SELECT 
+`tbl_user`.name,
+`tbl_user`.image,
+`tbl_user`.username,
+`tbl_products`.id_prd,
+`tbl_products`.name_prd,
+`tbl_comments`.*
+FROM `tbl_comments`
+INNER JOIN `tbl_products` ON `tbl_products`.id_prd = `tbl_comments`.ID_Product
+INNER JOIN `tbl_user` ON `tbl_user`.ID = `tbl_comments`.ID_User 
+WHERE tbl_comments.ID_Product = ?
+ORDER BY `tbl_comments`.id_cmt DESC
+
 CREATE TABLE tbl_blogs (
     id_blog INT NULL AUTO_INCREMENT,
     user_post INT NULL,

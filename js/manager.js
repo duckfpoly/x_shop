@@ -26,18 +26,13 @@ else {
     $('#home').addClass('active fw-bold');  
 }
 $(document).ready(function() {
-    $('#example').DataTable();
-});
-$(document).ready(function() {
     $('#example').DataTable( {
+        responsive: true,
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     } );
-});
-$('#example').DataTable( {
-    responsive: true
 });
 function selects() {
     var ele = document.getElementsByClassName('checkbox');

@@ -1,5 +1,5 @@
 <?php 
-    include 'global.php';
+    include_once 'global.php';
 
     require_once 'model/model_cate.php';
     require_once 'model/model_product.php';
@@ -80,11 +80,11 @@
         private function home(){
             $read_prd    = $this->product->read();
             $top_view    = $this->product->top_product();
-            include('view/site/home.php');
+            include('view/site/page/home/home.php');
             $name_cate   = $this->cate->read();
             foreach ($name_cate as $key => $value) {
                 $prd = $this->product->products_with_cate($value['id_cate']);
-                include('view/site/list_prd.php');
+                include('view/site/page/home/list_prd.php');
             }
             include('view/site/layout/newsletter.php');
         }
@@ -97,10 +97,11 @@
                     $up_view = $this->product->tang_view($id);
                     if(isset($_POST['send_cmt'])){
                         $id_product = $id;
-                        $id_user = Session::get('ID');
-                        $comment_time = date("Y-m-d H:i:s");
-                        $content =  $_POST['comment'];
-                        $detail = $this->comment->create($id_product,$id_user,$comment_time,$content);
+                        $img_client     = $_POST['image'];
+                        $name_client    = $_POST['name'];
+                        $content        = $_POST['comment'];
+                        $comment_time   = date("Y-m-d H:i:s");
+                        $detail = $this->comment->create($id_product,$img_client,$name_client,$comment_time,$content);
                     }
                     else {
                         $detail = $this->product->detail($id);
@@ -108,7 +109,7 @@
                         $list_cmt = $this->comment->detail($id);
                         $count = $this->comment->count_cmt($id);
                         $data = total($detail['price'],$detail['giam_gia']);
-                        include('view/site/product_detail.php');
+                        include('view/site/shop/prd_detail.php');
                     }
                 }
             }
@@ -181,19 +182,19 @@
                 $max = $_POST['max_price'];
                 $read_prd = $this->product->filter_price_range($min,$max); 
             }
-            isset($_GET['req']) == true ? "" : require_once 'view/site/shop.php';
+            isset($_GET['req']) == true ? "" : require_once 'view/site/shop/shop.php';
         }
         private function about(){ 
-            include('view/site/about.php');
+            include('view/site/page/about.php');
         }
         private function blog(){ 
-            include('view/site/blog.php');
+            include('view/site/page/blog.php');
         }
         private function contact(){ 
-            include('view/site/contact.php');
+            include('view/site/page/contact.php');
         }
         private function feedback(){ 
-            include('view/site/feedback.php');
+            include('view/site/page/feedback.php');
         }
         private function profiles(){ 
             checkLoginn();
@@ -367,7 +368,7 @@
                 }
                 else {
                     $search = $this->product->searchs($key);
-                    include('view/site/search.php');
+                    include('view/site/page/search.php');
                 }
             }
             else {
@@ -404,7 +405,7 @@
                 $update_qty_cart  = update_product_cart($qty);
             }
 
-            include('view/site/cart.php');
+            include('view/site/cart/cart.php');
         }
         private function checkout(){
             if(isset($_POST['process_pay'])){
@@ -426,7 +427,7 @@
                 $message        = isset($_POST['message'])          ? $_POST['message']         : "" ;
                 // Phương thức thanh toán và vận chuyển
                 $order_pay      = isset($_POST['pay_option'])       ? $_POST['pay_option']      : "" ;
-                $order_track   = isset($_POST['truck'])             ? $_POST['truck']           : "" ;
+                $order_track    = isset($_POST['truck'])             ? $_POST['truck']           : "" ;
                 // giỏ hàng
                 if(Session::get('cart') == true){
                     foreach(Session::get('cart') as $key => $values){
@@ -443,13 +444,33 @@
                 $add_order_customer      = $this->order->add_order_customer($name,$email,$phone,$address,$address_detail,$message,$order_code);
                 // clear giỏ hàng
                 unset($_SESSION['cart']);
+                $output     = '<p>Dear,&emsp;'.$name.'</p>';
+                $output .= '
+                    <h1>Cảm ơn quý khách đã đặt hàng ❤️❤️❤️</h1>
+                    <p>X Store xin được gửi mã đơn hàng của quý khách:</p>
+                    <ul>
+                        <li><strong>Mã đơn hàng: '.$order_code.'</li>
+                    </ul>
+                    <p>Qúy khách có thể xem lại đơn hàng, theo dõi đơn hàng của mình <a href="http://localhost/xshop/check_order">tại đây</a></p>
+                    <br>
+                    <hr>
+                    <br>
+                '; 
+                $output .= '
+                    <p>Nếu không phải bạn đặt hàng<br><br>
+                    Vui lòng nhấn <a href="mailto:ndcake.store@gmai.com">vào đây</a> để gửi email liên hệ lại với chúng tôi 
+                    hoặc có thể liên hệ trực tiếp qua số điện thoại: <a href="tel:+84823565831">+8482 3565 831</a></p>
+                ';         
+                $output .= '<p>Thanks,</p>';
+                $output .= '<p>ADMIN X SHOP</p>';
+                send_mail($email,$output,'CONFIRM ORDER');
                 // view hiển thị đặt hàng thành công !
                 location('confirm_order');
             }
-            include('view/site/checkout.php');
+            include('view/site/cart/checkout.php');
         }
         private function confirm_order(){
-            include('view/site/confirm_order.php');
+            include('view/site/cart/order_success.php');
         }
         private function check_order(){
             if(isset($_POST['key'])){
@@ -461,11 +482,11 @@
                     $orders         = $this->order->orders($key);
                     $order_details  = $this->order->order_details($key);
                     $customer       = $this->order->customer($key);
-                    include('view/site/check_order.php');
+                    include('view/site/cart/check_order.php');
                 }
             }
             else{
-                include('view/site/check_order.php');
+                include('view/site/cart/check_order.php');
             }
         }
         private function not_found(){

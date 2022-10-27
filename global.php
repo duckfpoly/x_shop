@@ -67,7 +67,7 @@
         }
         return $str;
     }
-    function send_mail($mail,$output){
+    function send_mail($mail,$output,$title){
         $mailer         = new PHPMailer(true);                             
         $mailer->SMTPDebug = 0;                     
         $mailer->isSMTP();                                            
@@ -82,7 +82,7 @@
         $mailer->isHTML(true);     
         $mailer->AddReplyTo('ndcake.store@gmail.com', 'X STORE');
         $body = $output;
-        $mailer->Subject = 'X Store - Sign Up Account';
+        $mailer->Subject = 'X Store - '.$title;
         $mailer->Body = $body;
         $mailer->send();
     }
