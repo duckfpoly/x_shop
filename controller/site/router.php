@@ -34,7 +34,7 @@
             $this->order        = new orders(); 
             $this->pagination   = new pagination(); 
 
-            if(isset($_GET['v']) == true){
+            if(isset($_GET['v'])){
                 
                 $v = $_GET['v'];
 
@@ -115,14 +115,14 @@
             }
             if(isset($_GET['cate'])){
                 $cate = $_GET['cate'];
-                $read_prd = $this->product->filter_update($cate)[0];
-                $current_page = $this->product->filter_update($cate)[1];
-                $total_page = $this->product->filter_update($cate)[2];
+                $read_prd       = $this->product->filter_update($cate)[0];
+                $current_page   = $this->product->filter_update($cate)[1];
+                $total_page     = $this->product->filter_update($cate)[2];
             }
             else{
-                $read_prd = $this->product->list()[0];
-                $current_page = $this->product->list()[1];
-                $total_page = $this->product->list()[2];
+                $read_prd       = $this->product->list()[0];
+                $current_page   = $this->product->list()[1];
+                $total_page     = $this->product->list()[2];
             }
             if(isset($_GET['sort'])){
                 $sort = $_GET['sort'];

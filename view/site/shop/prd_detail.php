@@ -81,8 +81,12 @@
                             <span>3 Reviews</span>
                         </div>
                         <div class="product-price-discount">
-                            <span><?= number_format($data, 0, '', ',');  ?> VND</span>
-                            <span class="line-through"><?= $detail['giam_gia'] ?>%</span>
+                            <h3><?= number_format($data, 0, '', ',');  ?> VND</h3>
+                            <?php if($detail['giam_gia'] == 0 ) { ?>
+                            <?php } else { ?>
+                                <span class="line-through"><?= number_format($detail['price'], 0, '', ',');  ?> VND</span>
+                                <small>Tiết kiệm: (<?= $detail['giam_gia'] ?>%)</small>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="card mb-3">
@@ -95,7 +99,7 @@
                     </div>
                     <?php if ($detail['so_luong'] > 0) { ?>
                         <div class="product-count">
-                            <label for="size" class="mb-3">Quantity</label>
+                            <label for="size" class="mb-3">Số lượng</label>
                             <form onsubmit="return false">
                                 <input type="hidden" name="id_prd" class="id_prd" id="id_prd" value="<?= $detail['id_prd'] ?>">
                                 <input type="hidden" name="name_prd" class="content-product-h3" id="name_prd" value="<?= $detail['name_prd'] ?>">
@@ -247,6 +251,53 @@
             </div>
         </div>
     </div>
+    <section class="trending_items">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>Sản phẩm liên quan</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <?php foreach ($list_with_cate as $items => $values) {
+                $data = total($values['price'], $values['giam_gia']); ?>
+                <div class="col-lg-3 col-sm-6 prd_same" data-aos="zoom-in">
+                    <div class="single_product_item">
+                        <div class="single_product_item_thumb">
+                            <a href="shop?req=detail&id=<?= $values['id_prd'] ?>">
+                                <img style="width: 100% !important; height: 300px !important; " src="assets/uploads/admin/products/<?= $values['image'] ?>" alt="#" class="img-fluid rounded">
+                            </a>
+                        </div>
+                        <h3 style="font-size: 20px;"> <a href="shop?req=detail&id=<?= $values['id_prd'] ?>"><?= $values['name_prd'] ?></a> </h3>
+                        <div class="d-flex mt-3 mb-3 <?= $values['giam_gia'] == 0 ? "invisible" : "" ?>">
+                            <del><?= number_format($values['price'], 0, '', ',');  ?>₫</del>&emsp;
+                            <span class="text-danger">Discount ( <?= $values['giam_gia'] ?>% )</span>
+                        </div>
+                        <div class="fw-bold d-flex justify-content-between align-items-center">
+                            <p>Price: <?= number_format($data, 0, '', ','); ?>₫</p>
+                            <?php if ($values['so_luong'] > 0) {
+                                echo '
+                                <small class="text-success"><i class="fa-solid fa-check"></i>&nbsp;Stock</small>
+                            ';
+                            } else {
+                                echo '
+                                <small class="text-secondary"><i class="fa-solid fa-phone"></i>&nbsp;Contact</small>
+                            ';
+                            } ?>
+
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <div class="text-center">
+                <a href="#" class="btn animate__animated animate__fadeInUp" id="loadMoreother">Load More</a>
+                <a href="#" class="btn d-none animate__animated animate__fadeInUp" id="loadLessother">Load Less</a>
+            </div>
+        </div>
+    </div>
+</section>
     <script>
         // cmt
         load_more(".comment-list", "#loadMore", "#loadLess", 2);
@@ -256,6 +307,6 @@
         //  load_less(".comment-listt", "#loadLess", "#loadMore", 2);
 
         // product the same
-        //  load_more(".prd_same", "#loadMoreother", "#loadLessother", 4);
-        //  load_less(".prd_same", "#loadLessother", "#loadMoreother", 4);
+         load_more(".prd_same", "#loadMoreother", "#loadLessother", 4);
+         load_less(".prd_same", "#loadLessother", "#loadMoreother", 4);
     </script>

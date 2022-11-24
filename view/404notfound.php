@@ -1,5 +1,6 @@
+<?php $noti = "Hệ thống đang bảo trì !" ?>
 <div class="text-center mb-5 mt-5">
-    <h1>Nội dung không tồn tại !</h1>
+    <h1><?= isset($noti) ? $noti : "" ?></h1>
 </div>
 <div class="container">
     <div class="row">

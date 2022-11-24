@@ -27,7 +27,7 @@
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
             <h5 class="card-title text-center mb-5 fw-light fs-5">ADMIN XSHOP</h5>
-            <form id="form-1">
+            <form id="form-1" onsubmit="return false">
               <div class="form-floating form-group mb-3">
                 <input type="text" name="username" class="form-control" id="username" placeholder="@username">
                 <label for="floatingInput">Username</label>
@@ -39,7 +39,7 @@
                 <div class="form-message text-danger mt-2"><br></div>
               </div>
               <div class="d-grid mt-5">
-                <button class="btn btn-primary btn-login text-uppercase fw-bold" id="btn_login_admin" type="button" name="sign_in_admin">Sign
+                <button class="btn btn-primary btn-login text-uppercase fw-bold" id="btn_login_admin" type="submit" name="sign_in_admin">Sign
                   in</button>
               </div>
             </form>

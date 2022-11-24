@@ -1,4 +1,3 @@
-
 // LoadLess
 function load_less(array, btn_less, btn_more, view_cut) {
     $(btn_less).click(function (e) {
@@ -8,19 +7,6 @@ function load_less(array, btn_less, btn_more, view_cut) {
         $(btn_less).addClass("d-none");
     });
 }
-
-function load_less_scroll(array, btn_less, btn_more, view_cut, height) {
-    $(btn_less).click(function (e) {
-        e.preventDefault();
-        $('html, body').animate({
-            scrollTop: height
-        }, 0);
-        $(array).slice(view_cut, $(array).lenght).slideUp();
-        $(btn_more).removeClass("d-none");
-        $(btn_less).addClass("d-none");
-    });
-}
-
 
 
 
@@ -78,3 +64,19 @@ function load_more(array, btn_more, btn_less, view) {
 	
 
 })(jQuery);
+
+
+function load_less_scroll(array, btn_less, btn_more, view_cut, height) {
+  $(btn_less).click(function (e) {
+    e.preventDefault();
+    $("html, body").animate(
+      {
+        scrollTop: height,
+      },
+      0
+    );
+    $(array).slice(view_cut, $(array).lenght).slideUp();
+    $(btn_more).removeClass("d-none");
+    $(btn_less).addClass("d-none");
+  });
+}

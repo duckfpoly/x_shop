@@ -138,7 +138,7 @@ const coupon_code = [
     }
 ]
 $( "#apply_id_coupon" ).click(function() {
-    if($('#input_coupon').val('')){
+    if($('#input_coupon').val() == ''){
         alert('Vui lòng nhập mã giảm giá'); 
     }
     else {

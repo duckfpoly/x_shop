@@ -68,8 +68,8 @@
         return $str;
     }
     function send_mail($mail,$output,$title){
-        $mailer         = new PHPMailer(true);                             
-        $mailer->SMTPDebug = 0;                     
+        $mailer             = new PHPMailer(true);                             
+        $mailer->SMTPDebug  = 0;                     
         $mailer->isSMTP();                                            
         $mailer->Host       = 'smtp.gmail.com';                     
         $mailer->SMTPAuth   = true;                                  
@@ -103,53 +103,6 @@
             location('home');
         }
     }
-    // function page($id,$tbl){
-    //     $process = new process();
-    //     $sql = "SELECT count($id) as total from $tbl";
-    //     $row = $process->query_one($sql);
-    //     $total_records = $row['total'];
-    //     $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-    //     $limit = 10;
-    //     $total_page = ceil($total_records / $limit);
-    //     if ($current_page > $total_page){
-    //         $current_page = $total_page;
-    //     }
-    //     else if ($current_page < 1){
-    //         $current_page = 1;
-    //     }
-    //     $start = ($current_page - 1) * $limit;
-    //     $data_pani = "SELECT * FROM $tbl LIMIT $start, $limit";
-    //     $row = $process->query($data_pani);
-    //     $arr = [$row,$current_page,$total_page];
-    //     return $arr;
-    // }   
-    // function filter_page($id,$tbl){
-    //     $process = new process();
-    //     $sql = "SELECT count(id_prd) as total from tbl_products 
-    //                 INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate
-    //                 $query
-    //         ";
-    //         $row = $process->query_one($sql);
-    //         $total_records = $row['total'];
-    //         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-    //         $limit = 10;
-    //         $total_page = ceil($total_records / $limit);
-    //         if ($current_page > $total_page){
-    //             $current_page = $total_page;
-    //         }
-    //         else if ($current_page < 1){
-    //             $current_page = 1;
-    //         }
-    //         $start = ($current_page - 1) * $limit;
-    //         $data_pani = "SELECT * FROM tbl_products 
-    //                         INNER JOIN `tbl_categories` ON `tbl_products`.ID_Cate = `tbl_categories`.id_cate 
-    //                         $query
-    //                         $orderr 
-    //                         LIMIT $start, $limit ";
-    //         $row = $process->query($data_pani);
-    //         $arr = [$row,$current_page,$total_page];
-    //         return $arr;
-    // }     
     function select_page($current_page,$total_page){
         if ($current_page > 1 && $total_page > 1) {
             echo '<a href="shop?page=' . ($current_page - 1) . '"><</a>';
