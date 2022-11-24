@@ -13,7 +13,7 @@
     <title><?= isset($_GET['module']) == true ? strtoupper($_GET['module']) : "Xshop Manager" ?></title>
     <link rel="icon" href="https://www.pngitem.com/pimgs/m/457-4579707_x-letter-logo-hd-png-download.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
@@ -29,7 +29,7 @@
                     <i class='bx bx-menu'></i>
                 </div>
                 <div class="mt-2" style="margin: 20px;">
-                    <?php include 'controller/admin/router.php'    ?>
+                    <?php include 'controller/admin/router.php'      ?>
                 </div>
             </section>
         </div>

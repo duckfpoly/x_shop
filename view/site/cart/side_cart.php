@@ -32,7 +32,7 @@
                             </div>
                             <span class="cart-price cart-column"><?= $values['price_prd'] ?></span>
                             <div class="cart-quantity cart-column">
-                                <input onchange="change_qtyy(this)" class="cart-quantity-input" data-item="<?= $values['id_prd'] ?>" type="number" min="1" class="form-control" name="qty[<?= $values['id_prd'] ?>]" value="<?= $values['quantity_prd'] ?>">
+                                <input   class="cart-quantity-input" data-item="<?= $values['id_prd'] ?>" type="number" min="1" class="form-control" name="qty[<?= $values['id_prd'] ?>]" value="<?= $values['quantity_prd'] ?>">
                                 <button class="btn btn-dangerr" type="button" value="<?= $values['id_prd'] ?>">Xóa</button>
                             </div>
                         </div>

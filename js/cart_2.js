@@ -31,6 +31,24 @@ var quantity_input = document.getElementsByClassName("cart-quantity-input");
 for (var i = 0; i < quantity_input.length; i++) {
     var input = quantity_input[i];
     input.addEventListener("change", function (event) {
+        // var total_item = (event.value) * Number($('#price_prd').val())
+        // $('#total-item').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_item))
+        event.setAttribute("disabled", true);
+        id_product = event.getAttribute('data-item');
+        var update_qty_cart  = 'update_qty_cart';
+        var qty              = Number(event.value)
+        var dataString =
+        'update_qty_cart='    + update_qty_cart +
+        '&id_product='        + id_product +
+        '&quantity='          + qty;
+        $.ajax({
+            type: "POST",
+            url: 'cart',
+            data: dataString,
+            success: function () {
+                event.removeAttribute("disabled");
+            }
+        });
         var input = event.target
         if (isNaN(input.value) || input.value <= 0) {
             input.value = 1;
@@ -125,8 +143,8 @@ function addItemToCart(title, quantity, price, img, id_prd) {
         }
     })
     cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', function (event) {
-        var total_item = (event.value) * Number($('#price_prd').val())
-        $('#total-item').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_item))
+        // var total_item = (event.value) * Number($('#price_prd').val())
+        // $('#total-item').text(new Intl.NumberFormat('it-IT',{style:'currency',currency:'VND'}).format(total_item))
         event.setAttribute("disabled", true);
         id_product = event.getAttribute('data-item');
         var update_qty_cart  = 'update_qty_cart';

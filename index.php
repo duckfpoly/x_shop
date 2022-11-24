@@ -76,11 +76,11 @@
     </div>
     <div id="app">
         <div id="overlay"></div>
-        <?php include 'view/site/cart/side_cart.php' ?>
+        <?php include 'view/site/cart/side_cart.php'    ?>
         <a class="btn d-none animate__animated animate__fadeInUp" id="btn-back-to-top"><i class="fa-solid fa-circle-arrow-up"></i></a>
-        <?php include 'view/site/layout/header.php' ?>
-        <main><?php include 'controller/site/router.php' ?></main>
-        <?php include 'view/site/layout/footer.php' ?>
+        <?php include 'view/site/layout/header.php'     ?>
+        <main><?php include 'controller/site/router.php'?></main>
+        <?php include 'view/site/layout/footer.php'     ?>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" defer></script>
